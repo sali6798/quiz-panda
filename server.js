@@ -36,6 +36,9 @@ app.set("view engine", "handlebars");
 // const routename = require("./app/controllers/file");
 // app.use(routename);
 
+const userRoutes = require("./app/controllers/usersController.js");
+app.use(userRoutes);
+
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");
 app.use(htmlRoutes);
