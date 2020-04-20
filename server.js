@@ -33,8 +33,8 @@ app.set("view engine", "handlebars");
 // =============================================================
 // Data routes
 // TODO: put api routes here
-// const routename = require("./app/controllers/file");
-// app.use(routename);
+const stagedApiRoutes = require("./app/controllers/stagedApiController");
+app.use("/api/staged", stagedApiRoutes);
 
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");
