@@ -23,8 +23,7 @@ module.exports = function (sequelize, DataTypes) {
 
     Quiz.associate = function (models) {
         Quiz.belongsToMany(models.User, { 
-            through: 'QuizUser',   
-            onDelete: "RESTRICT"
+            through: 'QuizUser'
         });
         Quiz.belongsTo(models.User, {
             foreignKey: {

@@ -50,11 +50,14 @@ app.set("view engine", "handlebars");
 const stagedApiRoutes = require("./app/controllers/stagedApiController");
 app.use(stagedApiRoutes);
 
-const userRoutes = require("./app/controllers/usersApiController.js");
-app.use(userRoutes);
+const usersApiRoutes = require("./app/controllers/usersApiController.js");
+app.use(usersApiRoutes);
 
-const quizRoutes = require("./app/controllers/quizesController.js");
-app.use(quizRoutes);
+const quizuserApiRoutes = require("./app/controllers/quizusersApiController");
+app.use(quizuserApiRoutes);
+
+const quizApiRoutes = require("./app/controllers/quizzesApiController.js");
+app.use(quizApiRoutes);
 
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");

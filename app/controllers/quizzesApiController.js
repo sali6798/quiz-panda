@@ -4,8 +4,14 @@ const db = require("../models");
 
 
 router.route("/api/quiz/")
+    .get((req, res) => {
+        db.Quiz.findAll().then(quizzes => {
+            res.status(200).json(quizzes)
+        }).catch(err => {
+            res.status(400).json(err)
+        })
+    })
     .post((req, res) => {
-
         db.Quiz.create({
             title: req.body.title,
             canRetake: req.body.canRetake,
@@ -26,14 +32,12 @@ router.route("/api/quiz/")
                             correctAnswer: newAnswer.correctAnswer,
                             QuestionId: newQuestionData.id
                         }).then((data) => {
-                            res.status(200);
+                            res.status(200).end();
                         })
 
                     }
                 })
             }
-        }).then(data => {
-            res.json(data);
         }).catch(err => {
             res.status(500)
         })
@@ -62,7 +66,7 @@ router.route("/api/quiz/:id")
         }).then(quiz => {
             res.json(quiz);
         }).catch(err => {
-            res.status(500);
+            res.status(500).json(err);
         })
 
     }).delete((req, res) => {
@@ -81,7 +85,7 @@ router.route("/api/quiz/:id")
         }).then(data => {
             res.status(200).end();
         }).catch(err => {
-            res.status(500);
+            res.status(500).json(err);
         })
     })
 
