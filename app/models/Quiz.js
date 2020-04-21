@@ -1,3 +1,5 @@
+const uniqid = require("uniqid");
+
 module.exports = function (sequelize, DataTypes) {
     const Quiz = sequelize.define("Quiz", {
         title: {
@@ -8,9 +10,9 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         accessCode: {
-            type: DataTypes.UUID,
-            defaultValue: sequelize.UUIDV4,
-            unique: true
+            type: DataTypes.STRING,
+            unique: true,
+            allowNull: false
         },
         canRetake: {
             type: DataTypes.BOOLEAN,
@@ -35,6 +37,10 @@ module.exports = function (sequelize, DataTypes) {
         });
         Quiz.hasMany(models.Question);
     }
+
+    Quiz.beforeCreate(function(quiz) {
+        quiz.accessCode = uniqid();
+    })
 
     return Quiz;
 }
