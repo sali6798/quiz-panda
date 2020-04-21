@@ -39,6 +39,9 @@ app.set("view engine", "handlebars");
 const userRoutes = require("./app/controllers/usersController.js");
 app.use(userRoutes);
 
+const quizuserApiRoutes = require("./app/controllers/quizuserApiController");
+app.use(quizuserApiRoutes);
+
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");
 app.use(htmlRoutes);
