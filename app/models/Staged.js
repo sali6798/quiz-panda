@@ -9,7 +9,9 @@ module.exports = function (sequelize, DataTypes) {
         Staged.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
-            }
+            },
+            onDelete: "CASCADE",
+            hooks: true
         });
     }
 

@@ -35,8 +35,17 @@ app.set("view engine", "handlebars");
 // =============================================================
 // Data routes
 // TODO: put api routes here
-// const routename = require("./app/controllers/file");
-// app.use(routename);
+const stagedApiRoutes = require("./app/controllers/stagedApiController");
+app.use(stagedApiRoutes);
+
+const usersApiRoutes = require("./app/controllers/usersApiController.js");
+app.use(usersApiRoutes);
+
+const quizuserApiRoutes = require("./app/controllers/quizusersApiController");
+app.use(quizuserApiRoutes);
+
+const quizApiRoutes = require("./app/controllers/quizzesApiController.js");
+app.use(quizApiRoutes);
 
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");

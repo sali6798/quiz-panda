@@ -23,18 +23,17 @@ module.exports = function (sequelize, DataTypes) {
 
     Quiz.associate = function (models) {
         Quiz.belongsToMany(models.User, { 
-            through: 'QuizUser',   
-            onDelete: "RESTRICT"
+            through: 'QuizUser'
         });
         Quiz.belongsTo(models.User, {
             foreignKey: {
                 name: "creatorId",
                 allowNull: false
-            }
+            },
+            onDelete: "CASCADE",
+            hooks: true
         });
-        Quiz.hasMany(models.Question, {
-            onDelete: "CASCADE"
-        });
+        Quiz.hasMany(models.Question);
     }
 
     return Quiz;

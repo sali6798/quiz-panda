@@ -46,12 +46,9 @@ module.exports = function (sequelize, DataTypes) {
             foreignKey: {
                 name: "creatorId",
                 allowNull: false
-            },
-            onDelete: "CASCADE"
+            }
         });
-        User.hasMany(models.Staged, {
-            onDelete: "CASCADE"
-        });
+        User.hasMany(models.Staged);
     }
 
     return User;
