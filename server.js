@@ -6,6 +6,8 @@
 // =============================================================
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 // Sets up the Express App
 // =============================================================
@@ -20,13 +22,25 @@ const db = require("./app/models");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(session({
+  // secret:process.env.SESSION_SECRET,
+  secret:"tacos",
+  store: new SequelizeStore({
+    db:db.sequelize
+  }),
+  resave:false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge:7200000
+  }
+}))
+
 // Static directory
 // DONT MESS WITH THIS!
 app.use(express.static("app/public"));
 
 // Set Handlebars.
 const exphbs = require("express-handlebars");
-
 app.set("views", path.join(__dirname, "./app/views"))
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
