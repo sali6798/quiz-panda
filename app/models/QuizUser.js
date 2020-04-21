@@ -10,5 +10,10 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
+    QuizUser.associate = function (models) {
+        QuizUser.belongsTo(models.User);
+        QuizUser.belongsTo(models.Quiz);
+    }
+
     return QuizUser;
 }
