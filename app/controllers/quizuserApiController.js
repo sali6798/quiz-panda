@@ -4,7 +4,8 @@ const router = express.Router();
 const db = require("../models");
 
 router.get("/api/quizuser", function (req, res) {
-    db.Staged
+    db.QuizUser
+    
         .findAll()
         .then(data => {
             res.status(200).json(data)
