@@ -42,6 +42,9 @@ app.use(usersApiRoutes);
 const quizuserApiRoutes = require("./app/controllers/quizuserApiController");
 app.use(quizuserApiRoutes);
 
+const quizRoutes = require("./app/controllers/quizesController.js");
+app.use(quizRoutes);
+
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");
 app.use(htmlRoutes);
