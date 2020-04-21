@@ -39,6 +39,9 @@ app.use(stagedApiRoutes);
 const userRoutes = require("./app/controllers/usersApiController.js");
 app.use(userRoutes);
 
+const quizRoutes = require("./app/controllers/quizesController.js");
+app.use(quizRoutes);
+
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");
 app.use(htmlRoutes);
