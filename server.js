@@ -39,13 +39,16 @@ app.set("view engine", "handlebars");
 const userRoutes = require("./app/controllers/usersController.js");
 app.use(userRoutes);
 
+const quizRoutes = require("./app/controllers/quizesController.js");
+app.use(quizRoutes);
+
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");
 app.use(htmlRoutes);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
