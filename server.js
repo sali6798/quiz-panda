@@ -13,7 +13,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 // =============================================================
 const app = express();
 // changed my port to 8181 because 8080 was running on my comp somehow
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
 const db = require("./app/models");
@@ -36,7 +36,6 @@ app.use(session({
 }))
 
 // Static directory
-// DONT MESS WITH THIS!
 app.use(express.static("app/public"));
 
 // Set Handlebars.

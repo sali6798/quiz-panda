@@ -39,7 +39,8 @@ router.route("/api/quiz/")
                 })
             }
         }).catch(err => {
-            res.status(500)
+            console.log(err)
+            res.status(500).end();
         })
     })
 

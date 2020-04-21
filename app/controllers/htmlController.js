@@ -3,10 +3,6 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-<<<<<<< HEAD
-// defaults to index.html if user tries to visit any other route
-router.get("*", function (req, res) {
-=======
 router.get("/signup", function(req, res) {
     res.render("adduser");
 });
@@ -33,7 +29,6 @@ router.get("/leaderboard", function(req, res) {
 
 // defaults to index.handlebars if user tries to visit any other route
 router.get("*", function(req, res) {
->>>>>>> c5e34259e07863ab8ab608fc0e00dedf375e4720
     res.render("index");
 });
 
