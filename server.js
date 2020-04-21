@@ -39,11 +39,11 @@ app.use(stagedApiRoutes);
 const usersApiRoutes = require("./app/controllers/usersApiController.js");
 app.use(usersApiRoutes);
 
-const quizuserApiRoutes = require("./app/controllers/quizuserApiController");
+const quizuserApiRoutes = require("./app/controllers/quizusersApiController");
 app.use(quizuserApiRoutes);
 
-const quizRoutes = require("./app/controllers/quizesController.js");
-app.use(quizRoutes);
+const quizApiRoutes = require("./app/controllers/quizzesApiController.js");
+app.use(quizApiRoutes);
 
 // HTML routes
 const htmlRoutes = require("./app/controllers/htmlController");
