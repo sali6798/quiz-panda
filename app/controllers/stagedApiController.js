@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+//====== GET/POST requests for /api/staged ==========
+// returns all entries in staged
 router.get("/api/staged", function (req, res) {
     db.Staged
         .findAll()
@@ -14,6 +16,7 @@ router.get("/api/staged", function (req, res) {
         })
 });
 
+// creates a new entry in the staged table
 router.post("/api/staged", function (req, res) {
     db.Staged
         .create({
@@ -28,6 +31,8 @@ router.post("/api/staged", function (req, res) {
         })
 });
 
+//======== GET/PUT/DELETE requests for /api/staged/:id =================
+// returns the entry in staged that matches the id parameter
 router.get("/api/staged/:id", function (req, res) {
     db.Staged
         .findOne({
@@ -43,6 +48,7 @@ router.get("/api/staged/:id", function (req, res) {
         })
 });
 
+// updates the storedQuiz property for the given id
 router.put("/api/staged/:id", function (req, res) {
     db.Staged
         .update({
@@ -60,6 +66,7 @@ router.put("/api/staged/:id", function (req, res) {
         })
 });
 
+// deletes the entry in staged that matches the id
 router.delete("/api/staged/:id", function (req, res) {
     db.Staged
         .destroy({
@@ -74,7 +81,5 @@ router.delete("/api/staged/:id", function (req, res) {
             res.status(400).json(error)
         })
 });
-
-
 
 module.exports = router;

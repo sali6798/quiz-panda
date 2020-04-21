@@ -3,6 +3,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+// for all of these url routes, render the
+// handlebar files
+
 router.get("/signup", function(req, res) {
     res.render("adduser");
 });
