@@ -2,17 +2,23 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-router.route("/api/users").post((req, res) => {
-    db.User.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email
-    }).then(dbNewUser => {
-        res.status(200).json(dbNewUser);
-    });
-})
+router.route("/api/users")
+    .get((req, res) => {
+        db.User.findAll().then(dbUsers => {
+            res.status(200).json(dbUsers);
+        })
+    })
+    .post((req, res) => {
+        db.User.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email
+        }).then(dbNewUser => {
+            res.status(200).json(dbNewUser);
+        })
+    })
 
 router.route("/api/users/:id")
     .get((req, res) => {
@@ -47,4 +53,4 @@ router.route("/api/users/:id")
         })
     })
 
-    module.exports=router;
+module.exports=router;
