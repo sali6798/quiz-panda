@@ -2,13 +2,24 @@ html {
     background-color:gray ;
 }
 
+.navbar{
+    height: 10vh;
+}
+
+
+.bodycontainer{
+    min-height: 75vh;
+}
+
+
+
 
 .footerdiv {
-    height: 300px;
+    height: 15vh;
     background-color: #222;
     padding: 80px 0px;
     color: white;
-    position: fixed;
+    /* position: fixed; */
     left: 0;
     right:0;
     bottom: 0;
@@ -22,4 +33,19 @@ html {
     bottom:10px;
     left:10px;
     position: fixed;
+}
+
+
+.jumbotron{
+    width: 100%;
+    height: 30vh;
+    background-color:black; 
+    color: white;
+    font-weight: bold;
+    text-align: center;
+      
+}
+
+.logo{
+    width: 100px;
 }
