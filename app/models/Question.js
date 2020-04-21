@@ -13,11 +13,11 @@ module.exports = function (sequelize, DataTypes) {
         Question.belongsTo(models.Quiz, {
             foreignKey: {
                 allowNull: false
-            }
+            },
+            onDelete: "CASCADE",
+            hooks: true
         });
-        Question.hasMany(models.Answer, {
-            onDelete: "CASCADE"
-        });
+        Question.hasMany(models.Answer);
     }
 
     return Question;
