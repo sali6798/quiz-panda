@@ -79,7 +79,7 @@ router.route("/api/quiz/:id")
                 }
             })
         }).then(data => {
-            res.status(200).end;
+            res.status(200).end();
         }).catch(err => {
             res.status(500);
         })
