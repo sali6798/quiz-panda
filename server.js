@@ -10,6 +10,7 @@ const path = require("path");
 // Sets up the Express App
 // =============================================================
 const app = express();
+// changed my port to 8181 because 8080 was running on my comp somehow
 const PORT = process.env.PORT || 8081;
 
 // Requiring our models for syncing
@@ -20,7 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Static directory
-app.use(express.static("./app/public"));
+// DONT MESS WITH THIS!
+app.use(express.static("app/public"));
 
 // Set Handlebars.
 const exphbs = require("express-handlebars");
