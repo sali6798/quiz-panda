@@ -30,11 +30,11 @@ module.exports = function (sequelize, DataTypes) {
             foreignKey: {
                 name: "creatorId",
                 allowNull: false
-            }
+            },
+            onDelete: "CASCADE",
+            hooks: true
         });
-        Quiz.hasMany(models.Question, {
-            onDelete: "CASCADE"
-        });
+        Quiz.hasMany(models.Question);
     }
 
     return Quiz;

@@ -14,7 +14,9 @@ module.exports = function (sequelize, DataTypes) {
         Answer.belongsTo(models.Question, {
             foreignKey: {
                 allowNull: false
-            }
+            },
+            onDelete: "CASCADE",
+            hooks: true
         });
     }
 
