@@ -11,8 +11,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         accessCode: {
             type: DataTypes.STRING,
-            unique: true,
-            allowNull: false
+            unique: true
         },
         canRetake: {
             type: DataTypes.BOOLEAN,
