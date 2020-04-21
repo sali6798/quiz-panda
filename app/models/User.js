@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 module.exports = function (sequelize, DataTypes) {
     const User = sequelize.define("User", {
         firstName: {
@@ -26,6 +28,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
+                len: [8],
                 notEmpty: true
             }
         },
@@ -39,6 +42,10 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
+
+    User.beforeCreate(user => {
+        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    })
 
     User.associate = function (models) {
         User.belongsToMany(models.Quiz, { through: 'QuizUser' });
