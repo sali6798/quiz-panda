@@ -12,8 +12,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 // Sets up the Express App
 // =============================================================
 const app = express();
-// changed my port to 8181 because 8080 was running on my comp somehow
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
 const db = require("./app/models");
@@ -36,7 +35,6 @@ app.use(session({
 }))
 
 // Static directory
-// DONT MESS WITH THIS!
 app.use(express.static("app/public"));
 
 // Set Handlebars.
@@ -48,7 +46,6 @@ app.set("view engine", "handlebars");
 // Routes
 // =============================================================
 // Data routes
-// TODO: put api routes here
 const stagedApiRoutes = require("./app/controllers/stagedApiController");
 app.use(stagedApiRoutes);
 
@@ -67,7 +64,7 @@ app.use(htmlRoutes);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
