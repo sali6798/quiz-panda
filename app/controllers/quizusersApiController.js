@@ -5,12 +5,14 @@ const db = require("../models");
 
 router.get("/api/quizuser", function (req, res) {
     db.QuizUser
-    
-        .findAll()
+        .findAll({
+            include: [ db.Quiz ]
+        })
         .then(data => {
             res.status(200).json(data)
         })
         .catch(error => {
+            console.log(error)
             res.status(400).json(error)
         })
 });
@@ -29,30 +31,37 @@ router.post("/api/quizuser", function (req, res) {
         .catch(error => {
             res.status(400).json(error)
         })
+
 });
 
-router.get("/api/quizuser/:userId/:quizId", function (req, res) {
-    db.Staged
+router.get("/api/quizuser/:user/:quiz", function (req, res) {
+    db.QuizUser
         .findOne({
+            include: [ db.Quiz ],
             where: {
-                id: req.params.id
+                UserId: req.params.user,
+                QuizId: req.params.quiz
             }
         })
         .then(data => {
             res.status(200).json(data)
         })
         .catch(error => {
+            console.log(error)
             res.status(400).json(error)
         })
 });
 
-router.put("/api/quizuser/:userId/:quizId", function (req, res) {
-    db.Staged
+router.put("/api/quizuser/:user/:quiz", function (req, res) {
+    db.QuizUser
         .update({
-            storedQuiz: req.body.storedQuiz
-        }, {
+            hasTaken: req.body.hasTaken,
+            score: req.body.score
+        }, 
+        {
             where: {
-                id: req.params.id
+                UserId: req.params.user,
+                QuizId: req.params.quiz
             }
         })
         .then(data => {
@@ -63,11 +72,12 @@ router.put("/api/quizuser/:userId/:quizId", function (req, res) {
         })
 });
 
-router.delete("/api/quizuser/:userId/:quizId", function (req, res) {
-    db.Staged
+router.delete("/api/quizuser/:user/:quiz", function (req, res) {
+    db.QuizUser
         .destroy({
             where: {
-                id: req.params.id
+                UserId: req.params.user,
+                QuizId: req.params.quiz
             }
         })
         .then(data => {
@@ -77,7 +87,5 @@ router.delete("/api/quizuser/:userId/:quizId", function (req, res) {
             res.status(400).json(error)
         })
 });
-
-
 
 module.exports = router;
