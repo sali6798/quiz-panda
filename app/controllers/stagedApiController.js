@@ -3,7 +3,18 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-router.post("/", function (req, res) {
+router.get("/api/staged", function (req, res) {
+    db.Staged
+        .findAll()
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(error => {
+            res.status(400).json(error)
+        })
+});
+
+router.post("/api/staged", function (req, res) {
     db.Staged
         .create({
             storedQuiz: req.body.storedQuiz,
@@ -17,7 +28,7 @@ router.post("/", function (req, res) {
         })
 });
 
-router.get("/:id", function (req, res) {
+router.get("/api/staged/:id", function (req, res) {
     db.Staged
         .findOne({
             where: {
@@ -32,7 +43,7 @@ router.get("/:id", function (req, res) {
         })
 });
 
-router.put("/:id", function (req, res) {
+router.put("/api/staged/:id", function (req, res) {
     db.Staged
         .update({
             storedQuiz: req.body.storedQuiz
@@ -49,8 +60,19 @@ router.put("/:id", function (req, res) {
         })
 });
 
-router.delete("/:id", function (req, res) {
-    res.render("index");
+router.delete("/api/staged/:id", function (req, res) {
+    db.Staged
+        .destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(error => {
+            res.status(400).json(error)
+        })
 });
 
 

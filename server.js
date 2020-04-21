@@ -34,9 +34,9 @@ app.set("view engine", "handlebars");
 // Data routes
 // TODO: put api routes here
 const stagedApiRoutes = require("./app/controllers/stagedApiController");
-app.use("/api/staged", stagedApiRoutes);
+app.use(stagedApiRoutes);
 
-const userRoutes = require("./app/controllers/usersController.js");
+const userRoutes = require("./app/controllers/usersApiController.js");
 app.use(userRoutes);
 
 // HTML routes
@@ -45,7 +45,7 @@ app.use(htmlRoutes);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
