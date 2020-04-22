@@ -1,0 +1,56 @@
+
+<h1>Profile</h1>
+
+{{!-- Take a quiz card --}}
+<div class="card" style="width: 200px;">
+  <div class="card-section">
+    <h3>Take a Quiz!</h3>
+    <br>
+    <p>Enter your access code below to get started:</p>
+    <form method="get" action="/api/quiz/accesscode">
+    <label>
+        <input name="accesscode" type="text">
+    </label>
+    <button type="submit">Go!</button>
+    </form>
+  </div>
+</div>
+
+{{!-- Create a quiz card --}}
+<div class="card" style="width: 200px;">
+  <div class="card-section">
+    <h3>Create a quiz!</h3>
+    <br>
+    <p>Click to begin creating a shareable quiz:</p>
+    <a href="/createquiz"><button>Go!</button></a>
+  </div>
+</div>
+
+ {{!-- Past quiz table --}}
+<table>   
+<h3>Past Quizes</h3>  
+<thead>
+    <tr>
+      <th width="200">Quiz Name</th>
+      <th width="150">Score</th>
+      <th width="150">Leaderboard</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+    <tr>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+      <td>Content Goes Here</td>
+    </tr>
+  </tbody>
+</table>
