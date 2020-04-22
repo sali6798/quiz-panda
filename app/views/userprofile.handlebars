@@ -7,10 +7,12 @@
     <h3>Take a Quiz!</h3>
     <br>
     <p>Enter your access code below to get started:</p>
+    <form method="get" action="/api/quiz/accesscode">
     <label>
-        <input type="number">
+        <input name="accesscode" type="text">
     </label>
-    <button>Go!</button>
+    <button type="submit">Go!</button>
+    </form>
   </div>
 </div>
 
@@ -20,7 +22,7 @@
     <h3>Create a quiz!</h3>
     <br>
     <p>Click to begin creating a shareable quiz:</p>
-    <button>Go!</button>
+    <a href="/createquiz"><button>Go!</button></a>
   </div>
 </div>
 
