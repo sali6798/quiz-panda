@@ -36,7 +36,36 @@ router.get("/createquiz", function(req, res) {
 });
 
 router.get("/quiz/:accesscode", function(req, res) {
+<<<<<<< HEAD
     res.render("takequiz");
+=======
+    db.Quiz.findOne({
+        where: {
+            accessCode: req.params.accesscode
+        },
+
+        include: [
+            {
+                model: db.Question,
+
+                include: [
+                    {
+                        model: db.Answer
+                    }
+                ]
+            }
+        ]
+    }).then(quiz => {
+        const QuizJson = quiz.toJSON();
+        console.log(QuizJson);
+        console.log("---------------");
+        
+        res.render("takequiz", QuizJson);
+    }).catch(err => {
+        res.status(500).json(err);
+    })
+    
+>>>>>>> development
 });
 
 //Render route for leaderboard.handlebars.
