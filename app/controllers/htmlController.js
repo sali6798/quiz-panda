@@ -14,8 +14,22 @@ router.get("/login", function(req, res) {
     res.render("login");
 });
 
+//Render route for userprofile.handlebars.
+//Serves entries from Quizzes table which correspond to the session user's userid.
+//Will allow us to serve quiz data upon rendering.
 router.get("/profile", function(req, res) {
-    res.render("userprofile");
+    db.QuizUser.findAll({
+        where:{
+            UserId:req.session.user.id
+        },
+        include:[{
+            model:db.Quiz
+        }]
+    }).then((dbQuizzes)=>{
+        console.log(dbQuizzes);
+        let hbsObject = {quiz:dbQuizzes}
+        return res.render("userprofile", hbsObject)    
+    })
 });
 
 router.get("/createquiz", function(req, res) {
