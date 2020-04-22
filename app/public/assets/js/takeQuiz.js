@@ -1,3 +1,10 @@
+$(document).ready(function() {
+    $("#accesscodeForm").on("submit", function (event) {
+        
+    })
+})
+
+
 //     $("#").on("submit", function (event) {
 //         event.preventDefault();
 //         const  = $("#").val();
