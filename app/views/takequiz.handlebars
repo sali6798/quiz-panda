@@ -1,13 +1,13 @@
-<h3>Quiz Name</h3>
+<h3>{{this.title}}</h3>
 
 <div class="grid-container">
 
     <div class="grid-x grid-padding-x">
 
         <fieldset class="large cell">
-            {{#each question}}
-            <legend>{{this.question}}</legend>
-            {{#each answer}}
+            {{#each Questions}}
+            <legend>{{this.title}}</legend>
+            {{#each Answers}}
             <input name="answerOption-{{QuestionId}}" id="{{this.id}}" type="radio" class="answerOption" data-IsCorrect="{{this.IsCorrect}}"><label
                 for="{{this.id}}">{{this.answer}}</label>
             {{/each}}
