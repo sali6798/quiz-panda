@@ -46,7 +46,7 @@ router.route("/login")
                     id: dbUser.id
                 };
                 res.send("logged in!")
-                // res.redirect('/')
+                // res.redirect("/profile")
             } else {
                 res.send("not logged in")
             }
@@ -60,13 +60,28 @@ router.route("/login")
 router.route("/logout")
     .get((req, res) => {
         req.session.destroy(err => {
-            res.json("logged out!")
+            res.redirect("/")
         })
     })
 
 router.get("/readsessions", ((req, res) => {
     res.json(req.session);
 }))
+
+router.route("/api/users/:username")
+    .get((req, res) => {
+        db.User.findOne({
+            where: {
+                username: req.params.username
+            }
+        }).then(dbUser => {
+            res.status(200).json(dbUser);
+        }).catch(err => {
+            res.status(404).json(err)
+        })
+    })
+
+
 
 // router.route("/api/users/:id")
 //     .get((req, res) => {

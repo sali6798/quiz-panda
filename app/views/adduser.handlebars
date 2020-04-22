@@ -1,36 +1,40 @@
-
-        {{!-- start content of adduser.handlebars --}}
-        <form>
-            <div class="grid-container">
-                <div class="grid-x grid-padding-x">
-                    <div class="medium-6 cell">
-                        <label>First Name
-                            <input type="text" placeholder="First Name">
-                        </label>
-                    </div>
-                    <div class="medium-6 cell">
-                        <label>Last Name
-                            <input type="text" placeholder="Last Name">
-                        </label>
-                    </div>
-                    <div class="medium-6 cell">
-                        <label>Username
-                            <input type="text" placeholder="Username">
-                        </label>
-                    </div>
-                    <div class="medium-6 cell">
-                        <label>Password
-                            <input type="text" placeholder="Password">
-                        </label>
-                    </div>
-                    <div class="medium-6 cell">
-                        <label>Email
-                            <input type="text" placeholder="Email">
-                        </label>
-                    </div>
-                </div>
+{{!-- start content of adduser.handlebars --}}
+<form id="signupForm">
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="medium-6 cell">
+                <label>First Name
+                    <input type="text" name="firstName" placeholder="First Name">
+                </label>
             </div>
-
-             <button type="submit">Create User</button>
-        </form>
-        {{!-- end of content of adduser.handlebars --}}
+            <div class="medium-6 cell">
+                <label>Last Name
+                    <input type="text" name="lastName" placeholder="Last Name">
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Email
+                    <input type="email" name="email" placeholder="Email">
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Username
+                    <input type="text" name="username" placeholder="Username">
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Password
+                    <input type="password" name="password" placeholder="Password">
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Confirm password
+                    <input type="password" name="confirmPassword" placeholder="Password">
+                </label>
+            </div>
+            <button type="submit">Sign Up</button>
+        </div>
+    </div>
+</form>
+<p>Already have a login? <a href="/login">Log in here</a></p>
+{{!-- end of content of adduser.handlebars --}}
