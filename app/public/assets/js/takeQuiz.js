@@ -25,12 +25,12 @@ $(document).ready(function () {
             else {
                 quizObj = response;
                 console.log(quizObj)
-                location.href = "/quiz"
+                location.href = "/quiz/" + accesscode
             }
         })
     })
 
-    
+
     
 })
 

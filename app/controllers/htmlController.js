@@ -36,7 +36,7 @@ router.get("/createquiz", function(req, res) {
     res.render("quizbuildsplash");
 });
 
-router.get("/quiz", function(req, res) {
+router.get("/quiz/:accesscode", function(req, res) {
     res.render("takequiz");
 });
 
