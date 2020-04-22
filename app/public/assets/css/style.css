@@ -2,6 +2,10 @@ html {
     background-color:gray ;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .navbar{
     height: 10vh;
 }
@@ -11,8 +15,13 @@ html {
     min-height: 75vh;
 }
 
+.formError {
+    color: red;
+}
 
-
+.invalidInput {
+    border-color: red;
+}
 
 .footerdiv {
     height: 15vh;
