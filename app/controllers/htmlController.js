@@ -27,7 +27,7 @@ router.get("/profile", function(req, res) {
         }]
     }).then((dbQuizzes)=>{
         console.log(dbQuizzes);
-        let hbsObject = {quiz:dbQuizzes}
+        const hbsObject = {quiz:dbQuizzes}
         return res.render("userprofile", hbsObject)    
     })
 });
@@ -41,7 +41,15 @@ router.get("/quiz", function(req, res) {
 });
 
 router.get("/leaderboard", function(req, res) {
-    res.render("leaderboard");
+    db.QuizUser.findAll({
+        where:{
+            QuizId:req.body.QuizId
+        }
+    }).then((dbScores)=>{
+        console.log(dbLeaderboard);
+        const hbsObject={scores:dbScores}
+        return res.render("leaderboard", hbsObject)
+    })
 });
 
 // defaults to index.handlebars if user tries to visit any other route
