@@ -1,7 +1,37 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    let quizObj;
+
     $("#accesscodeForm").on("submit", function (event) {
-        
+        event.preventDefault();
+        const accesscode = $("#accesscodeForm :input[name=accesscode]").val().trim();
+
+        $.ajax({
+            method: "GET",
+            url: "/api/quiz/" + accesscode
+        }).then(response => {
+            if (response === null) {
+                if ($("#accesscodeForm").siblings()[3]) {
+                    $("#accesscodeForm").siblings()[3].remove();
+                }
+                
+                const errorMsg = $("<p>").text("This access code does not exist!").addClass("formError");
+                
+                // append it to the div after the form element
+                $("#takeQuiz").append(errorMsg);
+
+                // add red border to input element
+                $("#takeQuiz").addClass("invalidInput");
+            }
+            else {
+                quizObj = response;
+                console.log(quizObj)
+                location.href = "/quiz"
+            }
+        })
     })
+
+    
+    
 })
 
 

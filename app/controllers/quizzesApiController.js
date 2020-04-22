@@ -52,6 +52,36 @@ router.route("/api/quiz")
         })
     })
 
+
+router.route("/api/quiz/:accesscode")
+    // returns the quiz with its questions and answers
+    // that matches the id given in the parameter
+    .get((req, res) => {
+        db.Quiz.findOne({
+            where: {
+                accessCode: req.params.accesscode
+            },
+
+            include: [
+                {
+                    model: db.Question,
+
+                    include: [
+                        {
+                            model: db.Answer
+                        }
+                    ]
+                }
+            ]
+        }).then(quiz => {
+            res.json(quiz);
+        }).catch(err => {
+            res.status(500).json(err);
+        })
+    // sets the isDeleted property to true for the quiz that matches the id  
+    // parameter and then deletes the questions and answers for that quiz
+    })
+
 // GET and DELETE routes for /api/quiz/:id
 router.route("/api/quiz/:id")
     // returns the quiz with its questions and answers
