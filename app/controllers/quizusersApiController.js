@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+// return all the entries in QuizUser joined with Quiz
 router.get("/api/quizuser", function (req, res) {
     db.QuizUser
         .findAll({
@@ -17,6 +18,7 @@ router.get("/api/quizuser", function (req, res) {
         })
 });
 
+// add a new in QuizUser
 router.post("/api/quizuser", function (req, res) {
     db.QuizUser
         .create({
@@ -34,13 +36,16 @@ router.post("/api/quizuser", function (req, res) {
 
 });
 
-router.get("/api/quizuser/:user/:quiz", function (req, res) {
+// find the entry in QuizUser joined with Quiz that matches
+// the logged in user's id and the quizId parameter
+router.get("/api/quizuser/:quizId", function (req, res) {
+    console.log("session id", req.session.id)
     db.QuizUser
         .findOne({
             include: [ db.Quiz ],
             where: {
-                UserId: req.params.user,
-                QuizId: req.params.quiz
+                UserId: req.session.user.id,
+                QuizId: req.params.quizId
             }
         })
         .then(data => {
@@ -52,7 +57,9 @@ router.get("/api/quizuser/:user/:quiz", function (req, res) {
         })
 });
 
-router.put("/api/quizuser/:user/:quiz", function (req, res) {
+// updates the entry in QuizUser that matches
+// the logged in user's id and the quizId parameter
+router.put("/api/quizuser/:quizId", function (req, res) {
     db.QuizUser
         .update({
             hasTaken: req.body.hasTaken,
@@ -60,8 +67,8 @@ router.put("/api/quizuser/:user/:quiz", function (req, res) {
         }, 
         {
             where: {
-                UserId: req.params.user,
-                QuizId: req.params.quiz
+                UserId: req.session.user.id,
+                QuizId: req.params.quizId
             }
         })
         .then(data => {
@@ -72,12 +79,14 @@ router.put("/api/quizuser/:user/:quiz", function (req, res) {
         })
 });
 
-router.delete("/api/quizuser/:user/:quiz", function (req, res) {
+// delets the entry in QuizUser that matches
+// the logged in user's id and the quizId parameter
+router.delete("/api/quizuser/:quizId", function (req, res) {
     db.QuizUser
         .destroy({
             where: {
-                UserId: req.params.user,
-                QuizId: req.params.quiz
+                UserId: req.session.user.id,
+                QuizId: req.params.quizId
             }
         })
         .then(data => {
