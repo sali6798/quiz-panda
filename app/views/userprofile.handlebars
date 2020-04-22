@@ -29,29 +29,32 @@
  {{!-- Past quiz table --}}
 <table>   
 <h3>Past Quizes</h3>  
-<thead>
+{{!-- <thead>
     <tr>
       <th width="200">Quiz Name</th>
       <th width="150">Leaderboard</th>
-      {{!-- add conditional for if retakeable = true, this button appears --}}
       <th width="150">Retake Quiz</th>
     </tr>
-  </thead>
+  </thead> --}}
+  
   <tbody>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
+    {{#each quiz}}
+      <tr>
+       <td>{{this.title}}</td>
+        <td>
+          <a href="/leaderboard/{{QuizID}}">
+          <button>Leaderboard</button>
+          </a>
+        </td>
+        <td>
+          {{#if this.canRetake}}
+            <a href="/quiz/{{QuizID}}">
+            <button>Retake Quiz</button>
+            </a>
+          {{/if}}
+        </td>
+ 
+      </tr>
+    {{/each}}
   </tbody>
 </table>
