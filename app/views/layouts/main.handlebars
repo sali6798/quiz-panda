@@ -25,9 +25,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
         integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
 
+    {{!-- CDN link for motion  --}}
+    <!-- Insert this within your head tag and after foundation.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+
+    {{!-- link to css foundation --}}
+    {{!-- <link rel="stylesheet" type="text/css" href="/assets/css/app.css"> --}}
 
     {{!-- link to css file --}}
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
 
 
 
@@ -65,9 +72,9 @@
 
         {{{ body }}}
 
+
     </div>
     {{!-- end of body container --}}
-
 
 
 
@@ -75,12 +82,14 @@
     {{!-- start of footer --}}
     <footer>
         <div class="wrap row small-up-1 medium-up-4 footerdiv">
+            {{!-- <div class="aboutus"> --}}
             <div class="column">Brett</div>
             <div class="column">Shaidee</div>
             <div class="column">Yalda</div>
             <div class="column">JJ</div>
-            <div class="copyRight"> copy right 2020</div>
+            {{!-- </div> --}}
         </div>
+            <div class="copyRight"> copy right 2020</div>
     </footer>
     {{!-- end of footer --}}
 
@@ -93,6 +102,11 @@
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
         integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
 
+
+    <script src="/assets/js/app.js"></script>
+
+    {{!-- to help dropdowns on navbar working --}}
+    {{!-- <script>$(document).foundation();</script> --}}
 
 </body>
 
