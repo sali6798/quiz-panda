@@ -36,9 +36,6 @@ router.get("/createquiz", function(req, res) {
 });
 
 router.get("/quiz/:accesscode", function(req, res) {
-<<<<<<< HEAD
-    res.render("takequiz");
-=======
     db.Quiz.findOne({
         where: {
             accessCode: req.params.accesscode
@@ -65,7 +62,6 @@ router.get("/quiz/:accesscode", function(req, res) {
         res.status(500).json(err);
     })
     
->>>>>>> development
 });
 
 //Render route for leaderboard.handlebars.
