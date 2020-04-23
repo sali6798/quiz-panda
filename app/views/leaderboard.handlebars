@@ -1,29 +1,29 @@
-
 {{!-- start of  leaderboard start --}}
-<table>
-<h1> Leaderboard</h1>  
-<thead>
-    <tr>
-      <th width="200">Username</th>
-      <th width="150">score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-    </tr>
-  </tbody>
-</table>
+<div class="grid-contaner">
+  <div class="grid-x grid-padding-x">
+    <div class="medium-3 cell"></div>
 
+    <div class="medium-6 cell">
+      <table>
+        <h1> Leaderboard for {{title}}</h1>
+        <thead>
+          <tr>
+            <th width="200">Username</th>
+            <th width="150">score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each Users}}
+          <tr>
+            <td>{{username}}</td>
+            <td>{{QuizUser.score}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="medium-3 cell"></div>
+
+  </div>
+</div>
 {{!--  end of leaderboard --}}
-
-
