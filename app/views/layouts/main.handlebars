@@ -41,30 +41,32 @@
 </head>
 
 <body>
-    <header>
-        {{!-- navbar --}}
-        <div class="top-bar navbar">
-            <div class="top-bar-left">
-                <ul class="dropdown menu" data-dropdown-menu>
-                    <img class="logo" src="/assets/images/logo.png" alt="logo">
+
+
+    <div class="title-bar" id="">
+
+        {{!-- <div class=""> --}}
+            <div class="align-left">
+                 <li><a href="#"> <img class="logo" src="/assets/images/panda.svg" alt="logo"></a></li>
+            </div>
+
+            <div class="top-bar-left align-left navbarinfo">
+                <ul class="menu" data-responsive-menu="accordion">  
                     <li class="menu-text">Quiz Panda</li>
-                    {{!-- <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li> --}}
+                    <li><a href="#">Introduction</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
                 </ul>
             </div>
-            {{!-- <div class="top-bar-right">
-                <ul class="menu">
-
-                    <li><a href="/login">Login</a></li>
-
-                    <li><input type="search" placeholder="Search"></li>
-                <li><button type="button" class="button">Search</button></li>
+            <div class="top-bar-right align-right navbarinfo">
+                <ul class="menu right">
+                    <li><a href="#">My Account</a></li>
+                    <li><a class="button primary">Login</a></li>
                 </ul>
-            </div> --}}
-        </div>
-        {{!-- end of navbar --}}
-    </header>
+            </div>
+
+        {{!-- </div> --}}
+    </div>
 
 
     {{!-- body container --}}
@@ -81,46 +83,29 @@
 
     {{!-- start of footer --}}
     <footer>
-        <div class="wrap row small-up-1 medium-up-4 footerdiv">
-            {{!-- <div class="aboutus"> --}}
+        {{!-- <div class="wrap row small-up-1 medium-up-4 footerdiv">
+            <div class="aboutus">
             <div class="column">
-                <div class="card">
-                    <img src="">
-                    <div class="card-section">
-                        <p>This is a simple card with an image.</p>
-                    </div>
-                </div>
-                Brett
+                <h3>Brett</h3>
+                <img class="thumbnail" src="https://place-hold.it/200x200" alt="Profile photo.">
             </div>
             <div class="column">
-                <div class="card">
-                    <img src="">
-                    <div class="card-section">
-                        <p>This is a simple card with an image.</p>
-                    </div>
-                </div>
-                Shaidee
+                <h3>Shaidee</h3>
+                <img class="thumbnail" src="https://place-hold.it/200x200" alt="Profile photo.">
+
             </div>
             <div class="column">
-                <div class="card">
-                    <img src="">
-                    <div class="card-section">
-                        <p>This is a simple card with an image.</p>
-                    </div>
-                </div>
-                Yalda
+                <h3>Yalda</h3>
+                <img class="thumbnail" src="https://place-hold.it/200x200" alt="Profile photo.">
             </div>
             <div class="column">
-                <div class="card">
-                    <img src="">
-                    <div class="card-section">
-                        <p>This is a simple card with an image.</p>
-                    </div>
-                </div>
-                JJ
+                <h3>JJ</h3>
+                <img class="thumbnail" src="https://place-hold.it/200x200" alt="Profile photo.">
             </div>
-            {{!-- </div> --}}
-        </div>
+            </div>
+        </div> --}}
+
+
         <div class="copyRight"> copy right 2020</div>
     </footer>
     {{!-- end of footer --}}
