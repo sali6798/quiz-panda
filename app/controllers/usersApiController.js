@@ -4,11 +4,6 @@ const db = require("../models");
 const bcrypt = require("bcrypt");
 
 router.route("/api/users")
-    // .get((req, res) => {
-    //     db.User.findAll().then(dbUsers => {
-    //         res.status(200).json(dbUsers);
-    //     })
-    // })
     .post((req, res) => {
         db.User.create({
             firstName: req.body.firstName,
@@ -46,14 +41,12 @@ router.route("/login")
                     id: dbUser.id
                 };
                 res.send("logged in!")
-                // res.redirect("/profile")
             } else {
                 res.send("not logged in")
             }
         }).catch(err => {
             console.log(err);
             res.status(500).json(err);
-
         })
     })
 
