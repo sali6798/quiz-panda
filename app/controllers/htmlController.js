@@ -77,11 +77,17 @@ router.get("/quiz/:accesscode", function (req, res) {
 
 //Render route for leaderboard.handlebars.
 //Serves scores data from the QuizUser table to retrieve the scores related to the quiz and user.
-router.get("/leaderboard/:id", function (req, res) {
+router.get("/leaderboard/:QuizId", function (req, res) {
     db.QuizUser.findAll({
         where: {
-            QuizId: req.params.id
-        }
+            QuizId: req.params.QuizId
+        },
+
+        include: [
+            {
+                model: db.Quiz
+            }
+        ]
     }).then((dbScores) => {
         console.log(dbLeaderboard);
         const hbsObject = { scores: dbScores }
