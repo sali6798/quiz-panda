@@ -2,6 +2,10 @@ html {
     background-color:gray ;
 }
 
+button {
+    border: 1px solid black;
+}
+
 button:hover {
     cursor: pointer;
 }
@@ -21,6 +25,16 @@ button:hover {
 
 .invalidInput {
     border-color: red;
+}
+
+.correctAnswerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answerOption {
+    margin: 0;
 }
 
 .footerdiv {
