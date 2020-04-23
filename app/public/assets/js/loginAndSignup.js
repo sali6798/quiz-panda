@@ -94,7 +94,7 @@ $(document).ready(function () {
     $("#signupForm :input[name=password], #signupForm :input[name=confirmPassword]").blur(function () {
         const password = $("#signupForm :input[name=password]");
         const confirmPassword = $("#signupForm :input[name=confirmPassword]");
-        
+
         // do not match, display error and give password input a red border too
         if (password.val() !== confirmPassword.val()) {
             validPassword = displayErrorMessage(confirmPassword, "Passwords do not match!", true);
@@ -155,7 +155,7 @@ $(document).ready(function () {
     // logs user in if entered username and password match
     $("#loginForm").on("submit", function (event) {
         event.preventDefault();
-        
+
         const user = {
             username: $("#loginForm :input[name=username]").val().trim(),
             password: $("#loginForm :input[name=password]").val()
@@ -167,13 +167,17 @@ $(document).ready(function () {
             data: user,
             url: "/login"
         }).then(data => {
-            // reloates to profile page if successful
-            location.href = "/profile"
+            // relocates to profile page if successful
+            if (data === "OK") {
+                location.href = "/profile"
+            }
+            else {
+                // if log in does not exist, display error message
+                $("#loginError").text("Username or password is wrong!");
+                $("#loginForm :input[name=password]").val("");
+            }
         }).catch(err => {
             console.log(err);
-            // if log in does not exist, display error message
-            $("#loginError").text("Username or password is wrong!");
-            $("#loginForm :input[name=password]").val("");
         })
     })
 })
