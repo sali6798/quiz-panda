@@ -1,5 +1,5 @@
 html {
-    background-color:gray ;
+    /* background-color:gray ; */
 }
 
 button {
@@ -16,7 +16,7 @@ button:hover {
 
 
 .bodycontainer{
-    min-height: 75vh;
+    min-height: 90vh;
 }
 
 .formError {
@@ -38,8 +38,8 @@ button:hover {
 }
 
 .footerdiv {
-    height: 15vh;
-    background-color: #222;
+    /* height: 10vh; */
+    background-color: rgb(19, 24, 24);
     padding: 80px 0px;
     color: white;
     /* position: fixed; */
@@ -98,6 +98,8 @@ button:hover {
 
 .logo{
     width: 100px;
+    float: left;
+
 }
 
 /* .aboutus{
@@ -118,12 +120,12 @@ button:hover {
     text-align: center;
     width: 100%;
     /* height: 50vh; */
-    height: 300px;
+    height: 500px;
     padding-top: 100px;
     /* background-color:black;  */
     color:white;
     
-    background: linear-gradient(132deg,  #0548a0,#df1604);
+    background: linear-gradient(132deg,  #11e2e9,#132627,  #11e2e9);
     background-size: 400% 400%;
     animation: BackgroundGradient 30s ease infinite;
 
@@ -150,3 +152,15 @@ button:hover {
   }
   
   /* end of animation from codepen */
+
+
+  .introinfo{
+      text-align: center;
+      font-size: 28px;
+      margin-top: 50px;
+      font-weight: bold;
+  }
+
+  .navbarinfo{
+      margin-top: 15px;
+  }
