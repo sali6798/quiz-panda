@@ -1,30 +1,68 @@
 <h1>Begin Building Your Quiz!</h1>
 
-<form>
+<form id="createLanding">
   <div class="grid-container">
-      <div class="grid-x grid-padding-x">
-          <h3>Enter the name of your new quiz:</h3>
-          <label>
-          <input type="text" placeholder="Name">
-        </label>
-      </div>
     <div class="grid-x grid-padding-x">
-      <div class="medium-6 cell">
+      <h3>Enter the title of your new quiz:</h3>
+      <label>
+        <input id="quizName" type="text" name="name" placeholder="Name">
+      </label>
+    </div>
+    <div class="grid-x grid-padding-x">
+      {{!-- <div class="medium-6 cell">
         <label>Enter your email address:
           <input type="text" placeholder="Email">
         </label>
-      </div>
+      </div> --}}
       <fieldset class="medium-6 cell">
         <legend>Should this quiz be retakeable?</legend>
-            <input id="checkbox1" type="checkbox"><label for="checkbox1">Yes</label>
-            <input id="checkbox2" type="checkbox"><label for="checkbox2">No</label>
+        <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label for="yesOption">Yes</label>
+        <input id="noOption" type="radio" value="no" name="retakeable"><label for="noOption">No</label>
       </fieldset>
+      <button type="submit">Create Quiz</button></a>
     </div>
   </div>
-  <div class="grid-container hide">
-      <div class="grid-x grid-padding-x">
-          <h3>Continue a quiz draft:</h3>
-          <p>Quiz name tags</p>
+</form>
+
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <h3>Continue a quiz draft:</h3>
+    <p>Quiz name tags</p>
+  </div>
+</div>
+
+<form id="addQuestions" class="hide">
+  <div class="grid-container">
+    <div class="grid-x grid-padding-x">
+      <label>Enter your question
+        <input type="text" placeholder="Question">
+      </label>
+      <label>Answer Option 1
+        <input type="text" placeholder="Answer">
+      </label>
+      <label>Answer Option 2
+        <input type="text" placeholder="Answer">
+      </label>
+      <label>Answer Option 3
+        <input type="text" placeholder="Answer">
+      </label>
+      <label>Answer Option 4
+        <input type="text" placeholder="Answer">
+      </label>
+    </div>
+    <div class="grid-x grid-padding-x">
+      <div class="medium-3 cell">
+        <button>Go Back</button>
       </div>
+      <div class="medium-3 cell">
+        <button>Save Question</button>
+      </div>
+      <div class="medium-3 cell">
+        <button>Finish!</button>
+      </div>
+      <div class="medium-3 cell">
+        <button>Next Question</button>
+      </div>
+    </div>
   </div>
 </form>

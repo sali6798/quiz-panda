@@ -32,7 +32,7 @@ router.get("/profile", function(req, res) {
 });
 
 router.get("/createquiz", function(req, res) {
-    res.render("quizbuildsplash");
+    res.render("quizbuild");
 });
 
 router.get("/quiz/:accesscode", function(req, res) {
