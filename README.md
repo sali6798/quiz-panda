@@ -78,7 +78,7 @@ The links to github accounts of contributers on this project:
 
 [Brett Belka](https://github.com/bbelka)
 
-[JJ Cardeens](https://github.com/cardeens)
+[JJ Cardenas](https://github.com/cardeens)
 
 [Zahra Ali Aghazadeh](https://github.com/zahraaliaghazadeh)
 
@@ -90,5 +90,9 @@ LinkedIn profiles for contact:
 [Yalda Aghazade](www.linkedin.com/in/yalda-aghazade)
 
 [Shaidee Alingcastre](https://www.linkedin.com/in/shaidee-alingcastre/)
+
+[JJ Cardenas](https://www.linkedin.com/in/jordanjcardenas/)
+
+[Brett Belka](https://www.linkedin.com/in/brettbelka/)
 
 Feel free to contact us for any feedbacks, questions or collaborations! 
