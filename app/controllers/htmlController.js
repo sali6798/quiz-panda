@@ -43,7 +43,8 @@ router.get("/createquiz", function (req, res) {
 
     //     return res.render("quizbuild", hbsStagedObj);
     // })
-    res.render("quizbuild")
+    const hbsObj = { id: req.session.user.id };
+    res.render("quizbuild", hbsObj)
 });
 
 router.get("/quiz/:accesscode", function (req, res) {
