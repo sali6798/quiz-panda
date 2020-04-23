@@ -40,9 +40,9 @@ router.route("/login")
                     username: dbUser.username,
                     id: dbUser.id
                 };
-                res.send("logged in!")
+                res.send("OK");
             } else {
-                res.send("not logged in")
+                res.send("not logged in");
             }
         }).catch(err => {
             console.log(err);
