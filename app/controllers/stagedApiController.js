@@ -21,7 +21,7 @@ router.post("/api/staged", function (req, res) {
     db.Staged
         .create({
             storedQuiz: req.body.storedQuiz,
-            UserId: req.body.UserId
+            UserId: req.session.user.id
         })
         .then(data => {
             res.status(200).json(data)
