@@ -170,3 +170,10 @@ button:hover {
 
 }
 
+.card-section{
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 7px;
+    margin-top: 3px;
+    /* margin-bottom: 5px; */
+}
