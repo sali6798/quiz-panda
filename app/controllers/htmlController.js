@@ -129,6 +129,8 @@ router.get("/leaderboard/:QuizId", function (req, res) {
             ]
         }).then((dbScores) => {
             const hbsObject = dbScores.toJSON();
+            console.log(hbsObject);
+            
             return res.render("leaderboard", hbsObject)
         })
     } else {
