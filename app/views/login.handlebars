@@ -1,0 +1,60 @@
+
+  
+    <header>
+      <div class="container">
+        <h1 class="brandname">Quiz Panda</h1>
+
+        <nav>
+          <ul>
+            <li><a href="#"><span>About</span></a></li>
+            <li><a href="/login"><span>Login</span></a></li>
+            <li><a href="/signup"><span>Sign Up</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+
+
+{{!-- content of login.handlebars --}}
+
+<div class="logincontainer">
+  <form id="loginForm">
+    <div class="grid-container">
+      <div class="grid-y grid-padding-x">
+        {{!-- <div class="medium-2 cell"></div> --}}
+        <div class="medium-4 cell">
+          <label>Username
+            <input type="text" name="username" placeholder="Username">
+          </label>
+        </div>
+
+        <div class="medium-4 cell">
+          <label>Password
+            <input type="password" name="password" placeholder="Password">
+          </label>
+        </div>
+      </div>
+      <div class="medium-2 cell"></div>
+      <div class="grid-y grid-padding-x">
+        {{!-- <div class="medium-2 cell"></div> --}}
+        <div class="medium-4 cell">
+          <button class="button" type="submit"> Login </button>
+        </div>
+      </div>
+    </div>
+    <div class="medium-6 cell"></div>
+    <div class="grid-x grid-padding-x">
+      <div class="medium-2 cell"></div>
+      <div class="medium-4 cell">
+        <div id="loginError" class="formError"></div>
+        <p>Don't have a login? <a href="/signup">Sign up here</a></p>
+      </div>
+
+    </div>
+  </form>
+
+</div>
+
+
+{{!-- end of content of login handlebars --}}

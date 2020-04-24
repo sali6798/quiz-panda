@@ -1,0 +1,284 @@
+/* html { */
+    /* background-color:gray ; */
+/* } */
+
+button:hover {
+    cursor: pointer;
+}
+
+.navbar{
+    height: 10vh;
+}
+
+
+/* .bodycontainer{ */
+    /* min-height: 90vh; */
+    /* background-color: #222; */
+    /* background-image: url(https://s3.envato.com/files/59596537-cfeb-4f99-810f-f0f73b297d08/inline_image_preview.jpg); */
+    /* background-image: url(https://images.unsplash.com/photo-1510422908328-746ed313f736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2552&q=80); */
+    /* background-image: url(https://images.unsplash.com/photo-1579747384978-5faf4c016375?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80); */
+    
+/* } */
+
+.bodycontainer background-image{
+opacity: 0.2;
+}
+
+.formError {
+    color: red;
+}
+
+.invalidInput {
+    border-color: red;
+}
+
+.correctAnswerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answerOption {
+    margin: 0;
+}
+
+.footerdiv {
+    /* height: 10vh; */
+    background-color: rgb(19, 24, 24);
+    padding: 80px 0px;
+    color: white;
+    /* position: fixed; */
+    left: 0;
+    right:0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin:0;
+    max-width: 100%;
+}
+
+.copyRight{
+    bottom:10px;
+    left:10px;
+    /* position: fixed; */
+    background-color: #222;
+    color:white;
+
+}
+
+#emailList {
+    list-style: none;
+}
+
+#emailList li {
+    border: 1px solid #132627;
+}
+
+/* .jumbotron{ */
+    /* width: 100%; */
+    /* height: 50vh; */
+    /* height: 300px; */
+    /* padding-bottom: 60px; */
+    /* background-color:black;  */
+    /* color: white;
+    font-weight: bold;
+    text-align: center; */
+    /* animation-name: example;
+    animation-duration: 4s; */
+      
+/* } */
+
+/* @keyframes example {
+    from {background-color:black ;}
+    to {background-color: yellow;}  
+  } */
+
+  /* @keyframes example {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+  } */
+
+
+  
+  
+
+
+
+.logo{
+    width: 100px;
+    float: left;
+
+}
+
+/* .aboutus{
+    text-align: center;
+
+} */
+.top-bar, ul.menu {
+    background: black;
+    color: white;
+}
+
+#intro{
+    /* margin-top: 100px; */
+    position: relative;
+}
+
+
+/* https://codepen.io/naimjeem/pen/LjjjNr */
+/* start of animation floating code from codepen */
+.jumbotron {
+    text-align: center;
+    width: 100%;
+    /* height: 50vh; */
+    height: 500px;
+    padding-top: 100px;
+    /* background-color:black;  */
+    color:white;
+    
+    background: linear-gradient(132deg,  rgb(62, 146, 69),#132627,  rgb(62, 146, 69));
+    background-size: 400% 400%;
+    animation: BackgroundGradient 30s ease infinite;
+
+  }
+  
+  /* h1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-family: Open Sans, sans-serif;
+    color: #fff;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2em;
+    padding: 5px;
+  } */
+  
+  @keyframes BackgroundGradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+  
+  /* end of animation from codepen */
+
+
+  .introinfo{
+      text-align: center;
+      font-size: 28px;
+      margin-top: 50px;
+      font-weight: bold;
+      color:white;
+  }
+
+  .navbarinfo{
+      margin-top: 15px;
+  }
+
+  @media only screen and (max-width: 500px) {
+      .logo {
+          display: none;
+      }
+  }
+
+
+  /* .signupForm label{
+  color:white;
+  } */
+
+  .havealogin{
+      color: white;
+      margin: 0 auto;
+  }
+
+
+/* 
+  .profileCards{
+      margin: 0 auto;
+      margin-bottom: 30px;
+      width: 50%;
+      align-content: center;
+      text-align: center;
+  } */
+
+  /* .profilecardcontainer{
+      background-color: deeppink;
+  } */
+
+  .profileCards{
+      background-color: ivory;
+      color:black;
+      /* background-image: url(https://static.vecteezy.com/system/resources/previews/000/137/496/non_2x/bamboo-background-frog-angle-free-vector.jpg); */
+  }
+
+  
+
+  /* start of parallax effect with foundation */
+
+  /* body {
+	font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+	font-weight: 200;
+	font-size: 20px;
+} */
+
+/* .parallax-background { */
+    /* background-color: #0078A0; */
+    /* background-image: url(https://images.unsplash.com/photo-1438755582627-221038b62986?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80); */
+	/* height: 620px; */
+	/* background-repeat: no-repeat; */
+	/* -webkit-background-size: cover; */
+  	/* -moz-background-size: cover; */
+  	/* -o-background-size: cover; */
+	/* background-size: cover; */
+	/* position: fixed; */
+	/* width: 100%; */
+/* } */
+
+/* .intro-text {
+	font-size: 50px;
+	color: #fff;
+	text-align: center;
+	margin-top: 15%;
+} */
+
+/* .parallax-content {
+	max-width: 100%;
+	position: relative;
+	top: 500px;
+	padding: 50px;
+	font-size: 20px;
+	background-color: #fff;
+}               */
+    
+
+/* end of parallax effect with foundation */
+
+
+.logincontainer{
+    background-color: ivory;
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 200px;
+}
+
+.nologin{
+    color: black;
+}
+
+.addusercontainer{
+    background-color: ivory;
+    width: 50%;
+    margin: 0 auto;
+    color: black;
+}
+
+.addusercontainer label{
+    color: black;
+}
+
+
