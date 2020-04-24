@@ -139,53 +139,19 @@ button:hover {
     padding: 10px;
  }
 
-
-  /* start of parallax effect with foundation */
-
-  /* body {
-	font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
-	font-weight: 200;
-	font-size: 20px;
-} */
-
-/* .parallax-background { */
-    /* background-color: #0078A0; */
-    /* background-image: url(https://images.unsplash.com/photo-1438755582627-221038b62986?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80); */
-	/* height: 620px; */
-	/* background-repeat: no-repeat; */
-	/* -webkit-background-size: cover; */
-  	/* -moz-background-size: cover; */
-  	/* -o-background-size: cover; */
-	/* background-size: cover; */
-	/* position: fixed; */
-	/* width: 100%; */
-/* } */
-
-/* .intro-text {
-	font-size: 50px;
-	color: #fff;
-	text-align: center;
-	margin-top: 15%;
-} */
-
-/* .parallax-content {
-	max-width: 100%;
-	position: relative;
-	top: 500px;
-	padding: 50px;
-	font-size: 20px;
-	background-color: #fff;
-}               */
-    
-
-/* end of parallax effect with foundation */
+.logincontainer{
+    background-color:rgb(243, 243, 243);
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 200px;
+}
 
 .nologin{
     color: black;
 }
 
-/* .addusercontainer{
-    background-color: ivory;
+.addusercontainer{
+    background-color:rgb(243, 243, 243);
     width: 50%;
     margin: 0 auto;
     color: black;
