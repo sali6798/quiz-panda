@@ -1,6 +1,6 @@
-html {
+/* html { */
     /* background-color:gray ; */
-}
+/* } */
 
 button:hover {
     cursor: pointer;
@@ -11,14 +11,14 @@ button:hover {
 }
 
 
-.bodycontainer{
-    min-height: 90vh;
-    background-color: #222;
+/* .bodycontainer{ */
+    /* min-height: 90vh; */
+    /* background-color: #222; */
     /* background-image: url(https://s3.envato.com/files/59596537-cfeb-4f99-810f-f0f73b297d08/inline_image_preview.jpg); */
     /* background-image: url(https://images.unsplash.com/photo-1510422908328-746ed313f736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2552&q=80); */
     /* background-image: url(https://images.unsplash.com/photo-1579747384978-5faf4c016375?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80); */
     
-}
+/* } */
 
 .bodycontainer background-image{
 opacity: 0.2;
@@ -171,9 +171,9 @@ opacity: 0.2;
   }
 
 
-  #signupForm label{
+  /* .signupForm label{
   color:white;
-  }
+  } */
 
   .havealogin{
       color: white;
@@ -195,7 +195,7 @@ opacity: 0.2;
   } */
 
   .profileCards{
-      background-color: rgb(51, 114, 56);
+      background-color: rgb(8, 240, 209);
       color:white;
       /* background-image: url(https://static.vecteezy.com/system/resources/previews/000/137/496/non_2x/bamboo-background-frog-angle-free-vector.jpg); */
   }
@@ -241,3 +241,26 @@ opacity: 0.2;
     
 
 /* end of parallax effect with foundation */
+
+
+.logincontainer{
+    background-color: ivory;
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 200px;
+}
+
+.nologin{
+    color: black;
+}
+
+.addusercontainer{
+    background-color: ivory;
+    width: 50%;
+    margin: 0 auto;
+    color: black;
+}
+
+.addusercontainer label{
+    color: black;
+}
