@@ -71,7 +71,7 @@ main p {
 	line-height: 190%;
 }
 
-button {
+.mainButton {
 	border-radius: 5px;
 	background-color: #FFFF;
 	color: #17a2b8;
