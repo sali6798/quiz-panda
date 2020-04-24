@@ -466,12 +466,13 @@ $(document).ready(function () {
                 // });
                 // console.log(stagedQuizzes[0])
                 // console.log(parsedQuiz)
-                $(".stagedList").empty();
+                // $(".stagedList").empty();
                 stagedQuizzes.forEach(quiz => {
                     const parsedQuiz = JSON.parse(quiz.storedQuiz)
+                    console.log(parsedQuiz)
                     // console.log(quiz.title)
                     // const quizName = $("<p>").text(quiz.title);
-                    $(".stagedList").append(quizName)
+                    // $(".stagedList").append(quizName)
 
                 });
 

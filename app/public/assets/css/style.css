@@ -15,6 +15,15 @@ button:hover {
     cursor: pointer;
 }
 
+/* ul {
+    list-style: none;
+}
+
+ul li {
+    border: 1px solid #132627;
+    background-color: white;
+} */
+
 .navbar{
     height: 10vh;
 }
@@ -62,13 +71,11 @@ button:hover {
 
 }
 
-#emailList {
-    list-style: none;
-}
 
-#emailList li {
+
+/* #emailList li {
     border: 1px solid #132627;
-}
+} */
 
   
 .logo{
