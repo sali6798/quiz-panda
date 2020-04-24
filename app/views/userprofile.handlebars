@@ -1,60 +1,87 @@
-
-<h1>Profile</h1>
-
-{{!-- Take a quiz card --}}
-<div class="card" style="width: 200px;">
-  <div id="takeQuiz" class="card-section">
-    <h3>Take a Quiz!</h3>
-    <br>
-    <p>Enter your access code below to get started:</p>
-    <form id="accesscodeForm">
-      <label>
-          <input name="accesscode" type="text" placeholder="Access Code">
-      </label>
-      <button type="submit">Go!</button>
-    </form>
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="medium-3 cell"></div>
+    <div class="medium-6 cell">
+      <h1>Profile</h1>
+    </div>
+    <div class="medium-3 cell"></div>
   </div>
-</div>
 
-{{!-- Create a quiz card --}}
-<div class="card" style="width: 200px;">
-  <div class="card-section">
-    <h3>Create a quiz!</h3>
-    <br>
-    <p>Click to begin creating a shareable quiz:</p>
-    <a href="/createquiz"><button>Go!</button></a>
+
+  <div class="grid-x grid-padding-x">
+    <div class="medium-3 cell"></div>
+    <div class="medium-6 cell">
+      {{!-- Take a quiz card --}}
+      <div class="card" style="width: 300px;">
+        <div id="takeQuiz" class="card-section">
+          <h3>Take a Quiz!</h3>
+          <br>
+          <p>Enter your access code below to get started:</p>
+          <form id="accesscodeForm">
+            <label>
+              <input name="accesscode" type="text" placeholder="Access Code">
+            </label>
+            <button class="button primary" type="submit">Go!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="medium-3 cell"></div>
   </div>
-</div>
 
- {{!-- Past quiz table --}}
-<table>   
-<h3>Past Quizes</h3>  
-{{!-- <thead>
+  <div class="grid-x grid-padding-x">
+    <div class="medium-3 cell"></div>
+    {{!-- Create a quiz card --}}
+    <div class="medium-6 cell">
+      <div class="card" style="width: 300px;">
+        <div class="card-section">
+          <h3>Create a quiz!</h3>
+          <br>
+          <p>Click to begin creating a shareable quiz:</p>
+          <a href="/createquiz" class="button primary">Go!</a>
+        </div>
+      </div>
+    </div>
+    <div class="medium-3 cell"></div>
+  </div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="medium-3 cell"></div>
+    <div class="medium-6 cell">
+      {{!-- Past quiz table --}}
+      <table>
+        <h3>Past Quizes</h3>
+        {{!-- <thead>
     <tr>
       <th width="200">Quiz Name</th>
       <th width="150">Leaderboard</th>
       <th width="150">Retake Quiz</th>
     </tr>
   </thead> --}}
-  
-  <tbody>
-    {{#each quiz}}
-      <tr>
-       <td>{{this.title}}</td>
-        <td>
-          <a href="/leaderboard/{{QuizID}}">
-          <button>Leaderboard</button>
-          </a>
-        </td>
-        <td>
-          {{#if this.canRetake}}
-            <a href="/quiz/{{QuizID}}">
-            <button>Retake Quiz</button>
-            </a>
-          {{/if}}
-        </td>
- 
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+
+
+        <tbody>
+          {{#each quiz}}
+          <tr>
+            <td>{{this.title}}</td>
+            <td>
+              <a href="/leaderboard/{{QuizID}}">
+                <button>Leaderboard</button>
+              </a>
+            </td>
+            <td>
+              {{#if this.canRetake}}
+              <a href="/quiz/{{QuizID}}">
+                <button>Retake Quiz</button>
+              </a>
+              {{/if}}
+            </td>
+
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="medium-3 cell"></div>
+  </div>
+</div>
