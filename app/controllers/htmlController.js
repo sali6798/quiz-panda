@@ -3,42 +3,66 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+
 // for all of these url routes, render the
 // handlebar files
 
 router.get("/signup", function (req, res) {
-    res.render("adduser");
+    if (req.session.user) {
+        res.redirect("/profile")
+    } else {
+        res.render("adduser")
+    }
 });
 
 router.get("/login", function (req, res) {
-    res.render("login");
+    if (req.session.user) {
+        res.redirect("/profile")
+    } else {
+        res.render("login")
+    }
 });
 
 router.get("/about", function (req, res) {
     res.render("aboutus");
 });
 
+router.route("/logout")
+    .get((req, res) => {
+        req.session.destroy(err => {
+            res.redirect("/")
+        })
+    })
+router.get("/readsessions", ((req, res) => {
+    res.json(req.session);
+}))
+
 //Render route for userprofile.handlebars.
 //Serves entries from Quizzes table which correspond to the session user's userid.
 //Will allow us to serve quiz data upon rendering.
 router.get("/profile", function (req, res) {
-    db.User.findOne({
-        where: {
-            id: req.session.user.id
-        },
-        include: [{
-            model: db.Quiz
-        }]
-    }).then((dbUserQuizzes) => {
-        const hbsObject = { User: dbUserQuizzes.toJSON() };
+    if (req.session.user) {
+        db.User.findOne({
+            where: {
+                id: req.session.user.id
+            },
+            include: [{
+                model: db.Quiz
+            }]
+        }).then((dbUserQuizzes) => {
+            const hbsObject = { User: dbUserQuizzes.toJSON() };
 
-        console.log(hbsObject);
+            console.log(hbsObject);
 
-        return res.render("userprofile", hbsObject)
-    })
+            return res.render("userprofile", hbsObject)
+        })
+    } else {
+        res.redirect("/login")
+    }
 });
 
 router.get("/createquiz", function (req, res) {
+    // if (req.session.user) {
     // db.Staged.findAll({
     //     where: {
     //         UserId: req.session.user.id
@@ -52,78 +76,64 @@ router.get("/createquiz", function (req, res) {
     // })
     const hbsObj = { id: req.session.user.id };
     res.render("quizbuild", hbsObj)
+    // } else {
+    //     res.redirect("/login");
+    // }
 });
 
 router.get("/quiz/:accesscode", function (req, res) {
-    db.Quiz.findOne({
-        where: {
-            accessCode: req.params.accesscode
-        },
+    if (req.session.user) {
+        db.Quiz.findOne({
+            where: {
+                accessCode: req.params.accesscode
+            },
 
-        include: [
-            {
-                model: db.Question,
+            include: [
+                {
+                    model: db.Question,
 
-                include: [
-                    {
-                        model: db.Answer
-                    }
-                ]
-            }
-        ]
-    }).then(quiz => {
-        const QuizJson = quiz.toJSON();
-        console.log(QuizJson);
-        console.log("---------------");
+                    include: [
+                        {
+                            model: db.Answer
+                        }
+                    ]
+                }
+            ]
+        }).then(quiz => {
+            const QuizJson = quiz.toJSON();
+            console.log(QuizJson);
+            console.log("---------------");
 
-        res.render("takequiz", QuizJson);
-    }).catch(err => {
-        res.status(500).json(err);
-    })
-
+            res.render("takequiz", QuizJson);
+        }).catch(err => {
+            res.status(500).json(err);
+        })
+    } else {
+        res.redirect("/login");
+    }
 });
 
 //Render route for leaderboard.handlebars.
 //Serves scores data from the QuizUser table to retrieve the scores related to the quiz and user.
 router.get("/leaderboard/:QuizId", function (req, res) {
-    db.Quiz.findOne({
-        where: {
-            id: req.params.QuizId
-        },
-        include: [
-            {
-                model: db.User
-            }
-        ]
-        // })
+    if (req.session.user) {
+        db.Quiz.findOne({
 
-        // db.QuizUser.findAll({
-        //     where: {
-        //         QuizId: req.params.QuizId
-        //     },
-
-        //     include: [
-        //         {
-        //             model: db.Quiz,
-        //             include: [
-        //                 { model:db.User }
-        //             ]
-        //         }
-        //     ]
-    }).then((dbScores) => {
-        console.log("_________________");
-        console.log("DB SCORES: ", dbScores);
-        // const dbScoresJSON = dbScores.map(score => {
-        //     return score.toJSON();
-        // })
-        // const hbsObject = { scores: dbScoresJSON, title: dbScoresJSON[0].Quiz.title };
-        const hbsObject = dbScores.toJSON();
-        console.log("__________________");
-
-        console.log("hbsObject", hbsObject);
-
-        return res.render("leaderboard", hbsObject)
-    })
+            where: {
+                id: req.params.QuizId
+            },
+            include: [
+                {
+                    model: db.User
+                }
+            ]
+        }).then((dbScores) => {
+            const hbsObject = dbScores.toJSON();
+            return res.render("leaderboard", hbsObject)
+        })
+    } else {
+        res.redirect("/login");
+    }
 });
 
 // defaults to index.handlebars if user tries to visit any other route
