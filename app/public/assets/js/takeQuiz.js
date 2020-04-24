@@ -1,16 +1,15 @@
-
-
 $(document).ready(function () {
     let quizObj;
 
     $("#accesscodeForm").on("submit", function (event) {
         event.preventDefault();
         const accesscode = $("#accesscodeForm :input[name=accesscode]").val().trim();
-
+        //GET request to retrieve quiz
         $.ajax({
             method: "GET",
             url: "/api/quiz/" + accesscode
         }).then(response => {
+            //if the access code entered doesn't correspond to an existing quiz, throw an eror.
             if (response === null) {
                 if ($("#accesscodeForm").siblings()[3]) {
                     $("#accesscodeForm").siblings()[3].remove();
@@ -25,6 +24,7 @@ $(document).ready(function () {
                 $("#takeQuiz").addClass("invalidInput");
             }
             else {
+                //redirrect to the appropriate quiz
                 quizObj = response;
                 console.log(quizObj)
                 location.href = "/quiz/" + accesscode
@@ -34,30 +34,28 @@ $(document).ready(function () {
 
     //submitAnswers onclick
     $("#submitAnswers").on("click", function (event) {
-        let quizId;
         event.preventDefault();
+        //declare required variables
+        let quizId;
         let correctAnswers = 0;
+        //grab the required inputs
         let radios = document.querySelectorAll(".answerOption");
-
+        //loop over the answers and check how many correct answers were chosen
         radios.forEach(radio => {
-
             if (radio.checked && Boolean(radio.dataset.correctanswer)) {
+                //update answer count
                 correctAnswers += 1
             }
         });
-        console.log("correct anwers: " + correctAnswers);
-
+        //grab the quizID
         quizId = $(this).data("quizid");
-
-        console.log("quizID: " + quizId);
-
+        //Get request to see if the current user has taken the quiz before
         $.ajax({
             method: "GET",
             url: "/api/quizuser/" + quizId,
             dataType: "json"
         }).then(quizUser => {
-            console.log("Get result", quizUser);
-
+            //if the user has not taken the quiz before, post their score to the QuizUser table
             if (quizUser === null) {
                 $.ajax({
                     method: "POST",
@@ -68,13 +66,12 @@ $(document).ready(function () {
                         score: correctAnswers
                     }
                 }).then(newQuizUser => {
-                    console.log("NewQuizUser: ", newQuizUser);
-                    console.log("/leaderboard/" + quizId);
-
+                    //redirrect to the leaderboard for the quiz
                     location.href = "/leaderboard/" + quizId
-
                 })
             } else {
+                //if the user has taken the quiz before, there will already be a record
+                //PUT request to update the user's score in the table
                 $.ajax({
                     method: "PUT",
                     url: "/api/quizuser/" + quizId,
@@ -83,51 +80,10 @@ $(document).ready(function () {
                         score: correctAnswers
                     }
                 }).then(updatedQuizUser => {
-                    console.log("updatedQuizUser: ", updatedQuizUser);
-                    console.log("/leaderboard/" + quizId);
-
+                    //redirrect to the leaderboard for the quiz
                     location.href = "/leaderboard/" + quizId
                 })
             }
-
         })
-
     })
-
 })
-
-//     $("#").on("submit", function (event) {
-//         event.preventDefault();
-//         const  = $("#").val();
-//         const  = {
-//             : $("#").val(),
-//             : $("#").val()
-//         }
-//        $.ajax({
-//            method:"GET",
-//            data:,
-//            url:`/api/takequiz/${}`
-//        }).then(data=>{
-//            location.href = `/takequiz/${}`
-//        })
-//     })
-
-// $("#").on("submit", function (event) {
-//     event.preventDefault();
-//     const  = {
-//         : $("#").val(),
-//         : $("#").val()
-//     }
-//    $.ajax({
-//        method:"POST",
-//        data:,
-//        url:"/api/takequiz"
-//    }).then(data=>{
-//        location.href = "/"
-//    })
-// })
-
-
-// get request to quiz to get all of them
-//  data attr for access code
-//  
