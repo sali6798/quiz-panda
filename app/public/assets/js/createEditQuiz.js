@@ -255,7 +255,7 @@ $(document).ready(function () {
     })
 
     $(document).on("click", ".editQBtn", function () {
-        $("#finalQuiz").addClass("hide");
+        $("#finalQuizContainer").addClass("hide");
         $("#addQuestions").removeClass("hide");
 
         const editQNum = parseInt($(this).val());

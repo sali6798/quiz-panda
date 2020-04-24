@@ -1,17 +1,16 @@
-
 <form id="createLanding">
-  
+
   <div class="grid-container actionCards">
     <h1 class="cardTitles">Begin Building Your Quiz!</h1>
     <div class="grid-x grid-padding-x">
-      
+
       <h3 class="cardTitles">Enter the title of your new quiz:</h3>
       {{!-- <label> --}}
-        <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
+      <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
       {{!-- </label> --}}
     </div>
     <div class="grid-x grid-padding-x">
-     
+
       <fieldset class="medium-6 cell">
         <legend>Is this quiz retakeable?</legend>
         <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label for="yesOption">Yes</label>
@@ -26,7 +25,7 @@
 <input class="hide" type="hidden" name="id" data-id="{{ id }}">
 
 <div id="unfinishedQuiz" class="hide">
-  <div class="grid-container actionCards">
+  {{!-- <div class="grid-container actionCards">
     <h3>Continue a quiz draft:</h3>
     <div class="grid-y grid-padding-y">
       <ul class="stagedList">
@@ -37,8 +36,26 @@
         </li>
       </ul>
     </div>
+  </div> --}}
+  <div class="grid-container card actionCards">
+    <div class="card-section">
+      <h3 class="cardTitles">Continue a drafted quiz</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>test</td>
+            <td>
+              <a href="/leaderboard/quiz">
+                <button class="button">Edit</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
 
 
 <form id="addQuestions" class="hide">
@@ -112,7 +129,7 @@
 </form>
 
 <div id="finalQuizContainer" class="grid-container actionCards hide">
-  <div id="finalQuiz" class="grid-container"></div>
+  <div id="finalQuiz"></div>
 </div>
 
 <div id="emailListContainer" class="grid-container hide actionCards">
