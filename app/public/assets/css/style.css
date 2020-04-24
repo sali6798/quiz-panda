@@ -1,7 +1,3 @@
-/* html { */
-    /* background-color:gray ; */
-/* } */
-
 button:hover {
     cursor: pointer;
 }
@@ -10,19 +6,6 @@ button:hover {
     height: 10vh;
 }
 
-
-/* .bodycontainer{ */
-    /* min-height: 90vh; */
-    /* background-color: #222; */
-    /* background-image: url(https://s3.envato.com/files/59596537-cfeb-4f99-810f-f0f73b297d08/inline_image_preview.jpg); */
-    /* background-image: url(https://images.unsplash.com/photo-1510422908328-746ed313f736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2552&q=80); */
-    /* background-image: url(https://images.unsplash.com/photo-1579747384978-5faf4c016375?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80); */
-    
-/* } */
-
-.bodycontainer background-image{
-opacity: 0.2;
-}
 
 .formError {
     color: red;
@@ -74,49 +57,13 @@ opacity: 0.2;
     border: 1px solid #132627;
 }
 
-/* .jumbotron{ */
-    /* width: 100%; */
-    /* height: 50vh; */
-    /* height: 300px; */
-    /* padding-bottom: 60px; */
-    /* background-color:black;  */
-    /* color: white;
-    font-weight: bold;
-    text-align: center; */
-    /* animation-name: example;
-    animation-duration: 4s; */
-      
-/* } */
-
-/* @keyframes example {
-    from {background-color:black ;}
-    to {background-color: yellow;}  
-  } */
-
-  /* @keyframes example {
-    0%   {background-color:red; left:0px; top:0px;}
-    25%  {background-color:yellow; left:200px; top:0px;}
-    50%  {background-color:blue; left:200px; top:200px;}
-    75%  {background-color:green; left:0px; top:200px;}
-    100% {background-color:red; left:0px; top:0px;}
-  } */
-
-
   
-  
-
-
-
 .logo{
     width: 100px;
     float: left;
 
 }
 
-/* .aboutus{
-    text-align: center;
-
-} */
 .top-bar, ul.menu {
     background: black;
     color: white;
@@ -126,46 +73,6 @@ opacity: 0.2;
     /* margin-top: 100px; */
     position: relative;
 }
-
-
-/* https://codepen.io/naimjeem/pen/LjjjNr */
-/* start of animation floating code from codepen */
-.jumbotron {
-    text-align: center;
-    width: 100%;
-    /* height: 50vh; */
-    height: 500px;
-    padding-top: 100px;
-    /* background-color:black;  */
-    color:white;
-    
-    background: linear-gradient(132deg,  rgb(62, 146, 69),#132627,  rgb(62, 146, 69));
-    background-size: 400% 400%;
-    animation: BackgroundGradient 30s ease infinite;
-
-  }
-  
-  /* h1 {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    font-family: Open Sans, sans-serif;
-    color: #fff;
-    font-weight: 400;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 2em;
-    padding: 5px;
-  } */
-  
-  @keyframes BackgroundGradient {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-  
-  /* end of animation from codepen */
 
 
   .introinfo{
@@ -187,28 +94,12 @@ opacity: 0.2;
   }
 
 
-  /* .signupForm label{
-  color:white;
-  } */
-
   .havealogin{
       color: white;
       margin: 0 auto;
   }
 
 
-/* 
-  .profileCards{
-      margin: 0 auto;
-      margin-bottom: 30px;
-      width: 50%;
-      align-content: center;
-      text-align: center;
-  } */
-
-  /* .profilecardcontainer{
-      background-color: deeppink;
-  } */
 
   .actionCards{
       background-color: rgb(243, 243, 243);
@@ -218,7 +109,6 @@ opacity: 0.2;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       padding: 10px;
 
-      /* background-image: url(https://static.vecteezy.com/system/resources/previews/000/137/496/non_2x/bamboo-background-frog-angle-free-vector.jpg); */
   }
 
 
@@ -235,6 +125,7 @@ opacity: 0.2;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
  }
+
 
   /* start of parallax effect with foundation */
 
@@ -291,4 +182,12 @@ opacity: 0.2;
     color: black;
 }
 
+.aboutus{
+    background-color: rgb(243, 243, 243);
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 50%;
+    padding: 30px;
+
+}
 
