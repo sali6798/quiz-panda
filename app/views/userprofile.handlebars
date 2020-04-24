@@ -1,4 +1,11 @@
-
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="medium-3 cell"></div>
+    <div class="medium-6 cell">
+      <h1>Profile</h1>
+    </div>
+    <div class="medium-3 cell"></div>
+  </div>
  <header>
       <div class="container">
         <h1 class="brandname">Quiz Panda</h1>
@@ -12,9 +19,6 @@
         </nav>
       </div>
     </header>
-
-
-
 
   <div class="grid-container profilecardcontainer">
     <div class="grid-padding-y grid-y">
@@ -52,18 +56,18 @@
 
   </div>
 
-
   {{!-- Past quiz table --}}
   <table>
     <h3></h3>
     {{!-- <thead>
+
     <tr>
       <th width="200">Quiz Name</th>
       <th width="150">Leaderboard</th>
       <th width="150">Retake Quiz</th>
     </tr>
   </thead> --}}
-
+  
     <tbody>
       {{#each quiz}}
       <tr>
@@ -86,8 +90,5 @@
     </tbody>
   </table>
 
-
-
 {{!-- </div> --}}
-
 
