@@ -104,7 +104,7 @@ $(document).ready(function () {
 
     function displayFinishedQuiz() {
         $("#addQuestions").addClass("hide");
-        $("#finalQuiz").removeClass("hide");
+        $("#finalQuizContainer").removeClass("hide");
 
         $("#finalQuiz").empty();
 
@@ -137,8 +137,8 @@ $(document).ready(function () {
     }
 
 
-    $(document).on("click", "#finalSubmit", async function () {
-        $("#finalQuiz").addClass("hide");
+    $(document).on("click", "#finalSubmit", function () {
+        $("#finalQuizContainer").addClass("hide");
         $("#emailListContainer").removeClass("hide");
         console.log(quizObj)
 
