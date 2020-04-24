@@ -5,6 +5,8 @@ const db = require("../models");
 
 // return all the entries in QuizUser joined with Quiz
 router.get("/api/quizuser", function (req, res) {
+    if (req.session.user) {
+
     db.QuizUser
         .findAll({
             include: [ db.Quiz ]
@@ -16,10 +18,15 @@ router.get("/api/quizuser", function (req, res) {
             console.log(error)
             res.status(400).json(error)
         })
+    } else {
+        res.redirect("/login");
+    }
 });
 
 // add a new in QuizUser
 router.post("/api/quizuser", function (req, res) {
+    if (req.session.user) {
+
     db.QuizUser
         .create({
             UserId: req.session.user.id,
@@ -33,12 +40,16 @@ router.post("/api/quizuser", function (req, res) {
         .catch(error => {
             res.status(400).json(error)
         })
-
+    } else {
+        res.redirect("/login");
+    }
 });
 
 // find the entry in QuizUser joined with Quiz that matches
 // the logged in user's id and the quizId parameter
 router.get("/api/quizuser/:quizId", function (req, res) {
+    if (req.session.user) {
+
     console.log("session id", req.session.id)
     db.QuizUser
         .findOne({
@@ -55,11 +66,16 @@ router.get("/api/quizuser/:quizId", function (req, res) {
             console.log(error)
             res.status(400).json(error)
         })
+    } else {
+        res.redirect("/login");
+    }
 });
 
 // updates the entry in QuizUser that matches
 // the logged in user's id and the quizId parameter
 router.put("/api/quizuser/:quizId", function (req, res) {
+    if (req.session.user) {
+
     db.QuizUser
         .update({
             hasTaken: req.body.hasTaken,
@@ -77,11 +93,16 @@ router.put("/api/quizuser/:quizId", function (req, res) {
         .catch(error => {
             res.status(400).json(error)
         })
+    } else {
+        res.redirect("/login");
+    }
 });
 
 // delets the entry in QuizUser that matches
 // the logged in user's id and the quizId parameter
 router.delete("/api/quizuser/:quizId", function (req, res) {
+    if (req.session.user) {
+
     db.QuizUser
         .destroy({
             where: {
@@ -95,6 +116,9 @@ router.delete("/api/quizuser/:quizId", function (req, res) {
         .catch(error => {
             res.status(400).json(error)
         })
+    } else {
+        res.redirect("/login");
+    }
 });
 
 module.exports = router;

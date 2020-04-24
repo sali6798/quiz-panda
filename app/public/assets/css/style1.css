@@ -72,24 +72,6 @@ main .container {
 	transform: translate(-50%, -50%);
 }
 
-/*main .container h1, .container p {
-	color: #FFFF;
-	position: relative;
-	top: 50%
-	transform: translate(-50%, -50%);
-}*/
-
-/*main .container {
-	position: absolute;
-	margin: auto;
-	color: #FFFF;
-	top: 10%;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	width: 40%;
-	height: 50%;
-}*/
 
 #main_header {
 	font-size: 250%;
@@ -101,7 +83,7 @@ main p {
 	line-height: 190%;
 }
 
-button {
+.mainButton {
 	border-radius: 5px;
 	background-color: #FFFF;
 	color: #17a2b8;
