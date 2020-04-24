@@ -1,11 +1,13 @@
-<h1>Begin Building Your Quiz!</h1>
 
 <form id="createLanding">
-  <div class="grid-container">
+  
+  <div class="grid-container actionCards">
+    <h1 class="cardTitles">Begin Building Your Quiz!</h1>
     <div class="grid-x grid-padding-x">
-      <h3>Enter the title of your new quiz:</h3>
+      
+      <h3 class="cardTitles">Enter the title of your new quiz:</h3>
       <label>
-        <input id="quizName" type="text" name="name" placeholder="Name">
+        <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
       </label>
     </div>
     <div class="grid-x grid-padding-x">
@@ -25,7 +27,7 @@
 </form>
 
 {{!-- {{#if quiz}} --}}
-<input type="hidden" name="id" data-id="{{ id }}">
+<input class="hide" type="hidden" name="id" data-id="{{ id }}">
 <div id="unfinishedQuiz" class="grid-container hide">
   <h3>Continue a quiz draft:</h3>
   <div class="grid-y grid-padding-y">
@@ -35,8 +37,8 @@
 {{!-- {{/if}} --}}
 
 <form id="addQuestions" class="hide">
-  <h3>Question <span id="questionNumber"></span></h3>
-  <div class="grid-container">
+  <div class="grid-container actionCards">
+    <h3 class="cardTitles">Question <span id="questionNumber"></span></h3>
     <div class="grid-y grid-padding-y">
       <div class="grid-x grid-padding-x">
         <div class="cell">
@@ -104,10 +106,12 @@
   </div>
 </form>
 
-<div id="finalQuiz" class="grid-container hide"></div>
+<div id="finalQuizContainer" class="grid-container actionCards hide">
+  <div id="finalQuiz" class="grid-container"></div>
+</div>
 
-<div id="emailListContainer" class="grid-container hide">
-  <h3>Send your quiz to your friends!</h3>
+<div id="emailListContainer" class="grid-container hide actionCards">
+  <h3 class="cardTitles">Send your quiz to your friends!</h3>
   <form action="">
     <div class="grid-x">
       <div class="cell auto">
