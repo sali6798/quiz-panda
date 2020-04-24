@@ -14,6 +14,10 @@ router.get("/login", function (req, res) {
     res.render("login");
 });
 
+router.get("/about", function (req, res) {
+    res.render("aboutus");
+});
+
 //Render route for userprofile.handlebars.
 //Serves entries from Quizzes table which correspond to the session user's userid.
 //Will allow us to serve quiz data upon rendering.
