@@ -77,14 +77,43 @@ router.get("/quiz/:accesscode", function (req, res) {
 
 //Render route for leaderboard.handlebars.
 //Serves scores data from the QuizUser table to retrieve the scores related to the quiz and user.
-router.get("/leaderboard/:id", function (req, res) {
-    db.QuizUser.findAll({
-        where: {
-            QuizId: req.params.id
-        }
+router.get("/leaderboard/:QuizId", function (req, res) {
+    db.Quiz.findOne({
+        where:{
+            id:req.params.QuizId
+        },
+        include:[
+            {
+                model:db.User
+            }
+        ]
+    // })
+    
+    // db.QuizUser.findAll({
+    //     where: {
+    //         QuizId: req.params.QuizId
+    //     },
+
+    //     include: [
+    //         {
+    //             model: db.Quiz,
+    //             include: [
+    //                 { model:db.User }
+    //             ]
+    //         }
+    //     ]
     }).then((dbScores) => {
-        console.log(dbLeaderboard);
-        const hbsObject = { scores: dbScores }
+        console.log("_________________");
+        console.log("DB SCORES: ", dbScores);
+        // const dbScoresJSON = dbScores.map(score => {
+        //     return score.toJSON();
+        // })
+        // const hbsObject = { scores: dbScoresJSON, title: dbScoresJSON[0].Quiz.title };
+        const hbsObject = dbScores.toJSON();
+        console.log("__________________");
+
+        console.log("hbsObject", hbsObject);
+
         return res.render("leaderboard", hbsObject)
     })
 });

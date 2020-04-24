@@ -8,7 +8,7 @@
             {{#each Questions}}
             <legend>{{this.title}}</legend>
             {{#each Answers}}
-            <input name="answerOption-{{QuestionId}}" id="{{this.id}}" type="radio" class="answerOption" data-IsCorrect="{{this.IsCorrect}}"><label
+            <input name="answerOption-{{QuestionId}}" id="{{this.id}}" type="radio" class="answerOption" data-correctanswer="{{this.correctAnswer}}"><label
                 for="{{this.id}}">{{this.answer}}</label>
             {{/each}}
             {{/each}}
@@ -21,7 +21,7 @@
         </div>
         <div class="medium-6 cell">
             {{!-- Check answers on submit --}}
-            <button id="submitAnswers">Submit</button>
+            <button data-quizid = "{{this.id}}" id="submitAnswers">Submit</button>
         </div>
     </div>
 </div>

@@ -22,7 +22,7 @@ router.get("/api/quizuser", function (req, res) {
 router.post("/api/quizuser", function (req, res) {
     db.QuizUser
         .create({
-            UserId: req.body.UserId,
+            UserId: req.session.user.id,
             QuizId: req.body.QuizId,
             hasTaken: req.body.hasTaken,
             score: req.body.score
