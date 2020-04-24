@@ -195,8 +195,8 @@ opacity: 0.2;
   } */
 
   .profileCards{
-      background-color: rgb(8, 240, 209);
-      color:white;
+      background-color: ivory;
+      color:black;
       /* background-image: url(https://static.vecteezy.com/system/resources/previews/000/137/496/non_2x/bamboo-background-frog-angle-free-vector.jpg); */
   }
 
@@ -264,3 +264,5 @@ opacity: 0.2;
 .addusercontainer label{
     color: black;
 }
+
+
