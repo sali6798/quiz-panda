@@ -20,8 +20,11 @@ ul {
 }
 
 .listDisplay {
-    border: 1px solid #132627;
     background-color: white;
+}
+
+.listDisplay button {
+    margin: 0;
 }
 
 .navbar{
