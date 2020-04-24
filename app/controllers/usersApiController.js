@@ -50,18 +50,18 @@ router.route("/login")
         })
     })
 
-// router.route("/api/users/:username")
-//     .get((req, res) => {
-//         db.User.findOne({
-//             where: {
-//                 username: req.params.username
-//             }
-//         }).then(dbUser => {
-//             res.status(200).json(dbUser);
-//         }).catch(err => {
-//             res.status(404).json(err)
-//         })
-//     })
+router.route("/api/users/:username")
+    .get((req, res) => {
+        db.User.findOne({
+            where: {
+                username: req.params.username
+            }
+        }).then(dbUser => {
+            res.status(200).json(dbUser);
+        }).catch(err => {
+            res.status(404).json(err)
+        })
+    })
 
 // router.route("/api/users/id/:id")
 //     .get((req, res) => {
