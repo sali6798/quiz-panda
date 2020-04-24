@@ -29,9 +29,12 @@ router.get("/profile", function (req, res) {
         include: [{
             model: db.Quiz
         }]
-    }).then((dbQuizzes) => {
-        console.log(dbQuizzes);
-        return res.render("userprofile", dbQuizzes)
+    }).then((dbUserQuizzes) => {
+        const hbsObject = { User: dbUserQuizzes.toJSON() };
+
+        console.log(hbsObject);
+
+        return res.render("userprofile", hbsObject)
     })
 });
 
@@ -84,29 +87,29 @@ router.get("/quiz/:accesscode", function (req, res) {
 //Serves scores data from the QuizUser table to retrieve the scores related to the quiz and user.
 router.get("/leaderboard/:QuizId", function (req, res) {
     db.Quiz.findOne({
-        where:{
-            id:req.params.QuizId
+        where: {
+            id: req.params.QuizId
         },
-        include:[
+        include: [
             {
-                model:db.User
+                model: db.User
             }
         ]
-    // })
-    
-    // db.QuizUser.findAll({
-    //     where: {
-    //         QuizId: req.params.QuizId
-    //     },
+        // })
 
-    //     include: [
-    //         {
-    //             model: db.Quiz,
-    //             include: [
-    //                 { model:db.User }
-    //             ]
-    //         }
-    //     ]
+        // db.QuizUser.findAll({
+        //     where: {
+        //         QuizId: req.params.QuizId
+        //     },
+
+        //     include: [
+        //         {
+        //             model: db.Quiz,
+        //             include: [
+        //                 { model:db.User }
+        //             ]
+        //         }
+        //     ]
     }).then((dbScores) => {
         console.log("_________________");
         console.log("DB SCORES: ", dbScores);

@@ -27,7 +27,6 @@
 
       {{!-- Create a quiz card --}}
       <div class="cell small-12 large-6">
-
         <div class="card actionCards" style="">
           <div class="card-section">
             <h3 class="cardTitles">Create a quiz!</h3>
@@ -40,35 +39,42 @@
 
     </div>
 
+
+
+    {{!-- Past quiz table --}}
+    {{#if User.Quizzes}}
+    <div class="cell small-12 large-6">
+      <div class="card actionCards">
+        <div class="card-section">
+          <h3 class="cardTitles">Past quizzes</h3>
+          <table>
+            <h3></h3>
+            <tbody>
+              {{#each User.Quizzes}}
+              <tr>
+                <td>{{this.title}}</td>
+                <td>
+                  <a href="/leaderboard/{{this.id}}">
+                    <button class="button">Leaderboard</button>
+                  </a>
+                </td>
+                <td>
+                  {{#if this.canRetake}}
+                  <a href="/quiz/{{this.accessCode}}">
+                    <button class="button">Retake Quiz</button>
+                  </a>
+                  {{/if}}
+                </td>
+
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {{/if}}
   </div>
+</div>
+{{!-- </div> --}}
 
-  {{!-- Past quiz table --}}
-  <table>
-    <h3></h3>
-    
-
-  
-
-    <tbody>
-      {{#each quiz}}
-      <tr>
-        <td>{{this.title}}</td>
-        <td>
-          <a href="/leaderboard/{{QuizID}}">
-            <button class="button">Leaderboard</button>
-          </a>
-        </td>
-        <td>
-          {{#if this.canRetake}}
-          <a href="/quiz/{{QuizID}}">
-            <button class="button">Retake Quiz</button>
-          </a>
-          {{/if}}
-        </td>
-
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-
-  {{!-- </div> --}}
