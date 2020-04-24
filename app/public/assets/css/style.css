@@ -107,6 +107,7 @@ button:hover {
       border: 2px solid #66fcf1;
       border-radius: 10px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      padding: 10px;
 
   }
 
@@ -116,6 +117,14 @@ button:hover {
       font-family: Avenir, "Century Gothic", sans-serif;
   }
   
+ .loginCard{
+    background-color: rgb(243, 243, 243);
+    color:black;
+    border: 2px solid #66fcf1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+ }
 
 .logincontainer{
     background-color:rgb(243, 243, 243);
@@ -133,7 +142,7 @@ button:hover {
     width: 50%;
     margin: 0 auto;
     color: black;
-}
+} */
 
 .addusercontainer label{
     color: black;
