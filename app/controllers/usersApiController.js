@@ -50,43 +50,20 @@ router.route("/login")
         })
     })
 
-router.route("/logout")
-    .get((req, res) => {
-        req.session.destroy(err => {
-            res.redirect("/")
-        })
-    })
+// router.route("/api/users/:username")
+//     .get((req, res) => {
+//         db.User.findOne({
+//             where: {
+//                 username: req.params.username
+//             }
+//         }).then(dbUser => {
+//             res.status(200).json(dbUser);
+//         }).catch(err => {
+//             res.status(404).json(err)
+//         })
+//     })
 
-router.get("/readsessions", ((req, res) => {
-    res.json(req.session);
-}))
-
-router.route("/api/users/:username")
-    .get((req, res) => {
-        db.User.findOne({
-            where: {
-                username: req.params.username
-            }
-        }).then(dbUser => {
-            res.status(200).json(dbUser);
-        }).catch(err => {
-            res.status(404).json(err)
-        })
-    })
-
-router.route("/api/users/id/:id")
-    .get((req, res) => {
-        db.User.findOne({
-            where: {
-                id: req.params.id
-            }
-        }).then(dbUser => {
-            res.status(200).json(dbUser);
-        })
-    })
-
-
-// router.route("/api/users/:id")
+// router.route("/api/users/id/:id")
 //     .get((req, res) => {
 //         db.User.findOne({
 //             where: {
@@ -94,28 +71,6 @@ router.route("/api/users/id/:id")
 //             }
 //         }).then(dbUser => {
 //             res.status(200).json(dbUser);
-//         })
-//     }).delete((req, res) => {
-//         db.User.destroy({
-//             where: {
-//                 id: req.params.id
-//             }
-//         }).then(deletedUser => {
-//             res.status(200).json(deletedUser);
-//         })
-//     }).put((req, res) => {
-//         db.User.update({
-//             firstName: req.body.firstName,
-//             lastName: req.body.lastName,
-//             username: req.body.username,
-//             password: req.body.password,
-//             email: req.body.email
-//         }, {
-//             where: {
-//                 id: req.params.id
-//             }
-//         }).then(updatedUser => {
-//             res.status(200).json(updatedUser);
 //         })
 //     })
 

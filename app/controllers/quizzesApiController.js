@@ -7,53 +7,61 @@ const nodemailer = require("nodemailer");
 router.route("/api/quiz")
     // gets and returns json of all quiz entries
     .get((req, res) => {
-        db.Quiz.findAll().then(quizzes => {
-            res.status(200).json(quizzes)
-        }).catch(err => {
-            res.status(400).json(err)
-        })
+        if (req.session.user) {
+            db.Quiz.findAll().then(quizzes => {
+                res.status(200).json(quizzes)
+            }).catch(err => {
+                res.status(400).json(err)
+            })
+        } else {
+            res.redirect("/login");
+        }
     })
     // creates a new quiz, questions and answers
     .post(async function (req, res) {
-        try {
-            const newQuizData = await db.Quiz.create({
-                title: req.body.title,
-                canRetake: req.body.canRetake,
-                creatorId: req.session.user.id
+        if (req.session.user) {
+            try {
+                const newQuizData = await db.Quiz.create({
+                    title: req.body.title,
+                    canRetake: req.body.canRetake,
+                    creatorId: req.session.user.id
 
-            });
+                });
 
-            for (let i = 0; i < req.body.questions.length; i++) {
-                const newQuestion = req.body.questions[i];
-                const newQuestionData = await db.Question.create({
-                    title: newQuestion.title,
-                    QuizId: newQuizData.id
+                for (let i = 0; i < req.body.questions.length; i++) {
+                    const newQuestion = req.body.questions[i];
+                    const newQuestionData = await db.Question.create({
+                        title: newQuestion.title,
+                        QuizId: newQuizData.id
 
-                })
-
-                for (let i = 0; i < newQuestion.answers.length; i++) {
-                    const newAnswer = newQuestion.answers[i];
-                    await db.Answer.create({
-                        answer: newAnswer.answer,
-                        correctAnswer: newAnswer.correctAnswer,
-                        QuestionId: newQuestionData.id
                     })
+
+                    for (let i = 0; i < newQuestion.answers.length; i++) {
+                        const newAnswer = newQuestion.answers[i];
+                        await db.Answer.create({
+                            answer: newAnswer.answer,
+                            correctAnswer: newAnswer.correctAnswer,
+                            QuestionId: newQuestionData.id
+                        })
+                    }
                 }
+
+                res.status(200).json(newQuizData)
+
+
+
+
+                // .then((data) => {
+                //     res.status(200).end();
+                // })
+
+
+            } catch (err) {
+                console.log(err)
+                res.status(500).end();
             }
-
-            res.status(200).json(newQuizData)
-                    
-                    
-                    
-                    
-                    // .then((data) => {
-                    //     res.status(200).end();
-                    // })
-
-
-        } catch (err) {
-            console.log(err)
-            res.status(500).end();
+        } else {
+            res.redirect("/login");
         }
 
 
@@ -101,27 +109,32 @@ router.route("/api/quiz/:accesscode")
     // returns the quiz with its questions and answers
     // that matches the id given in the parameter
     .get((req, res) => {
-        db.Quiz.findOne({
-            where: {
-                accessCode: req.params.accesscode
-            },
+        if (req.session.user) {
 
-            include: [
-                {
-                    model: db.Question,
+            db.Quiz.findOne({
+                where: {
+                    accessCode: req.params.accesscode
+                },
 
-                    include: [
-                        {
-                            model: db.Answer
-                        }
-                    ]
-                }
-            ]
-        }).then(quiz => {
-            res.json(quiz);
-        }).catch(err => {
-            res.status(500).json(err);
-        })
+                include: [
+                    {
+                        model: db.Question,
+
+                        include: [
+                            {
+                                model: db.Answer
+                            }
+                        ]
+                    }
+                ]
+            }).then(quiz => {
+                res.json(quiz);
+            }).catch(err => {
+                res.status(500).json(err);
+            })
+        } else {
+            res.redirect("/login");
+        }
         // sets the isDeleted property to true for the quiz that matches the id  
         // parameter and then deletes the questions and answers for that quiz
     })
