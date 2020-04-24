@@ -453,23 +453,38 @@ $(document).ready(function () {
 
         // }
 
-        const stagedQuizzes = await $.ajax({
-            method: "GET",
-            url: "/api/staged/user/" + $(":input[name=id]").data("id")
-        })
+        try {
+            const stagedQuizzes = await $.ajax({
+                method: "GET",
+                url: "/api/staged/user/" + $(":input[name=id]").data("id")
+            })
 
-        if (stagedQuizzes !== null) {
+            if (stagedQuizzes !== null) {
+                console.log(stagedQuizzes)
+                // stagedQuizzes.forEach(quiz => {
+                // const parsedQuiz = JSON.parse(stagedQuizzes[0])
+                // });
+                // console.log(stagedQuizzes[0])
+                // console.log(parsedQuiz)
+                $(".stagedList").empty();
+                stagedQuizzes.forEach(quiz => {
+                    const parsedQuiz = JSON.parse(quiz.storedQuiz)
+                    // console.log(quiz.title)
+                    // const quizName = $("<p>").text(quiz.title);
+                    $(".stagedList").append(quizName)
 
-            // stagedQuizzes.forEach(quiz => {
-                const parsedQuiz = JSON.parse(stagedQuizzes[0])
-            // });
-
-            console.log(parsedQuiz)
+                });
 
 
-            $("#unfinishedQuiz").removeClass("hide");
 
+                $("#unfinishedQuiz").removeClass("hide");
+
+            }
+        } catch (error) {
+            console.log(error)
         }
+
+
 
         // .then(data => {
         //     console.log(data)
