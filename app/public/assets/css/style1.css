@@ -121,7 +121,9 @@ button {
 	}
 } 
 
-
+#havealogin{
+	color:black;
+}
 
 
 .brandname{
@@ -138,3 +140,4 @@ button {
 .mainintro{
     font-size: 28px;
 }
+
