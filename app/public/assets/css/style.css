@@ -118,7 +118,7 @@ button:hover {
   
 
 .logincontainer{
-    background-color: ivory;
+    background-color:rgb(243, 243, 243);
     margin: 0 auto;
     width: 40%;
     margin-top: 200px;
@@ -129,7 +129,7 @@ button:hover {
 }
 
 .addusercontainer{
-    background-color: ivory;
+    background-color:rgb(243, 243, 243);
     width: 50%;
     margin: 0 auto;
     color: black;

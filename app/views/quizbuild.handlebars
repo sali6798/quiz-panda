@@ -11,11 +11,6 @@
       </label>
     </div>
     <div class="grid-x grid-padding-x">
-      {{!-- <div class="medium-6 cell">
-        <label>Enter your email address:
-          <input type="text" placeholder="Email">
-        </label>
-      </div> --}}
       <fieldset class="medium-6 cell">
         <legend>Is this quiz retakeable?</legend>
         <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label for="yesOption">Yes</label>
@@ -26,7 +21,7 @@
   </div>
 </form>
 
-{{!-- {{#if quiz}} --}}
+
 <input class="hide" type="hidden" name="id" data-id="{{ id }}">
 <div id="unfinishedQuiz" class="grid-container hide">
   <h3>Continue a quiz draft:</h3>
@@ -34,7 +29,7 @@
     <ul class="stagedList"></ul>
   </div>
 </div>
-{{!-- {{/if}} --}}
+
 
 <form id="addQuestions" class="hide">
   <div class="grid-container actionCards">
