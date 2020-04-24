@@ -32,6 +32,16 @@ opacity: 0.2;
     border-color: red;
 }
 
+.correctAnswerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answerOption {
+    margin: 0;
+}
+
 .footerdiv {
     /* height: 10vh; */
     background-color: rgb(19, 24, 24);
@@ -56,7 +66,13 @@ opacity: 0.2;
 
 }
 
+#emailList {
+    list-style: none;
+}
 
+#emailList li {
+    border: 1px solid #132627;
+}
 
 /* .jumbotron{ */
     /* width: 100%; */

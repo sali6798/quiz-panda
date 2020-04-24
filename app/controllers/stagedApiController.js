@@ -21,7 +21,7 @@ router.post("/api/staged", function (req, res) {
     db.Staged
         .create({
             storedQuiz: req.body.storedQuiz,
-            UserId: req.body.UserId
+            UserId: req.session.user.id
         })
         .then(data => {
             res.status(200).json(data)
@@ -72,6 +72,39 @@ router.delete("/api/staged/:id", function (req, res) {
         .destroy({
             where: {
                 id: req.params.id
+            }
+        })
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(error => {
+            res.status(400).json(error)
+        })
+});
+
+// router.get("/api/staged/user", function (req, res) {
+//     console.log(req.session.user.id)
+//     console.log("hello world")
+//     db.Staged
+//         .findAll({
+//             where: {
+//                 UserId: req.session.user.id
+//             }
+//         })
+//         .then(data => {
+//             res.status(200).json(data)
+//         })
+//         .catch(error => {
+//             res.status(400).json(error)
+//         })
+// });
+
+router.get("/api/staged/user/:id", function (req, res) {
+    db.Staged
+        .findAll({
+            where: {
+                // UserId: req.session.user.id
+                UserId: req.params.id
             }
         })
         .then(data => {

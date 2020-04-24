@@ -34,15 +34,15 @@ router.route("/login")
             }
         }).then(dbUser => {
             console.log(dbUser);
-            
+
             if (bcrypt.compareSync(req.body.password, dbUser.password)) {
                 req.session.user = {
                     username: dbUser.username,
                     id: dbUser.id
                 };
-                res.send("logged in!")
+                res.send("OK");
             } else {
-                res.send("not logged in")
+                res.send("not logged in");
             }
         }).catch(err => {
             console.log(err);
@@ -74,6 +74,16 @@ router.route("/api/users/:username")
         })
     })
 
+router.route("/api/users/id/:id")
+    .get((req, res) => {
+        db.User.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(dbUser => {
+            res.status(200).json(dbUser);
+        })
+    })
 
 
 // router.route("/api/users/:id")
