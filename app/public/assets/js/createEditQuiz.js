@@ -137,7 +137,7 @@ $(document).ready(function () {
     }
 
 
-    $(document).on("click", "#finalSubmit", function () {
+    $(document).on("click", "#finalSubmit", async function () {
         $("#finalQuizContainer").addClass("hide");
         $("#emailListContainer").removeClass("hide");
         console.log(quizObj)
@@ -460,7 +460,11 @@ $(document).ready(function () {
 
         if (stagedQuizzes !== null) {
 
-            console.log(stagedQuizzes)
+            // stagedQuizzes.forEach(quiz => {
+                const parsedQuiz = JSON.parse(stagedQuizzes[0])
+            // });
+
+            console.log(parsedQuiz)
 
 
             $("#unfinishedQuiz").removeClass("hide");
