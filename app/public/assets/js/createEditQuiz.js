@@ -238,7 +238,7 @@ $(document).ready(function () {
 
             // remove red border
             $(this).removeClass("invalidInput");
-            var item = $("<li>");
+            var item = $("<li class='listDisplay'>");
             // create a span with the text as the city name
             var itemName = $("<span class='emailItem'>").text(email.val());
             // creates a 'x' button for deletion of item

@@ -15,14 +15,14 @@ button:hover {
     cursor: pointer;
 }
 
-/* ul {
+ul {
     list-style: none;
 }
 
-ul li {
+.listDisplay {
     border: 1px solid #132627;
     background-color: white;
-} */
+}
 
 .navbar{
     height: 10vh;
