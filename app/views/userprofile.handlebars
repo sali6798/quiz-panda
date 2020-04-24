@@ -1,32 +1,12 @@
 <div class="grid-container">
-  <div class="grid-x grid-padding-x">
-    <div class="medium-3 cell"></div>
-    <div class="medium-6 cell">
-      <h1>Profile</h1>
-    </div>
-    <div class="medium-3 cell"></div>
-  </div>
- <header>
-      <div class="container">
-        <h1 class="brandname">Quiz Panda</h1>
-
-        <nav>
-          <ul>
-            <li><a href="#"><span>About</span></a></li>
-            <li><a href="/login"><span>Login</span></a></li>
-            <li><a href="/signup"><span>Sign Up</span></a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
 
   <div class="grid-container profilecardcontainer">
     <div class="grid-padding-y grid-y">
       {{!-- Take a quiz card --}}
       <div class="cell small-12 large-6">
-        <div class="card profileCards" style="">
+        <div class="card actionCards" style="">
           <div id="takeQuiz" class="card-section">
-            <h3>Take a Quiz!</h3>
+            <h3 class="cardTitles">Take a Quiz!</h3>
             <br>
             <p>Enter your access code below to get started:</p>
             <form id="accesscodeForm">
@@ -41,10 +21,9 @@
 
       {{!-- Create a quiz card --}}
       <div class="cell small-12 large-6">
-
-        <div class="card profileCards" style="">
+        <div class="card actionCards" style="">
           <div class="card-section">
-            <h3>Create a quiz!</h3>
+            <h3 class="cardTitles">Create a Quiz!</h3>
             <br>
             <p>Click to begin creating a shareable quiz:</p>
             <a href="/createquiz"><button class="button primary">Go!</button></a>
@@ -54,41 +33,44 @@
 
     </div>
 
+
+
+    {{!-- Past quiz table --}}
+    {{#if User.Quizzes}}
+    <div class="cell small-12 large-6">
+      <div class="card actionCards">
+        <div class="card-section">
+          <h3 class="cardTitles">Past Quizzes</h3>
+          <table>
+            <h3></h3>
+            <tbody>
+              {{#each User.Quizzes}}
+              <tr>
+                <td>{{this.title}}</td>
+                <td>
+                  <a href="/leaderboard/{{this.id}}">
+                    <button class="button">Leaderboard</button>
+                  </a>
+                </td>
+                <td>
+                  {{#if this.canRetake}}
+                  <a href="/quiz/{{this.accessCode}}">
+                    <button class="button">Retake Quiz</button>
+                  </a>
+                  {{/if}}
+                </td>
+
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {{/if}}
   </div>
-
-  {{!-- Past quiz table --}}
-  <table>
-    <h3></h3>
-    {{!-- <thead>
-
-    <tr>
-      <th width="200">Quiz Name</th>
-      <th width="150">Leaderboard</th>
-      <th width="150">Retake Quiz</th>
-    </tr>
-  </thead> --}}
-  
-    <tbody>
-      {{#each quiz}}
-      <tr>
-        <td>{{this.title}}</td>
-        <td>
-          <a href="/leaderboard/{{QuizID}}">
-            <button class="button">Leaderboard</button>
-          </a>
-        </td>
-        <td>
-          {{#if this.canRetake}}
-          <a href="/quiz/{{QuizID}}">
-            <button class="button">Retake Quiz</button>
-          </a>
-          {{/if}}
-        </td>
-
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-
+</div>
 {{!-- </div> --}}
+
+{{!--  --}}
 

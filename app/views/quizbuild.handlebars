@@ -1,19 +1,17 @@
-<h1>Begin Building Your Quiz!</h1>
 
 <form id="createLanding">
-  <div class="grid-container">
+  
+  <div class="grid-container actionCards">
+    <h1 class="cardTitles">Begin Building Your Quiz!</h1>
     <div class="grid-x grid-padding-x">
-      <h3>Enter the title of your new quiz:</h3>
+      
+      <h3 class="cardTitles">Enter the title of your new quiz:</h3>
       <label>
-        <input id="quizName" type="text" name="name" placeholder="Name">
+        <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
       </label>
     </div>
     <div class="grid-x grid-padding-x">
-      {{!-- <div class="medium-6 cell">
-        <label>Enter your email address:
-          <input type="text" placeholder="Email">
-        </label>
-      </div> --}}
+     
       <fieldset class="medium-6 cell">
         <legend>Is this quiz retakeable?</legend>
         <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label for="yesOption">Yes</label>
@@ -24,19 +22,19 @@
   </div>
 </form>
 
-{{!-- {{#if quiz}} --}}
-<input type="hidden" name="id" data-id="{{ id }}">
+
+<input class="hide" type="hidden" name="id" data-id="{{ id }}">
 <div id="unfinishedQuiz" class="grid-container hide">
   <h3>Continue a quiz draft:</h3>
   <div class="grid-y grid-padding-y">
     <ul class="stagedList"></ul>
   </div>
 </div>
-{{!-- {{/if}} --}}
+
 
 <form id="addQuestions" class="hide">
-  <h3>Question <span id="questionNumber"></span></h3>
-  <div class="grid-container">
+  <div class="grid-container actionCards">
+    <h3 class="cardTitles">Question <span id="questionNumber"></span></h3>
     <div class="grid-y grid-padding-y">
       <div class="grid-x grid-padding-x">
         <div class="cell">
@@ -104,10 +102,12 @@
   </div>
 </form>
 
-<div id="finalQuiz" class="grid-container hide"></div>
+<div id="finalQuizContainer" class="grid-container actionCards hide">
+  <div id="finalQuiz" class="grid-container"></div>
+</div>
 
-<div id="emailListContainer" class="grid-container hide">
-  <h3>Send your quiz to your friends!</h3>
+<div id="emailListContainer" class="grid-container hide actionCards">
+  <h3 class="cardTitles">Send your quiz to your friends!</h3>
   <form action="">
     <div class="grid-x">
       <div class="cell auto">
@@ -121,3 +121,4 @@
   <ul id="emailList"></ul>
   <button id="emailQuiz" class="button" name="emailQuiz" type="submit">Email Quiz</button>
 </div>
+{{!--  --}}

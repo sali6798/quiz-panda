@@ -1,7 +1,6 @@
 README IN PROCESS
 
-
-# [quiz-panda](https://)
+# [quiz-panda](https://quizpanda.herokuapp.com/)
 
 ## Quiz Making Made Easy 
 
@@ -32,7 +31,7 @@ README IN PROCESS
 
 ## Installation
 
-To use this application, follow the link on the repository page; otherwise, you can [click here]().
+To use this application, follow the link on the repository page; otherwise, you can [click here](https://quizpanda.herokuapp.com/).
 
 ## Usage 
 

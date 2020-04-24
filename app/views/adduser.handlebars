@@ -1,23 +1,7 @@
-<header>
-    <div class="container">
-        <h1 class="brandname">Quiz Panda</h1>
-
-        <nav>
-            <ul>
-                <li><a href="#"><span>About</span></a></li>
-                <li><a href="/login"><span>Login</span></a></li>
-                <li><a href="/signup"><span>Sign Up</span></a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
-
-
 
 
 {{!-- start content of adduser.handlebars --}}
-<div class="addusercontainer">
+<div class="addusercontainer loginCard">
 
     <form id="signupForm">
         <div class="grid-container">
@@ -53,12 +37,17 @@
                             placeholder="Password has to be at least 8 characters">
                     </label>
                 </div>
-                <button class="button primary" type="submit">Sign Up</button>
+                <div class="medium-4 cell">
+                    <button class="button primary" type="submit">Sign Up</button>
+                </div>
+                <div class="medium-4 cell">
+                    <p id="havealogin">Already have a login? <a href="/login">Log in here</a></p>
+                </div>
             </div>
         </div>
     </form>
 
-    <p class="havealogin">Already have a login? <a href="/login">Log in here</a></p>
     {{!-- end of content of adduser.handlebars --}}
 
 </div>
+{{!--  --}}
