@@ -1,5 +1,4 @@
 body {
-	/*background-color: #333;*/
 	height: 100%;
 	background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%);
 	/* background: linear-gradient(to bottom, #17a2b8 0%, #006666 100%); */
@@ -13,15 +12,10 @@ body {
 
 .container {
 	padding: 0;
-	margin: 0 auto; /*keeps container in middle of screen*/
+	margin: 0 auto; 
 	text-align: center;
 }
 
-/*header .container {
-	padding: 0;
-	margin: 0 auto; keeps container in middle of screen
-	text-align: center;
-}*/
 
 header h1 {
 	display: inline-block;
@@ -42,7 +36,6 @@ header nav li {
     font-size: 18px;
     line-height: 24px;
     font-weight: bold;
-    /*color: #808080;*/
     color: #0E6471;
     display: inline-block;
     margin-left: 20px;
@@ -54,8 +47,6 @@ header nav li a {
 }
 
 header nav li a span:hover {
-	/*text-decoration: underline;
-	text-underline-position: under;*/
 	padding-bottom: 5px;
 	border-bottom: 2px solid;
 	color: #FFFF;
@@ -66,9 +57,6 @@ main .container {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-
-	/*width: 40%;
-	height: 50%;*/
 	transform: translate(-50%, -50%);
 }
 
