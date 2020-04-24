@@ -2,10 +2,6 @@ html {
     /* background-color:gray ; */
 }
 
-button {
-    border: 1px solid black;
-}
-
 button:hover {
     cursor: pointer;
 }
@@ -61,7 +57,13 @@ button:hover {
 
 }
 
+#emailList {
+    list-style: none;
+}
 
+#emailList li {
+    border: 1px solid #132627;
+}
 
 /* .jumbotron{ */
     /* width: 100%; */

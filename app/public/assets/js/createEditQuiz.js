@@ -1,9 +1,8 @@
 $(document).ready(function () {
-    $("#addQuestions").addClass("hide");
     let quizObj = {};
     let stagedId = 0;
-    // let questionNumber = 0;
     let currentQuestionNum = 1;
+    let accessCode = "";
 
     $("#createLanding").on("submit", function (event) {
         event.preventDefault();
@@ -103,12 +102,175 @@ $(document).ready(function () {
         console.log(quizObj);
     }
 
+    function displayFinishedQuiz() {
+        $("#addQuestions").addClass("hide");
+        $("#finalQuiz").removeClass("hide");
+
+        $("#finalQuiz").empty();
+
+        $.each(quizObj.questions, function (index) {
+            const questionContainer = $("<div class='grid-x grid-padding-x'>");
+            const titleDiv = $("<div class='cell shrink'>").css({ "display": "flex", "align-items": "center" });
+            const title = $("<p>").text(`Question ${index + 1}: ${$(this)[0].title}`).css("font-weight", "bold");
+            titleDiv.append(title);
+            questionContainer.append(titleDiv);
+            $.each($(this)[0].answers, function (index) {
+                const answerDiv = $("<div class='cell shrink'>").css({ "display": "flex", "align-items": "center" });
+                const answer = $("<p>").text(`Answer ${index + 1}: ${$(this)[0].answer}`);
+                if ($(this)[0].correctAnswer) {
+                    const correctAnswer = $("<span>").text(" Correct Answer").css("color", "green");
+                    answer.append(correctAnswer);
+                }
+                answerDiv.append(answer)
+                questionContainer.append(answerDiv)
+            })
+
+            const buttonDiv = $("<div class='cell shrink'>");
+            const editButton = $(`<button class="editQBtn button" type='button' value=${index}>`).text("Edit");
+            buttonDiv.append(editButton)
+            questionContainer.append(buttonDiv)
+
+            $("#finalQuiz").append(questionContainer)
+        });
+
+        $("#finalQuiz").append($(`<button id="finalSubmit" class="button" type='button'>`).text("Create Quiz"))
+    }
+
+
+    $(document).on("click", "#finalSubmit", function () {
+        $("#finalQuiz").addClass("hide");
+        $("#emailListContainer").removeClass("hide");
+        console.log(quizObj)
+        $.ajax({
+            method: "POST",
+            data: quizObj,
+            url: "/api/quiz"
+        }).then(data => {
+            console.log(data);
+            accessCode = data.accessCode;
+            console.log(accessCode)
+            $.ajax({
+                method: "DELETE",
+                url: "/api/staged/" + stagedId
+            }).then(data => {
+                console.log(data)
+            }).catch(err => {
+                console.log(err);
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    })
+
+    $("#emailQuiz").on("click", async function (event) {
+        event.preventDefault();
+
+        // const { email } = await $.ajax({
+        //     method: "GET",
+        //     url: "/api/users/id/" + $(":input[name=id]").data("id")
+        // })
+
+        const emailsArr = [];
+
+        $(".emailItem").each(function (index) {
+            emailsArr.push($(this).text())
+        })
+
+        const {firstName, lastName} = await $.ajax({
+            method: "GET",
+            url: "/api/users/id/" + $(":input[name=id]").data("id")
+        })
+
+        $.ajax({
+            method: "POST",
+            data: {
+                emails: emailsArr,
+                accessCode: accessCode,
+                firstName: firstName,
+                lastName: lastName
+            },
+            url: "/send"
+        }).then(data => {
+            console.log(data)
+            location.href = "/profile"
+        })
+    })
+
+    $(document).on("click", ".close", function () {
+        $(`#emailList li:contains("${$(this).siblings().text()}")`).remove();
+    })
+
+    $("#emailListContainer :input[name=add]").on("click", function () {
+        const email = $("#emailListContainer :input[name=email]");
+        // check email is a valid format [A-Za-z0-9_-.]@[A-Za-z0-9_-.].[a-zA-Z]
+        var valid = /^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,7}$/g;
+        if (!valid.test(email.val().trim())) {
+            // remove existing message if it exists
+            if ($(this).parent().children()[1]) {
+                $(this).parent().children()[1].remove();
+            }
+            // create a new message with font color red
+            const errorMsg = $("<p>").text("Not a valid email!").addClass("formError");
+            // append it to the div that holds the input element
+            $(this).parent().append(errorMsg);
+            // add red border to input element
+            $(this).addClass("invalidInput");
+        }
+        else {
+            // remove message
+            if ($(this).parent().children()[1]) {
+                $(this).parent().children()[1].remove();
+            }
+
+            // remove red border
+            $(this).removeClass("invalidInput");
+            var item = $("<li>");
+            // create a span with the text as the city name
+            var itemName = $("<span class='emailItem'>").text(email.val());
+            // creates a 'x' button for deletion of item
+            var button = $("<button type='button' class='close' aria-label='Close'>");
+            var close = $("<span aria-hidden='true'>&times;</span>");
+
+            button.append(close);
+            item.append(itemName, button);
+
+            $("#emailList").append(item)
+        }
+
+        $("#emailListContainer :input[name=email]").val("")
+    })
+
+    $(document).on("click", ".editQBtn", function () {
+        $("#finalQuiz").addClass("hide");
+        $("#addQuestions").removeClass("hide");
+
+        const editQNum = parseInt($(this).val());
+        currentQuestionNum = editQNum + 1;
+        $("#questionNumber").text(currentQuestionNum);
+        if (currentQuestionNum === 1) {
+            $("#back").addClass("hide")
+        }
+
+        const editQuestion = quizObj.questions[editQNum];
+        // console.log("=================================");
+        // console.log("edit question");
+        // console.log(editQuestion)
+
+        $("#addQuestions :input[name=question]").val(editQuestion.title);
+        $("#addQuestions :input[placeholder=Answer]").each(function (index) {
+            $(this).val(editQuestion.answers[index].answer);
+            if (editQuestion.answers[index].correctAnswer) {
+                $(`:input[value=${index}]`).prop("checked", true);
+            }
+        })
+
+    });
+
     function updateQuestion() {
-        console.log("=================================");
-        console.log("prev q");
-        console.log(currentQuestionNum)
+        // console.log("=================================");
+        // console.log("prev q");
         const currentQuestion = quizObj.questions[currentQuestionNum - 1];
-        console.log(currentQuestion);
+        // console.log(currentQuestion);
 
         const newAnswersArr = [];
         $("#addQuestions :input[placeholder=Answer]").each(function () {
@@ -122,13 +284,13 @@ $(document).ready(function () {
         newAnswersArr[index].correctAnswer = true;
         currentQuestion.answers = newAnswersArr;
 
-        console.log("=======================================")
-        console.log("updated q")
-        console.log(currentQuestion);
-        console.log(quizObj)
+        // console.log("=======================================")
+        // console.log("updated q")
+        // console.log(currentQuestion);
+        // console.log(quizObj)
     }
 
-    $("#next, #save").on("click", function (event) {
+    $("#next, #save, #finish").on("click", function (event) {
         event.preventDefault();
 
         if (checkInputs() === 5) {
@@ -136,6 +298,10 @@ $(document).ready(function () {
                 updateQuestion();
             }
             else {
+                // console.log("========================")
+                // console.log("before next save fin add q")
+                // console.log("current num", currentQuestionNum);
+                // console.log("questions length", quizObj.questions.length);
                 addQuestion();
             }
             if (stagedId === 0) {
@@ -147,19 +313,29 @@ $(document).ready(function () {
                     url: "/api/staged"
                 }).then((data) => {
                     stagedId = data.id;
-                    if ($(this).val() === "next") {
-                        $(":input[name=question]").val("")
-                        $("#addQuestions :input[placeholder=Answer]").each(function () {
-                            $(this).val("");
-                        })
 
-                        $("#back").removeClass("hide");
-                        $("#questionNumber").text(++currentQuestionNum);
+                    switch ($(this).val()) {
+                        case "next":
+                            $(":input[name=question]").val("")
+                            $("#addQuestions :input[placeholder=Answer]").each(function () {
+                                $(this).val("");
+                            })
+                            // console.log("========================")
+                            // console.log("inside staged 0")
+                            // console.log("current num", currentQuestionNum)
+
+                            $("#back").removeClass("hide");
+                            $("#questionNumber").text(++currentQuestionNum);
+                            // console.log("========================")
+                            // console.log("updated num", currentQuestionNum)
+                            break;
+                        case "save":
+                            location.href = "/profile"
+                            break;
+                        default:
+                            displayFinishedQuiz();
+                            break;
                     }
-                    else {
-                        location.href = "/profile"
-                    }
-                    // console.log("stagedId", stagedId)
                 }).catch(err => {
                     console.log(err)
                 })
@@ -172,29 +348,38 @@ $(document).ready(function () {
                     },
                     url: "/api/staged/" + stagedId
                 }).then((data) => {
-                    console.log(data)
-                    if ($(this).val() === "next") {
-                        if (currentQuestionNum < quizObj.questions.length) {
-                            const nextQuestion = quizObj.questions[currentQuestionNum];
-                            $("#addQuestions :input[name=question]").val(nextQuestion.title);
-                            $("#addQuestions :input[placeholder=Answer]").each(function (index) {
-                                $(this).val(nextQuestion.answers[index].answer);
-                                if (nextQuestion.answers[index].correctAnswer) {
-                                    $(`:input[value=${index}]`).prop("checked", true);
-                                }
-                            })
-                        }
-                        else {
-                            $(":input[name=question]").val("")
-                            $("#addQuestions :input[placeholder=Answer]").each(function () {
-                                $(this).val("");
-                            })
-                        }
-
-                        $("#questionNumber").text(++currentQuestionNum);
-                    }
-                    else {
-                        location.href = "/profile"
+                    switch ($(this).val()) {
+                        case "next":
+                            if (currentQuestionNum < quizObj.questions.length) {
+                                const nextQuestion = quizObj.questions[currentQuestionNum];
+                                $("#addQuestions :input[name=question]").val(nextQuestion.title);
+                                $("#addQuestions :input[placeholder=Answer]").each(function (index) {
+                                    $(this).val(nextQuestion.answers[index].answer);
+                                    if (nextQuestion.answers[index].correctAnswer) {
+                                        $(`:input[value=${index}]`).prop("checked", true);
+                                    }
+                                })
+                            }
+                            else {
+                                $(":input[name=question]").val("")
+                                $("#addQuestions :input[placeholder=Answer]").each(function () {
+                                    $(this).val("");
+                                })
+                            }
+                            $("#back").removeClass("hide");
+                            // console.log("========================")
+                            // console.log("inside PUT request")
+                            // console.log("current num", currentQuestionNum)
+                            $("#questionNumber").text(++currentQuestionNum);
+                            // console.log("========================")
+                            // console.log("updated num", currentQuestionNum)
+                            break;
+                        case "save":
+                            location.href = "/profile"
+                            break;
+                        default:
+                            displayFinishedQuiz();
+                            break;
                     }
                 }).catch(err => {
                     console.log(err)
@@ -225,13 +410,23 @@ $(document).ready(function () {
 
         if (checkInputs() === 5) {
             // addQuestion();
-            if (currentQuestionNum < quizObj.questions.length) {
+            if (currentQuestionNum < quizObj.questions.length ||
+                (currentQuestionNum === quizObj.questions.length && quizObj.questions[currentQuestionNum - 1])) {
                 updateQuestion();
             }
             else {
+                // console.log("========================")
+                // console.log("before back add q")
+                // console.log("current num", currentQuestionNum);
+                // console.log("questions length", quizObj.questions.length);
                 addQuestion();
             }
+            // console.log("========================")
+            // console.log("inside back fn")
+            // console.log("current num", currentQuestionNum)
             $("#questionNumber").text(--currentQuestionNum);
+            // console.log("========================")
+            // console.log("updated num", currentQuestionNum)
             if (currentQuestionNum === 1) {
                 $("#back").addClass("hide")
             }
@@ -245,6 +440,37 @@ $(document).ready(function () {
             })
         }
     });
+
+    function init() {
+        // $("#addQuestions").addClass("hide");
+        console.log("hi")
+        // const data = await $.ajax({
+        //     method: "GET",
+        //     url: "/api/staged/user"
+        // })
+
+        // if (data !== null) {
+        //     console.log("hello")
+        //     $("#unfinishedQuiz").removeClass("hide")
+        // }
+        // else {
+
+        // }
+
+        $.ajax({
+            method: "GET",
+            url: "/api/staged/user/" + $(":input[name=id]").data("id")
+        }).then(data => {
+            console.log(data)
+        }).catch(err => {
+            console.log(err)
+        })
+
+
+
+    }
+
+    init();
 
 
 })

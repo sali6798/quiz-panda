@@ -20,21 +20,21 @@
         <input id="noOption" type="radio" value="no" name="retakeable"><label for="noOption">No</label>
       </fieldset>
     </div>
-    <button type="submit">Create Quiz</button></a>
+    <button class="button" type="submit">Create Quiz</button></a>
   </div>
 </form>
 
 {{!-- {{#if quiz}} --}}
-<input type="hidden" name="UserId" data-id="{{ id }}">
-<div id="unfinishedQuiz" class="grid-container">
+<input type="hidden" name="id" data-id="{{ id }}">
+<div id="unfinishedQuiz" class="grid-container hide">
+  <h3>Continue a quiz draft:</h3>
   <div class="grid-y grid-padding-y">
-    <h3>Continue a quiz draft:</h3>
-    <p>Quiz name tags</p>
+    <ul class="stagedList"></ul>
   </div>
 </div>
 {{!-- {{/if}} --}}
 
-<form id="addQuestions">
+<form id="addQuestions" class="hide">
   <h3>Question <span id="questionNumber"></span></h3>
   <div class="grid-container">
     <div class="grid-y grid-padding-y">
@@ -89,17 +89,35 @@
     </div>
     <div class="grid-x grid-padding-x">
       <div class="medium-3 cell">
-        <button id="back" type="submit" value="back">Go Back</button>
+        <button id="back" class="button" type="submit" value="back">Go Back</button>
       </div>
       <div class="medium-3 cell">
-        <button id="save" type="submit" value="save">Save and Exit</button>
+        <button id="save" class="button" type="submit" value="save">Save and Exit</button>
       </div>
       <div class="medium-3 cell">
-        <button id="finish" type="submit" value="finish">Finish!</button>
+        <button id="finish" class="button" type="submit" value="finish">Finish!</button>
       </div>
       <div class="medium-3 cell">
-        <button id="next" type="submit" value="next">Next Question</button>
+        <button id="next" class="button" type="submit" value="next">Next Question</button>
       </div>
     </div>
   </div>
 </form>
+
+<div id="finalQuiz" class="grid-container hide"></div>
+
+<div id="emailListContainer" class="grid-container hide">
+  <h3>Send your quiz to your friends!</h3>
+  <form action="">
+    <div class="grid-x">
+      <div class="cell auto">
+        <input type="email" name="email" placeholder="Enter your friends' emails!">
+      </div>
+      <div class="cell shrink">
+        <button class="button" type="button" name="add">Add</button>
+      </div>
+    </div>
+  </form>
+  <ul id="emailList"></ul>
+  <button id="emailQuiz" class="button" name="emailQuiz" type="submit">Email Quiz</button>
+</div>
