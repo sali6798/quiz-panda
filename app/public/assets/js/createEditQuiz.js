@@ -137,46 +137,60 @@ $(document).ready(function () {
     }
 
 
-    $(document).on("click", "#finalSubmit", function () {
+    $(document).on("click", "#finalSubmit", async function () {
         $("#finalQuiz").addClass("hide");
         $("#emailListContainer").removeClass("hide");
         console.log(quizObj)
-        $.ajax({
-            method: "POST",
-            data: quizObj,
-            url: "/api/quiz"
-        }).then(data => {
-            console.log(data);
-            accessCode = data.accessCode;
+
+        try {
+            const createdQuiz = await $.ajax({
+                method: "POST",
+                data: quizObj,
+                url: "/api/quiz"
+            });
+            console.log(createdQuiz);
+            accessCode = createdQuiz.accessCode
             console.log(accessCode)
-            $.ajax({
+
+            await $.ajax({
                 method: "DELETE",
                 url: "/api/staged/" + stagedId
-            }).then(data => {
-                console.log(data)
-            }).catch(err => {
-                console.log(err);
-            })
-        }).catch(err => {
-            console.log(err);
-        })
+            });
+        } catch (error) {
+            console.log(error)
+        }
+
+        // const createdQuiz = await
+        //     $.ajax({
+        //         method: "POST",
+        //         data: quizObj,
+        //         url: "/api/quiz"
+        //     }).then(data => {
+        //         console.log(data);
+        //         accessCode = data.accessCode;
+        //         console.log(accessCode)
+        //         $.ajax({
+        //             method: "DELETE",
+        //             url: "/api/staged/" + stagedId
+        //         }).then(data => {
+        //             console.log(data)
+        //         }).catch(err => {
+        //             console.log(err);
+        //         })
+        //     }).catch(err => {
+        //         console.log(err);
+        //     })
     })
 
     $("#emailQuiz").on("click", async function (event) {
         event.preventDefault();
-
-        // const { email } = await $.ajax({
-        //     method: "GET",
-        //     url: "/api/users/id/" + $(":input[name=id]").data("id")
-        // })
-
         const emailsArr = [];
 
         $(".emailItem").each(function (index) {
             emailsArr.push($(this).text())
         })
 
-        const {firstName, lastName} = await $.ajax({
+        const { firstName, lastName } = await $.ajax({
             method: "GET",
             url: "/api/users/id/" + $(":input[name=id]").data("id")
         })
@@ -388,28 +402,10 @@ $(document).ready(function () {
         }
     });
 
-    // $("#back").on("click", function () {
-    //     $("#questionNumber").text(--currentQuestionNum);
-    //     if (currentQuestionNum === 1) {
-    //         $("#back").addClass("hide")
-    //     }
-    //     const prevQuestion = quizObj.questions[quizObj.questions.length - 1];
-    //     $("#addQuestions :input[name=question]").val(prevQuestion.title);
-    //     $("#addQuestions :input[placeholder=Answer]").each(function (index) {
-    //         $(this).val(prevQuestion.answers[index].answer);
-    //         // console.log(prevQuestion.answers[index].answer);
-    //         if (prevQuestion.answers[index].correctAnswer) {
-    //             // console.log(index)
-    //             $(`:input[value=${index}]`).prop("checked", true);
-    //         }
-    //     })
-    // })
-
     $("#back").on("click", function (event) {
         event.preventDefault();
 
         if (checkInputs() === 5) {
-            // addQuestion();
             if (currentQuestionNum < quizObj.questions.length ||
                 (currentQuestionNum === quizObj.questions.length && quizObj.questions[currentQuestionNum - 1])) {
                 updateQuestion();
@@ -441,9 +437,9 @@ $(document).ready(function () {
         }
     });
 
-    function init() {
+    async function init() {
         // $("#addQuestions").addClass("hide");
-        console.log("hi")
+        // console.log("hi")
         // const data = await $.ajax({
         //     method: "GET",
         //     url: "/api/staged/user"
@@ -457,14 +453,27 @@ $(document).ready(function () {
 
         // }
 
-        $.ajax({
+        const stagedQuizzes = await $.ajax({
             method: "GET",
             url: "/api/staged/user/" + $(":input[name=id]").data("id")
-        }).then(data => {
-            console.log(data)
-        }).catch(err => {
-            console.log(err)
         })
+
+        if (stagedQuizzes !== null) {
+
+            console.log(stagedQuizzes)
+
+
+            $("#unfinishedQuiz").removeClass("hide");
+
+        }
+
+        // .then(data => {
+        //     console.log(data)
+        // }).catch(err => {
+        //     console.log(err)
+        // })
+
+
 
 
 
