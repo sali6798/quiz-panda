@@ -1,6 +1,6 @@
-html {
+/* html { */
     /* background-color:gray ; */
-}
+/* } */
 
 button:hover {
     cursor: pointer;
@@ -11,8 +11,17 @@ button:hover {
 }
 
 
-.bodycontainer{
-    min-height: 90vh;
+/* .bodycontainer{ */
+    /* min-height: 90vh; */
+    /* background-color: #222; */
+    /* background-image: url(https://s3.envato.com/files/59596537-cfeb-4f99-810f-f0f73b297d08/inline_image_preview.jpg); */
+    /* background-image: url(https://images.unsplash.com/photo-1510422908328-746ed313f736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2552&q=80); */
+    /* background-image: url(https://images.unsplash.com/photo-1579747384978-5faf4c016375?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80); */
+    
+/* } */
+
+.bodycontainer background-image{
+opacity: 0.2;
 }
 
 .formError {
@@ -108,7 +117,10 @@ button:hover {
     text-align: center;
 
 } */
-
+.top-bar, ul.menu {
+    background: black;
+    color: white;
+}
 
 #intro{
     /* margin-top: 100px; */
@@ -127,7 +139,7 @@ button:hover {
     /* background-color:black;  */
     color:white;
     
-    background: linear-gradient(132deg,  #11e2e9,#132627,  #11e2e9);
+    background: linear-gradient(132deg,  rgb(62, 146, 69),#132627,  rgb(62, 146, 69));
     background-size: 400% 400%;
     animation: BackgroundGradient 30s ease infinite;
 
@@ -161,8 +173,112 @@ button:hover {
       font-size: 28px;
       margin-top: 50px;
       font-weight: bold;
+      color:white;
   }
 
   .navbarinfo{
       margin-top: 15px;
   }
+
+  @media only screen and (max-width: 500px) {
+      .logo {
+          display: none;
+      }
+  }
+
+
+  /* .signupForm label{
+  color:white;
+  } */
+
+  .havealogin{
+      color: white;
+      margin: 0 auto;
+  }
+
+
+/* 
+  .profileCards{
+      margin: 0 auto;
+      margin-bottom: 30px;
+      width: 50%;
+      align-content: center;
+      text-align: center;
+  } */
+
+  /* .profilecardcontainer{
+      background-color: deeppink;
+  } */
+
+  .profileCards{
+      background-color: ivory;
+      color:black;
+      /* background-image: url(https://static.vecteezy.com/system/resources/previews/000/137/496/non_2x/bamboo-background-frog-angle-free-vector.jpg); */
+  }
+
+  
+
+  /* start of parallax effect with foundation */
+
+  /* body {
+	font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+	font-weight: 200;
+	font-size: 20px;
+} */
+
+/* .parallax-background { */
+    /* background-color: #0078A0; */
+    /* background-image: url(https://images.unsplash.com/photo-1438755582627-221038b62986?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80); */
+	/* height: 620px; */
+	/* background-repeat: no-repeat; */
+	/* -webkit-background-size: cover; */
+  	/* -moz-background-size: cover; */
+  	/* -o-background-size: cover; */
+	/* background-size: cover; */
+	/* position: fixed; */
+	/* width: 100%; */
+/* } */
+
+/* .intro-text {
+	font-size: 50px;
+	color: #fff;
+	text-align: center;
+	margin-top: 15%;
+} */
+
+/* .parallax-content {
+	max-width: 100%;
+	position: relative;
+	top: 500px;
+	padding: 50px;
+	font-size: 20px;
+	background-color: #fff;
+}               */
+    
+
+/* end of parallax effect with foundation */
+
+
+.logincontainer{
+    background-color: ivory;
+    margin: 0 auto;
+    width: 40%;
+    margin-top: 200px;
+}
+
+.nologin{
+    color: black;
+}
+
+.addusercontainer{
+    background-color: ivory;
+    width: 50%;
+    margin: 0 auto;
+    color: black;
+}
+
+.addusercontainer label{
+    color: black;
+}
+
+
