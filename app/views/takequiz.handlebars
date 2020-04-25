@@ -1,27 +1,30 @@
-<div class="grid-container actionCards">
-    <div class="grid-x grid-padding-x">
-        <h3 class="cardTitles">{{this.title}}</h3>
-    </div>
-    <div class="grid-x grid-padding-x">
-
-        <fieldset class="large cell">
-            {{#each Questions}}
-            <legend>{{this.title}}</legend>
-            {{#each Answers}}
-            <input name="answerOption-{{QuestionId}}" id="{{this.id}}" type="radio" class="answerOption"
-                data-correctanswer="{{this.correctAnswer}}"><label for="{{this.id}}">{{this.answer}}</label>
-            {{/each}}
-            {{/each}}
-        </fieldset>
-    </div>
-
-    <br>
-
-    <div class="grid-x grid-padding-x">
-        <div class="medium-6 cell">
-            {{!-- Check answers on submit --}}
-            <button data-quizid="{{this.id}}" class="button primary" id="submitAnswers">Submit</button>
+<div class="grid-container">
+    <div class="actionCards">
+        <div class="grid-x grid-padding-x">
+            <h3 class="cardTitles">{{this.title}}</h3>
         </div>
+        <div class="grid-x grid-padding-x">
+
+            <fieldset class="large cell">
+                {{#each Questions}}
+                <legend>{{this.title}}</legend>
+                {{#each Answers}}
+                <input name="answerOption-{{QuestionId}}" id="{{this.id}}" type="radio" class="answerOption"
+                    data-correctanswer="{{this.correctAnswer}}"><label for="{{this.id}}">{{this.answer}}</label>
+                {{/each}}
+                {{/each}}
+            </fieldset>
+        </div>
+
+        <br>
+
+        <div class="grid-x grid-padding-x">
+            <div class="medium-6 cell">
+                {{!-- Check answers on submit --}}
+                <button data-quizid="{{this.id}}" class="button primary" id="submitAnswers">Submit</button>
+            </div>
+        </div>
+
     </div>
 </div>
-{{!--  --}}
+<script src="/assets/js/takeQuiz.js"></script>

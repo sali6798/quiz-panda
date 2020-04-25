@@ -34,16 +34,21 @@ router.route("/login")
             }
         }).then(dbUser => {
             console.log(dbUser);
-
-            if (bcrypt.compareSync(req.body.password, dbUser.password)) {
-                req.session.user = {
-                    username: dbUser.username,
-                    id: dbUser.id
-                };
-                res.send("OK");
-            } else {
-                res.send("not logged in");
+            if (dbUser !== null) {
+                if (bcrypt.compareSync(req.body.password, dbUser.password)) {
+                    req.session.user = {
+                        username: dbUser.username,
+                        id: dbUser.id
+                    };
+                    res.status(200).send("OK");
+                } else {
+                    res.status(200).send("not logged in");
+                }
             }
+            else {
+                res.status(200).send("user not found");
+            }
+
         }).catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -63,15 +68,16 @@ router.route("/api/users/:username")
         })
     })
 
-// router.route("/api/users/id/:id")
-//     .get((req, res) => {
-//         db.User.findOne({
-//             where: {
-//                 id: req.params.id
-//             }
-//         }).then(dbUser => {
-//             res.status(200).json(dbUser);
-//         })
-//     })
+// needed to send emails
+router.route("/api/users/id/:id")
+    .get((req, res) => {
+        db.User.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(dbUser => {
+            res.status(200).json(dbUser);
+        })
+    })
 
 module.exports = router;

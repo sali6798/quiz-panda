@@ -1,39 +1,24 @@
-
-
 {{!-- content of login.handlebars --}}
+<div class="grid-container">
+  <div class="logincontainer actionCards">
+    <form id="loginForm">
+      <div class="grid-y grid-padding-y">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Username">
 
-<div class="logincontainer loginCard">
-  <form id="loginForm">
-    <div class="grid-container">
-      <div class="grid-y grid-padding-x">
-        <div class="medium-4 cell">
-          <label>Username
-            <input type="text" name="username" placeholder="Username">
-          </label>
-        </div>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password">
+        
+        <div><button class="button" type="submit"> Login </button></div>
 
-        <div class="medium-4 cell">
-          <label>Password
-            <input type="password" name="password" placeholder="Password">
-          </label>
-        </div>
-      </div>
-      <div class="medium-2 cell"></div>
-      <div class="grid-y grid-padding-x">
-        <div class="medium-12 cell">
-          <button class="button" type="submit"> Login </button>
-        </div>
-      </div>
-          <div class="grid-x grid-padding-x">
-      <div class="medium-12 cell">
         <div id="loginError" class="formError"></div>
         <p>Don't have a login? <a href="/signup">Sign up here</a></p>
+
       </div>
-    </div>
-    </div>
-  </form>
-
+    </form>
+  </div>
 </div>
+<script src="/assets/js/loginAndSignup.js"></script>
 
-{{!--  --}}
+
 {{!-- end of content of login handlebars --}}

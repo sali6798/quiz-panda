@@ -1,41 +1,37 @@
-
-
 {{!-- start content of adduser.handlebars --}}
-<div class="addusercontainer loginCard">
-
-    <form id="signupForm">
-        <div class="grid-container">
+<div class="grid-container">
+    <div class="addusercontainer actionCards">
+        <form id="signupForm">
             <div class="grid-y grid-padding-x">
                 <div class="medium-4 cell">
-                    <label>First Name
-                        <input type="text" name="firstName" placeholder="First Name">
-                    </label>
+                    <label>First Name</label>
+                    <input type="text" name="firstName" placeholder="First Name">
+
                 </div>
                 <div class="medium-4 cell">
-                    <label>Last Name
-                        <input type="text" name="lastName" placeholder="Last Name">
-                    </label>
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" placeholder="Last Name">
+
                 </div>
                 <div class="medium-4 cell">
-                    <label>Email
-                        <input type="email" name="email" placeholder="Email">
-                    </label>
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="Email">
+
                 </div>
                 <div class="medium-4 cell">
-                    <label>Username
-                        <input type="text" name="username" placeholder="Username">
-                    </label>
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Username">
+
                 </div>
                 <div class="medium-4 cell">
-                    <label>Password
-                        <input type="password" name="password" placeholder="Password">
-                    </label>
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password">
+
                 </div>
                 <div class="medium-4 cell">
-                    <label>Confirm password
-                        <input type="password" name="confirmPassword"
-                            placeholder="Password has to be at least 8 characters">
-                    </label>
+                    <label>Confirm password</label>
+                    <input type="password" name="confirmPassword" placeholder="Confirm password">
+
                 </div>
                 <div class="medium-4 cell">
                     <button class="button primary" type="submit">Sign Up</button>
@@ -44,10 +40,9 @@
                     <p id="havealogin">Already have a login? <a href="/login">Log in here</a></p>
                 </div>
             </div>
-        </div>
-    </form>
-
-    {{!-- end of content of adduser.handlebars --}}
-
+        </form>
+    </div>
 </div>
-{{!--  --}}
+<script src="/assets/js/loginAndSignup.js"></script>
+
+{{!-- end of content of adduser.handlebars --}}
