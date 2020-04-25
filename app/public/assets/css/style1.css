@@ -1,21 +1,13 @@
 body {
-	height: 100%;
 	background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%);
-	/* background: linear-gradient(to bottom, #17a2b8 0%, #006666 100%); */
-	/* background: linear-gradient(to bottom, #1cc0cc 0%, #020211 100%); */
+	font-family: Avenir, "Century Gothic", sans-serif;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	font-family: Avenir, "Century Gothic", sans-serif;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
-	padding: 0;
-	margin: 0 auto; 
 	text-align: center;
 }
-
 
 header h1 {
 	display: inline-block;
@@ -52,37 +44,25 @@ header nav li a span:hover {
 	color: #FFFF;
 }
 
+main {
+	margin-bottom: 30px;
+}
+
 main .container {
 	color: #FFFF;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
-
 
 #main_header {
-	font-size: 250%;
-	/*font-size: 3vw;*/
-}
-
-main p {
-	font-size: 110%;
-	line-height: 190%;
+	font-size: 48px;
 }
 
 .mainButton {
 	border-radius: 5px;
 	background-color: #FFFF;
 	color: #17a2b8;
-	font-size: 110%;
-	/*font-size: 1.5vw;*/
-	padding: 3% 0;
-	/*margin-top: 5%;*/
+	font-size: 18px;
 	font-weight: bold;
-	width: 30%;
-	/*width: 200px;*/
-	/*height: 20%;*/
+	padding: 20px 30px;
 }
 
 @media (max-width: 600px) {
@@ -91,16 +71,9 @@ main p {
 	}
 } 
 
-#havealogin{
-	color:black;
-}
-
-
 .brandname{
-
     font-family: 'Dancing Script', cursive;
     font-weight: bold;
-
 }
 
 .mainlogo{

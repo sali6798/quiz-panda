@@ -9,11 +9,15 @@ $(document).ready(function () {
     // to be validated
     function displayErrorMessage(element, message, needValidate) {
         // remove existing message if it exists
-        element.parent().siblings().remove();
+        if (element.parent().children()[2]) {
+            element.parent().children()[2].remove();
+        }
+
         // create a new message with font color red
         const errorMsg = $("<p>").text(message).addClass("formError");
         // append it to the div that holds the input element
-        element.parent().parent().append(errorMsg);
+        // element.parent().parent().append(errorMsg);
+        element.parent().append(errorMsg);
         // add red border to input element
         element.addClass("invalidInput");
         if (needValidate) {
@@ -26,7 +30,9 @@ $(document).ready(function () {
     // validation is needed
     function removeErrorMessage(element, needValidate) {
         // remove message
-        element.parent().siblings().remove();
+        if (element.parent().children()[2]) {
+            element.parent().children()[2].remove();
+        }
         // remove red border
         element.removeClass("invalidInput");
         if (needValidate) {
@@ -156,28 +162,39 @@ $(document).ready(function () {
     $("#loginForm").on("submit", function (event) {
         event.preventDefault();
 
-        const user = {
-            username: $("#loginForm :input[name=username]").val().trim(),
-            password: $("#loginForm :input[name=password]").val()
+        const username = $("#loginForm :input[name=username]").val().trim();
+        const password = $("#loginForm :input[name=password]").val()
+
+        if (username === "" || password === "") {
+            $("#loginError").text("Must enter a username and password!");
+        }
+        else {
+            console.log(password)
+            const user = {
+                username: username,
+                password: password
+            }
+    
+            // make post request with login information
+            $.ajax({
+                method: "POST",
+                data: user,
+                url: "/login"
+            }).then(data => {
+                // relocates to profile page if successful
+                if (data === "OK") {
+                    location.href = "/profile"
+                }
+                else {
+                    // if log in does not exist, display error message
+                    $("#loginError").text("Username or password is wrong!");
+                    $("#loginForm :input[name=password]").val("");
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         }
 
-        // make post request with login information
-        $.ajax({
-            method: "POST",
-            data: user,
-            url: "/login"
-        }).then(data => {
-            // relocates to profile page if successful
-            if (data === "OK") {
-                location.href = "/profile"
-            }
-            else {
-                // if log in does not exist, display error message
-                $("#loginError").text("Username or password is wrong!");
-                $("#loginForm :input[name=password]").val("");
-            }
-        }).catch(err => {
-            console.log(err);
-        })
+        
     })
 })
