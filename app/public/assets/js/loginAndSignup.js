@@ -167,9 +167,9 @@ $(document).ready(function () {
 
         if (username === "" || password === "") {
             $("#loginError").text("Must enter a username and password!");
-            $("#loginForm :input[name=password]").val("");
         }
         else {
+            console.log(password)
             const user = {
                 username: username,
                 password: password
