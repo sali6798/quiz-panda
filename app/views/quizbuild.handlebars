@@ -1,39 +1,45 @@
 <div class="grid-container">
-  <form id="createLanding">
-    <div class="card actionCards">
-      <h1 class="cardTitles">Begin Building Your Quiz!</h1>
-      <div class="grid-x grid-padding-x">
-        <h3 class="cardTitles">Enter the title of your new quiz:</h3>
-        <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
-      </div>
-      <div class="grid-x grid-padding-x">
-        <fieldset class="medium-6 cell">
-          <legend>Is this quiz retakeable?</legend>
-          <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label for="yesOption">Yes</label>
-          <input id="noOption" type="radio" value="no" name="retakeable"><label for="noOption">No</label>
-        </fieldset>
-      </div>
-      <div class="grid-x cardTitles">
-        <button class="button" type="submit">Create Quiz</button></a>
-      </div>
+  <div class="grid-y grid-padding-y">
+    <div class="cell createQuizContainer">
+      <form id="createLanding">
+        <div class="actionCards">
+          <h1 class="cardTitles">Begin Building Your Quiz!</h1>
+          <div class="grid-x grid-padding-x">
+            <h3 class="cardTitles">Enter the title of your new quiz:</h3>
+            <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
+          </div>
+          <div class="grid-x grid-padding-x">
+            <fieldset class="medium-6 cell">
+              <legend>Is this quiz retakeable?</legend>
+              <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label
+                for="yesOption">Yes</label>
+              <input id="noOption" type="radio" value="no" name="retakeable"><label for="noOption">No</label>
+            </fieldset>
+          </div>
+          <div class="grid-x cardTitles">
+            <button class="button" type="submit">Create Quiz</button></a>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
 
-  <input class="hide" type="hidden" name="id" data-id="{{ id }}">
-
-  <div id="unfinishedQuiz" class="hide">
-    <div class="card actionCards">
-      <div class="card-section">
-        <h3 class="cardTitles">Continue a drafted quiz</h3>
-        <table>
-          <tbody id="stagedTable"></tbody>
-        </table>
+    <div class="cell unfinishedQuizContainer" class="hide">
+      <input class="hide" type="hidden" name="id" data-id="{{ id }}">
+      <div id="unfinishedQuiz">
+        <div class="actionCards">
+          <div class="card-section">
+            <h3 class="cardTitles">Continue a drafted quiz</h3>
+            <table>
+              <tbody id="stagedTable"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <form id="addQuestions" class="hide">
-    <div class="card actionCards">
+    <div class="actionCards">
       <h3 class="cardTitles">Question <span id="questionNumber"></span></h3>
       <div class="grid-y grid-padding-y">
         <div class="grid-x grid-padding-x">
@@ -102,14 +108,14 @@
   </form>
 
   <div id="finalQuizContainer" class="hide">
-    <div id="finalQuiz" class="card actionCards"></div>
+    <div id="finalQuiz" class="actionCards"></div>
   </div>
 
   <div id="emailListContainer" class="hide">
-    <div class="card actionCards">
+    <div class="actionCards">
       <h3 class="cardTitles">Send your quiz to your friends!</h3>
       <form class="cardTitles">
-        <div class="grid-x"> 
+        <div class="grid-x">
           <div class="cell auto">
             <input type="email" name="email" placeholder="Enter an email then click Add!">
           </div>
@@ -123,3 +129,4 @@
     </div>
   </div>
 </div>
+<script src="/assets/js/createEditQuiz.js"></script>

@@ -31,8 +31,8 @@ $(document).ready(function () {
 
             quizObj.questions = [];
 
-            $("#createLanding").addClass("hide");
-            $("#unfinishedQuiz").addClass("hide");
+            $(".createQuizContainer").addClass("hide");
+            $(".unfinishedQuizContainer").addClass("hide");
             $("#addQuestions").removeClass("hide");
             $("#questionNumber").text(currentQuestionNum);
             $("#back").addClass("hide");
@@ -159,27 +159,6 @@ $(document).ready(function () {
         } catch (error) {
             console.log(error)
         }
-
-        // const createdQuiz = await
-        //     $.ajax({
-        //         method: "POST",
-        //         data: quizObj,
-        //         url: "/api/quiz"
-        //     }).then(data => {
-        //         console.log(data);
-        //         accessCode = data.accessCode;
-        //         console.log(accessCode)
-        //         $.ajax({
-        //             method: "DELETE",
-        //             url: "/api/staged/" + stagedId
-        //         }).then(data => {
-        //             console.log(data)
-        //         }).catch(err => {
-        //             console.log(err);
-        //         })
-        //     }).catch(err => {
-        //         console.log(err);
-        //     })
     })
 
     $("#emailQuiz").on("click", async function (event) {
@@ -469,8 +448,8 @@ $(document).ready(function () {
                 }
             })
 
-            $("#createLanding").addClass("hide");
-            $("#unfinishedQuiz").addClass("hide");
+            $(".createQuizContainer").addClass("hide");
+            $(".unfinishedQuizContainer").addClass("hide");
             $("#addQuestions").removeClass("hide");
     
             
@@ -517,7 +496,7 @@ $(document).ready(function () {
                     $("#stagedTable").append(row);
                 });
 
-                $("#unfinishedQuiz").removeClass("hide");
+                $(".unfinishedQuizContainer").removeClass("hide");
 
             }
         } catch (error) {

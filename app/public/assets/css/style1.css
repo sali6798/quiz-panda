@@ -44,6 +44,10 @@ header nav li a span:hover {
 	color: #FFFF;
 }
 
+main {
+	margin-bottom: 30px;
+}
+
 main .container {
 	color: #FFFF;
 }

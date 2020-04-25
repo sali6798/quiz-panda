@@ -1,22 +1,14 @@
-
-/* html { 
-    background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%);
-} */
-
-/* button {
-    text-align: center;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 20px;
-    border: 2px solid white;
-} */
-
 button:hover {
     cursor: pointer;
 }
 
 td .button, .listDisplay button, .answerOption, #emailList {
     margin: 0;
+}
+
+.grid-container {
+    width: 70%;
+    margin-bottom: 30px;
 }
 
 .listDisplay {
@@ -39,11 +31,6 @@ td .button, .listDisplay button, .answerOption, #emailList {
     word-break: break-all;
 }
 
-/* .navbar{
-    height: 10vh;
-} */
-
-
 .formError {
     color: red;
 }
@@ -58,72 +45,12 @@ td .button, .listDisplay button, .answerOption, #emailList {
     align-items: center;
 }
 
-/* .footerdiv {
-    height: 10vh;
-    background-color: rgb(19, 24, 24);
-    padding: 80px 0px;
-    color: white;
-    position: fixed;
-    left: 0;
-    right:0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    margin:0;
-    max-width: 100%;
-} */
-
-/* .copyRight {
-    bottom:10px;
-    left:10px;
-    position: fixed;
-    background-color: #222;
-    color:white;
-
-}
-
-.logo {
-    width: 100px;
-    float: left;
-
-} */
-
-/* .top-bar, ul.menu {
-    background: black;
-    color: white;
-} */
-
-/* #intro {
-    margin-top: 100px;
-    position: relative;
-}
-
-.introinfo {
-    text-align: center;
-    font-size: 28px;
-    margin-top: 50px;
-    font-weight: bold;
-    color:white;
-}
-
-.navbarinfo {
-    margin-top: 15px;
-}
-
-.havealogin {
-    color: white;
-    margin: 0 auto;
-} */
-
-.actionCards, .loginCard, .logincontainer, .addusercontainer, .aboutus {
-    background-color: rgb(243, 243, 243);
-}
-
-.actionCards, .loginCard, .nologin, .addusercontainer, .addusercontainer label {
+.actionCards, .addusercontainer label {
     color: black;
 }
 
 .actionCards {
+    background-color: rgb(243, 243, 243);
     border: 2px solid #66fcf1;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -135,30 +62,20 @@ td .button, .listDisplay button, .answerOption, #emailList {
     font-family: Avenir, "Century Gothic", sans-serif;
 }
 
-.logincontainer{
-    margin: 0 auto;
-    width: 40%;
-    margin-top: 100px;
-}
-
-.addusercontainer {
-    width: 50%;
-    margin: 0 auto;
-} 
-
-.aboutus {
-    border-radius: 10px;
-    margin: 0 auto;
-    width: 50%;
-    padding: 30px;
-}
-
 .card-section {
     text-align: center;
     padding-top: 1px;
     padding-bottom: 7px;
     margin-top: 3px;
-    /* margin-bottom: 5px; */
+}
+
+.logincontainer{
+    margin-top: 100px;
+}
+
+.aboutus {
+    border-radius: 10px;
+    margin: 0 auto;
 }
 
 #emailQuiz {
@@ -168,5 +85,11 @@ td .button, .listDisplay button, .answerOption, #emailList {
 @media only screen and (max-width: 500px) {
     .logo {
         display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .grid-container {
+        width: 95%;
     }
 }
