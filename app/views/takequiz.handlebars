@@ -9,8 +9,12 @@
                 {{#each Questions}}
                 <legend>{{this.title}}</legend>
                 {{#each Answers}}
-                <input name="answerOption-{{QuestionId}}" id="{{this.id}}" type="radio" class="answerOption"
-                    data-correctanswer="{{this.correctAnswer}}"><label for="{{this.id}}">{{this.answer}}</label>
+                <div class="grid-y grid-padding-y">
+                    <div class="cell">
+                        <input name="answerOption-{{QuestionId}}" id="{{this.id}}" type="radio" class="answerOption"
+                            data-correctanswer="{{this.correctAnswer}}"><label for="{{this.id}}">{{this.answer}}</label>
+                    </div>
+                </div>
                 {{/each}}
                 {{/each}}
             </fieldset>
