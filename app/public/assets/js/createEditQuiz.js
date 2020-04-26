@@ -110,12 +110,12 @@ $(document).ready(function () {
 
         $.each(quizObj.questions, function (index) {
             const questionContainer = $("<div class='grid-x grid-padding-x'>");
-            const titleDiv = $("<div class='cell shrink'>").css({ "display": "flex", "align-items": "center" });
+            const titleDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center"});
             const title = $("<p>").text(`Question ${index + 1}: ${$(this)[0].title}`).css("font-weight", "bold");
             titleDiv.append(title);
             questionContainer.append(titleDiv);
             $.each($(this)[0].answers, function (index) {
-                const answerDiv = $("<div class='cell shrink'>").css({ "display": "flex", "align-items": "center" });
+                const answerDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center"});
                 const answer = $("<p>").text(`Answer ${index + 1}: ${$(this)[0].answer}`);
                 if ($(this)[0].correctAnswer) {
                     const correctAnswer = $("<span>").text(" Correct Answer").css("color", "green");
