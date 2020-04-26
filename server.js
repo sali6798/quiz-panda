@@ -8,7 +8,7 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-require("dotenv");
+require("dotenv").config();
 
 // Sets up the Express App
 // =============================================================

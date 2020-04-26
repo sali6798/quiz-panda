@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const nodemailer = require("nodemailer");
-require("dotenv");
+require("dotenv").config({ path: "../../" });
 
 // GET and POST requests for /api/quiz
 router.route("/api/quiz")
