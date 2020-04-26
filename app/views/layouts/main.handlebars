@@ -38,8 +38,6 @@
     {{!-- link to css foundation --}}
     {{!-- <link rel="stylesheet" type="text/css" href="/assets/css/app.css"> --}}
 
-
-
     {{!-- link to google fonts --}}
     <link
         href="https://fonts.googleapis.com/css?family=Allura|Berkshire+Swash|Dancing+Script|Girassol|Great+Vibes|Lobster|Oleo+Script|PT+Serif|Pacifico|Pattaya|Playfair+Display+SC|Satisfy&display=swap"
@@ -49,27 +47,26 @@
     {{!-- link to css file --}}
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 
-
-
     {{!-- main page css --}}
-    <link href="/assets/css/style1.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/splash.css" type="text/css" rel="stylesheet">
+</head>
 
-
+<body>
     <header>
-        <div class="container">
-            <a href="/">
-                <h1 class="brandname">Quiz Panda</h1>
-            </a>
-
-            <nav>
-                <ul>
+        <nav class="grid-x grid-padding-x navContainer">
+            <div class="cell medium-5 brandContainer">
+                
+                    <h1 class="brandname"><a href="/">Quiz Panda</a></h1>
+                
+            </div>
+            <div class="cell medium-7 menuContainer">
+                <ul class="links">
                     <li><a href="/about"><span>About</span></a></li>
-                    <li><a href="/login"><span>Login</span></a></li>
                     <li><a href="/signup"><span>Sign Up</span></a></li>
-                    <li><a href="/logout"><span>Sign Out</span></a></li>
+                    <li><a href="/login"><span>Log In</span></a></li>
                 </ul>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </header>
 
     {{!-- body container --}}
@@ -78,8 +75,17 @@
 
     {{!-- to help dropdowns on navbar working --}}
     {{!-- <script>$(document).foundation();</script> --}}
-
-    </body>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function (event) {
+                if ($(window).scrollTop() > 0) {
+                    $("header").css({ "background-color": "#0198af" });
+                } else {
+                    $("header").css({ "background-color": "transparent" });
+                }
+            });
+        });
+    </script>
+</body>
 
 </html>
-{{!--  --}}
