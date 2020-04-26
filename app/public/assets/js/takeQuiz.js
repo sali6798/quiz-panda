@@ -96,7 +96,6 @@ $(document).ready(function () {
             }
         })
     })
-<<<<<<< HEAD
     
     $(".delete").on("click", function(event){
         event.preventDefault();
@@ -109,7 +108,6 @@ $(document).ready(function () {
         })
 
     })
-=======
 
     function init() {
         $('a[href="/signup"]').children().text("Account");
@@ -122,5 +120,4 @@ $(document).ready(function () {
     }
 
     init();
->>>>>>> development
 })

@@ -39,23 +39,6 @@ $(document).ready(function () {
         }
     });
 
-    // $("#addQuestions :input[type=text]").on("blur", function () {
-    //     const value = $(this)
-
-    //     if (value.val().trim() === "") {
-    //         value.siblings().remove();
-    //         value.addClass("invalidInput");
-    //         // create a new message with font color red
-    //         const errorMsg = $("<p>").text("Must enter a value").addClass("formError");
-    //         // append it to the div that holds the input element
-    //         value.parent().append(errorMsg);
-    //     }
-    //     else {
-    //         value.siblings().remove();
-    //         value.removeClass("invalidInput")
-    //     }
-    // });
-
     function checkInputs() {
         let validCount = 0;
 
@@ -63,7 +46,9 @@ $(document).ready(function () {
             const value = $(this)
 
             if (value.val().trim() === "") {
-                value.siblings().remove();
+                if (value.siblings()[1]) {
+                    value.siblings()[1].remove();
+                }
                 value.addClass("invalidInput");
                 // create a new message with font color red
                 const errorMsg = $("<p>").text("Must enter a value").addClass("formError");
@@ -71,7 +56,9 @@ $(document).ready(function () {
                 value.parent().append(errorMsg);
             }
             else {
-                value.siblings().remove();
+                if (value.siblings()[1]) {
+                    value.siblings()[1].remove();
+                }
                 value.removeClass("invalidInput")
                 validCount++;
             }
@@ -130,7 +117,7 @@ $(document).ready(function () {
             buttonDiv.append(editButton)
             questionContainer.append(buttonDiv)
 
-            $("#finalQuiz").prepend(questionContainer)
+            $("#finalQuiz").append(questionContainer)
         });
 
         $("#finalQuiz").append($(`<button id="finalSubmit" class="button cardTitles" type='button'>`).text("Create Quiz"))
@@ -228,9 +215,9 @@ $(document).ready(function () {
             item.append(itemName, button);
 
             $("#emailList").append(item)
+            $("#emailListContainer :input[name=email]").val("")
         }
 
-        $("#emailListContainer :input[name=email]").val("")
     })
 
     $(document).on("click", ".editQBtn", function () {
@@ -473,6 +460,7 @@ $(document).ready(function () {
     })
 
     async function init() {
+        // navbar link change for logged in
         $('a[href="/signup"]').children().text("Account");
         $('a[href="/signup"]').attr("href", "/account")
 
@@ -488,7 +476,6 @@ $(document).ready(function () {
             })
 
             if (stagedQuizzes.length > 0) {
-                // console.log(stagedQuizzes)
                 stagedQuizzes.forEach(quiz => {
                     const parsedQuiz = JSON.parse(quiz.storedQuiz)
                     const row = $("<tr>");
