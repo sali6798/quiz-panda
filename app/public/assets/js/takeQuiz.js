@@ -110,13 +110,19 @@ $(document).ready(function () {
     })
 
     function init() {
-        $('a[href="/signup"]').children().text("Account");
-        $('a[href="/signup"]').attr("href", "/account")
+        if (window.location.pathname.includes("/quiz/")) {
+            $('a[href="/signup"]').children().text("Profile");
+            $('a[href="/signup"]').attr("href", "/profile");
+        }
+        else {
+            $('a[href="/signup"]').children().text("Account");
+            $('a[href="/signup"]').attr("href", "/account");
+        }
 
         $('a[href="/login"]').children().text("Log Out");
-        $('a[href="/login"]').attr("href", "/logout")
+        $('a[href="/login"]').attr("href", "/logout");
 
-        $('a[href="/"]').attr("href", "/profile")
+        $('a[href="/"]').attr("href", "/profile");
     }
 
     init();

@@ -1,8 +1,12 @@
 <div class="grid-container">
   <div class="grid-y grid-padding-y">
     <div class="cell createQuizContainer">
+      <a data-open="createLandingContainer"><button class="button">&#10133; Create A New Quiz</button></a>
+    </div>
+
+    <div class="reveal actionCards" id="createLandingContainer" data-reveal>
       <form id="createLanding">
-        <div class="actionCards">
+        <div class="">
           <h1 class="cardTitles">Begin Building Your Quiz!</h1>
           <div class="grid-x grid-padding-x">
             <h3 class="cardTitles">Enter the title of your new quiz:</h3>
@@ -21,6 +25,9 @@
           </div>
         </div>
       </form>
+      <button class="close-button" data-close aria-label="Close reveal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
 
     <input class="hide" type="hidden" name="id" data-id="{{ id }}">
@@ -127,7 +134,10 @@
         </div>
       </form>
       <ul id="emailList"></ul>
-      <button id="emailQuiz" class="button cardTitles" name="emailQuiz" type="submit">Email Quiz</button>
+      <div class="multButtonsContainer">
+        <button id="emailQuiz" class="button cardTitles" name="emailQuiz" type="submit">Email Quiz</button>
+        <a href="/profile"><button class="button cardTitles" type="button">Maybe Later</button></a>
+      </div>
     </div>
   </div>
 </div>

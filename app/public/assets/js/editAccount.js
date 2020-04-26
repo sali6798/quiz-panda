@@ -140,8 +140,8 @@ $(document).ready(function () {
 
     function init() {
         // navbar link change for logged in
-        $('a[href="/signup"]').children().text("Account");
-        $('a[href="/signup"]').attr("href", "/account")
+        $('a[href="/signup"]').children().text("Profile");
+        $('a[href="/signup"]').attr("href", "/profile")
 
         $('a[href="/login"]').children().text("Log Out");
         $('a[href="/login"]').attr("href", "/logout")

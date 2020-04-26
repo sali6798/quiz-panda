@@ -4,20 +4,31 @@ $(document).ready(function () {
     let currentQuestionNum = 1;
     let accessCode = "";
 
+    // displays error message for the input given
+    function displayErrorMessage(inputElement, errorElement, message) {
+        if (errorElement) {
+            errorElement.remove();
+        }
+
+        inputElement.addClass("invalidInput");
+        const errorMsg = $("<p>").text(message).addClass("formError");
+        inputElement.parent().append(errorMsg)
+    }
+
+    function removeErrorMessage(inputElement, errorElement) {
+        if (errorElement) {
+            errorElement.remove();
+        }
+        inputElement.removeClass("invalidInput");
+    }
+
     $("#createLanding").on("submit", function (event) {
         event.preventDefault();
 
         const quizName = $("#quizName").val().trim();
 
         if (quizName === "") {
-            if ($("#quizName").parent().children()[2]) {
-                $("#quizName").parent().children()[2].remove();
-            }
-            $("#quizName").addClass("invalidInput");
-            // create a new message with font color red
-            const errorMsg = $("<p class='cardTitles'>").text("Must enter a Quiz Title").addClass("formError");
-            // append it to the div that holds the input element
-            $("#quizName").parent().append(errorMsg);
+            displayErrorMessage($("#quizName"), $("#quizName").parent().children()[2], "Must enter a Quiz Title");
         }
         else {
             quizObj.title = quizName;
@@ -32,6 +43,7 @@ $(document).ready(function () {
             quizObj.questions = [];
 
             $(".createQuizContainer").addClass("hide");
+            $('#createLandingContainer').foundation('close');
             $(".unfinishedQuizContainer").addClass("hide");
             $("#addQuestions").removeClass("hide");
             $("#questionNumber").text(currentQuestionNum);
@@ -46,20 +58,10 @@ $(document).ready(function () {
             const value = $(this)
 
             if (value.val().trim() === "") {
-                if (value.siblings()[1]) {
-                    value.siblings()[1].remove();
-                }
-                value.addClass("invalidInput");
-                // create a new message with font color red
-                const errorMsg = $("<p>").text("Must enter a value").addClass("formError");
-                // append it to the div that holds the input element
-                value.parent().append(errorMsg);
+                displayErrorMessage(value, value.siblings()[1], "Must enter a value");
             }
             else {
-                if (value.siblings()[1]) {
-                    value.siblings()[1].remove();
-                }
-                value.removeClass("invalidInput")
+                removeErrorMessage(value, value.siblings()[1]);
                 validCount++;
             }
         })
@@ -82,11 +84,6 @@ $(document).ready(function () {
 
         newQuestion.answers = answersArr;
         quizObj.questions.push(newQuestion)
-
-        console.log("================================");
-        console.log("added q");
-        console.log(newQuestion);
-        console.log(quizObj);
     }
 
     function displayFinishedQuiz() {
@@ -97,12 +94,12 @@ $(document).ready(function () {
 
         $.each(quizObj.questions, function (index) {
             const questionContainer = $("<div class='grid-x grid-padding-x'>");
-            const titleDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center"});
+            const titleDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center" });
             const title = $("<p>").text(`Question ${index + 1}: ${$(this)[0].title}`).css("font-weight", "bold");
             titleDiv.append(title);
             questionContainer.append(titleDiv);
             $.each($(this)[0].answers, function (index) {
-                const answerDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center"});
+                const answerDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center" });
                 const answer = $("<p>").text(`Answer ${index + 1}: ${$(this)[0].answer}`);
                 if ($(this)[0].correctAnswer) {
                     const correctAnswer = $("<span>").text(" Correct Answer").css("color", "green");
@@ -127,7 +124,6 @@ $(document).ready(function () {
     $(document).on("click", "#finalSubmit", async function () {
         $("#finalQuizContainer").addClass("hide");
         $("#emailListContainer").removeClass("hide");
-        console.log(quizObj)
 
         try {
             const createdQuiz = await $.ajax({
@@ -135,9 +131,7 @@ $(document).ready(function () {
                 data: quizObj,
                 url: "/api/quiz"
             });
-            console.log(createdQuiz);
             accessCode = createdQuiz.accessCode
-            console.log(accessCode)
 
             await $.ajax({
                 method: "DELETE",
@@ -185,25 +179,11 @@ $(document).ready(function () {
         // check email is a valid format [A-Za-z0-9_-.]@[A-Za-z0-9_-.].[a-zA-Z]
         var valid = /^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,7}$/g;
         if (!valid.test(email.val().trim())) {
-            // remove existing message if it exists
-            if (email.parent().children()[1]) {
-                email.parent().children()[1].remove();
-            }
-            // create a new message with font color red
-            const errorMsg = $("<p>").text("Not a valid email!").addClass("formError");
-            // append it to the div that holds the input element
-            email.parent().append(errorMsg);
-            // add red border to input element
-            email.addClass("invalidInput");
+            displayErrorMessage(email, email.parent().children()[1], "Not a valid email!")
         }
         else {
-            // remove message
-            if (email.parent().children()[1]) {
-                email.parent().children()[1].remove();
-            }
+            removeErrorMessage(email, email.parent().children()[1]);
 
-            // remove red border
-            email.removeClass("invalidInput");
             var item = $("<li class='listDisplay cardTitles'>");
             // create a span with the text as the city name
             var itemName = $("<span class='emailItem'>").text(email.val());
@@ -220,37 +200,33 @@ $(document).ready(function () {
 
     })
 
+    function loadQuestion(questionObj) {
+        $("#questionNumber").text(currentQuestionNum);
+        if (currentQuestionNum === 1) {
+            $("#back").addClass("hide")
+        }
+
+        $("#addQuestions :input[name=question]").val(questionObj.title);
+        $("#addQuestions :input[placeholder=Answer]").each(function (index) {
+            $(this).val(questionObj.answers[index].answer);
+            if (questionObj.answers[index].correctAnswer) {
+                $(`:input[value=${index}]`).prop("checked", true);
+            }
+        })
+    }
+
     $(document).on("click", ".editQBtn", function () {
         $("#finalQuizContainer").addClass("hide");
         $("#addQuestions").removeClass("hide");
 
         const editQNum = parseInt($(this).val());
         currentQuestionNum = editQNum + 1;
-        $("#questionNumber").text(currentQuestionNum);
-        if (currentQuestionNum === 1) {
-            $("#back").addClass("hide")
-        }
 
-        const editQuestion = quizObj.questions[editQNum];
-        // console.log("=================================");
-        // console.log("edit question");
-        // console.log(editQuestion)
-
-        $("#addQuestions :input[name=question]").val(editQuestion.title);
-        $("#addQuestions :input[placeholder=Answer]").each(function (index) {
-            $(this).val(editQuestion.answers[index].answer);
-            if (editQuestion.answers[index].correctAnswer) {
-                $(`:input[value=${index}]`).prop("checked", true);
-            }
-        })
-
+        loadQuestion(quizObj.questions[editQNum]);
     });
 
     function updateQuestion() {
-        // console.log("=================================");
-        // console.log("prev q");
         const currentQuestion = quizObj.questions[currentQuestionNum - 1];
-        // console.log(currentQuestion);
 
         const newAnswersArr = [];
         $("#addQuestions :input[placeholder=Answer]").each(function () {
@@ -264,107 +240,86 @@ $(document).ready(function () {
         newAnswersArr[index].correctAnswer = true;
         currentQuestion.answers = newAnswersArr;
 
-        // console.log("=======================================")
-        // console.log("updated q")
-        // console.log(currentQuestion);
-        // console.log(quizObj)
+    }
+
+    function newQuestion() {
+        $(":input[name=question]").val("")
+        $("#addQuestions :input[placeholder=Answer]").each(function () {
+            $(this).val("");
+        })
+
+        $("#back").removeClass("hide");
+        $("#questionNumber").text(++currentQuestionNum);
+    }
+
+    async function saveFirstQuestion(command) {
+        try {
+            const { id } = await $.ajax({
+                method: "POST",
+                data: {
+                    storedQuiz: JSON.stringify(quizObj, "\t", null)
+                },
+                url: "/api/staged"
+            });
+
+            stagedId = id;
+            buttonActionSwitch(command);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    function buttonActionSwitch(...values) {
+        switch (values[0]) {
+            case "next":
+                if (values.length === 2) {
+                    if (currentQuestionNum < quizObj.questions.length) {
+                        const nextQuestion = quizObj.questions[currentQuestionNum];
+                        $("#questionNumber").text(++currentQuestionNum);
+                        loadQuestion(nextQuestion);
+                        $("#back").removeClass("hide");
+                    }
+                    else {
+                       newQuestion();
+                    }
+                }
+                else {
+                    newQuestion();
+                }
+                
+                break;
+            case "save":
+                location.href = "/profile"
+                break;
+            default:
+                displayFinishedQuiz();
+                break;
+        }
+    }
+
+    async function updateStagedQuiz(command) {
+        try {
+            await $.ajax({
+                method: "PUT",
+                data: {
+                    storedQuiz: JSON.stringify(quizObj, "\t", null)
+                },
+                url: "/api/staged/" + stagedId
+            })
+
+            buttonActionSwitch(command, "update")
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     $("#next, #save, #finish").on("click", function (event) {
         event.preventDefault();
 
         if (checkInputs() === 5) {
-            if (currentQuestionNum <= quizObj.questions.length) {
-                updateQuestion();
-            }
-            else {
-                // console.log("========================")
-                // console.log("before next save fin add q")
-                // console.log("current num", currentQuestionNum);
-                // console.log("questions length", quizObj.questions.length);
-                addQuestion();
-            }
-            if (stagedId === 0) {
-                $.ajax({
-                    method: "POST",
-                    data: {
-                        storedQuiz: JSON.stringify(quizObj, "\t", null)
-                    },
-                    url: "/api/staged"
-                }).then((data) => {
-                    stagedId = data.id;
+            (currentQuestionNum <= quizObj.questions.length) ? updateQuestion() : addQuestion();
 
-                    switch ($(this).val()) {
-                        case "next":
-                            $(":input[name=question]").val("")
-                            $("#addQuestions :input[placeholder=Answer]").each(function () {
-                                $(this).val("");
-                            })
-                            // console.log("========================")
-                            // console.log("inside staged 0")
-                            // console.log("current num", currentQuestionNum)
-
-                            $("#back").removeClass("hide");
-                            $("#questionNumber").text(++currentQuestionNum);
-                            // console.log("========================")
-                            // console.log("updated num", currentQuestionNum)
-                            break;
-                        case "save":
-                            location.href = "/profile"
-                            break;
-                        default:
-                            displayFinishedQuiz();
-                            break;
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-            }
-            else {
-                $.ajax({
-                    method: "PUT",
-                    data: {
-                        storedQuiz: JSON.stringify(quizObj, "\t", null)
-                    },
-                    url: "/api/staged/" + stagedId
-                }).then((data) => {
-                    switch ($(this).val()) {
-                        case "next":
-                            if (currentQuestionNum < quizObj.questions.length) {
-                                const nextQuestion = quizObj.questions[currentQuestionNum];
-                                $("#addQuestions :input[name=question]").val(nextQuestion.title);
-                                $("#addQuestions :input[placeholder=Answer]").each(function (index) {
-                                    $(this).val(nextQuestion.answers[index].answer);
-                                    if (nextQuestion.answers[index].correctAnswer) {
-                                        $(`:input[value=${index}]`).prop("checked", true);
-                                    }
-                                })
-                            }
-                            else {
-                                $(":input[name=question]").val("")
-                                $("#addQuestions :input[placeholder=Answer]").each(function () {
-                                    $(this).val("");
-                                })
-                            }
-                            $("#back").removeClass("hide");
-                            // console.log("========================")
-                            // console.log("inside PUT request")
-                            // console.log("current num", currentQuestionNum)
-                            $("#questionNumber").text(++currentQuestionNum);
-                            // console.log("========================")
-                            // console.log("updated num", currentQuestionNum)
-                            break;
-                        case "save":
-                            location.href = "/profile"
-                            break;
-                        default:
-                            displayFinishedQuiz();
-                            break;
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-            }
+            stagedId === 0 ? saveFirstQuestion($(this).val()) : updateStagedQuiz($(this).val());
         }
     });
 
@@ -377,73 +332,43 @@ $(document).ready(function () {
                 updateQuestion();
             }
             else {
-                // console.log("========================")
-                // console.log("before back add q")
-                // console.log("current num", currentQuestionNum);
-                // console.log("questions length", quizObj.questions.length);
                 addQuestion();
             }
-            // console.log("========================")
-            // console.log("inside back fn")
-            // console.log("current num", currentQuestionNum)
-            $("#questionNumber").text(--currentQuestionNum);
-            // console.log("========================")
-            // console.log("updated num", currentQuestionNum)
-            if (currentQuestionNum === 1) {
-                $("#back").addClass("hide")
-            }
+            
+            --currentQuestionNum;
             const prevQuestion = quizObj.questions[currentQuestionNum - 1];
-            $("#addQuestions :input[name=question]").val(prevQuestion.title);
-            $("#addQuestions :input[placeholder=Answer]").each(function (index) {
-                $(this).val(prevQuestion.answers[index].answer);
-                if (prevQuestion.answers[index].correctAnswer) {
-                    $(`:input[value=${index}]`).prop("checked", true);
-                }
-            })
+            loadQuestion(prevQuestion);
         }
     });
 
-    $(document).on("click", ".editStaged", async function() {
+    $(document).on("click", ".editStaged", async function () {
         try {
             const quizData = await $.ajax({
                 method: "GET",
                 url: "/api/staged/" + $(this).val()
             })
-            console.log(quizData)
 
             const parsedQuizData = JSON.parse(quizData.storedQuiz);
 
             quizObj.title = parsedQuizData.title;
             quizObj.canRetake = parsedQuizData.canRetake;
             quizObj.questions = parsedQuizData.questions;
-            console.log(quizObj)
 
             const lastQuestion = parsedQuizData.questions[parsedQuizData.questions.length - 1];
             stagedId = $(this).val();
             currentQuestionNum = parsedQuizData.questions.length;
 
-            $("#questionNumber").text(currentQuestionNum);
-            if (currentQuestionNum === 1) {
-                $("#back").addClass("hide")
-            }
-
-            $("#addQuestions :input[name=question]").val(lastQuestion.title);
-            $("#addQuestions :input[placeholder=Answer]").each(function (index) {
-                $(this).val(lastQuestion.answers[index].answer);
-                if (lastQuestion.answers[index].correctAnswer) {
-                    $(`:input[value=${index}]`).prop("checked", true);
-                }
-            })
+            loadQuestion(lastQuestion);
 
             $(".createQuizContainer").addClass("hide");
             $(".unfinishedQuizContainer").addClass("hide");
             $("#addQuestions").removeClass("hide");
-    
-            
+
+
         } catch (error) {
             console.log(error)
         }
-        
+
     })
 
     $(document).on("click", ".deleteStaged", async function () {
@@ -459,16 +384,7 @@ $(document).ready(function () {
         }
     })
 
-    async function init() {
-        // navbar link change for logged in
-        $('a[href="/signup"]').children().text("Account");
-        $('a[href="/signup"]').attr("href", "/account")
-
-        $('a[href="/login"]').children().text("Log Out");
-        $('a[href="/login"]').attr("href", "/logout")
-
-        $('a[href="/"]').attr("href", "/profile") 
-
+    async function loadStagedQuizzes() {
         try {
             const stagedQuizzes = await $.ajax({
                 method: "GET",
@@ -499,7 +415,19 @@ $(document).ready(function () {
         }
     }
 
+    function init() {
+        // navbar link change for logged in
+        $('a[href="/signup"]').children().text("Profile");
+        $('a[href="/signup"]').attr("href", "/profile");
+
+        $('a[href="/login"]').children().text("Log Out");
+        $('a[href="/login"]').attr("href", "/logout");
+
+        $('a[href="/"]').attr("href", "/profile");
+
+        loadStagedQuizzes();
+
+    }
+
     init();
-
-
 })

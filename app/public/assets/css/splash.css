@@ -2,6 +2,7 @@ header {
 	position: sticky;
 	position: -webkit-sticky;
 	top: 0;
+	background-color: #58c4d5;
 }
 
 header nav ul {
@@ -13,7 +14,7 @@ header nav li {
     font-size: 18px;
     line-height: 24px;
     font-weight: bold;
-    color: #0E6471;
+    color: #086775;
     display: inline-block;
     margin-left: 20px;
 }
@@ -84,7 +85,6 @@ main .container, .brandname a {
 @media screen and (max-width: 639px) {
 	header nav li {
 		margin: 0;
-		color: #0b4952;
 	}
 
 	.navContainer {
@@ -103,7 +103,7 @@ main .container, .brandname a {
 
 	.menuContainer {
 		display: block;
-		background-color: rgb(18, 126, 143);
+		background-color: rgb(19, 165, 187);
 		padding: 10px 0;
 	}
 

@@ -19,7 +19,7 @@ $(document).ready(function () {
             let quizzesCreatedHTML =
               `<hr>
               <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
-                <div class="cell small-12 medium-12 large-4 tdText">
+                <div class="cell small-12 medium-12 large-4 tdText quizTitle">
                 ${quiz.title}
                 </div>
                 <div class="cell small-12 medium-6 large-4 ">
@@ -59,7 +59,7 @@ $(document).ready(function () {
         let quizzesTakenHTML =
           `<hr>
             <div class="grid-padding-x grid-x " id="quizTakenLeaderboard${quiz.Quiz.id}">
-              <div class="cell small-12 medium-12 large-4 tdText">
+              <div class="cell small-12 medium-12 large-4 tdText quizTitle">
               ${quiz.Quiz.title}
               </div>
               <div class="cell small-12 medium-6 large-4 ">

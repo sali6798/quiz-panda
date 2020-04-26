@@ -104,8 +104,23 @@ td .button, .listDisplay button, .answerOption, #emailList {
     font-size: 50px;
 }
 
-#emailQuiz {
-    margin-top: 20px;
+.createQuizContainer {
+    text-align: right;
+}
+
+.quizHeading {
+    font-weight: bold;
+}
+
+.quizHeading:not(h3) {
+    margin-top: 30px;
+}
+
+.quizTitle {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #emailList span {
@@ -115,6 +130,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
 #accesscodeForm { 
     width:50%;
     margin: 0 auto;
+}
+
+#createLanding .formError {
+    margin-left: 10px;
 }
 
 @media screen and (max-width: 639px) {
@@ -131,6 +150,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
 @media screen and (max-width: 575px) {
     .grid-container {
         width: 95%;
+    }
+
+    #accesscodeForm {
+        width: 100%;
     }
 
     .logincontainer {
