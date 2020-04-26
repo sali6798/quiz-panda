@@ -1,51 +1,87 @@
 $(document).ready(function () {
 
-    $.ajax({
-        method: "GET",
-        url: "/api/quizuser",
-    }).then(quizInfo => {
-        console.log(quizInfo);
+  $.ajax({
+    method: "GET",
+    url: "/api/userquizzes",
+  }).then(userInfo => {
+    let userQuizzes = userInfo.userQuizzes;
+    let userId = userInfo.id;
 
-        let quizUsers = quizInfo.quizUsers;
-        console.log(quizUsers);
+    for (let i = 0; i < userQuizzes.length; i++) {
+      if (userQuizzes[i].id === userId) {
+        let user = userQuizzes[i];
 
-        let userId = quizInfo.id;
-        console.log(quizInfo.id);
+        for (let x = 0; x < user.Quizzes.length; x++) {
+          let quiz = user.Quizzes[x];
 
-        console.log(quizUsers[0].Quiz.title);
+          if (quiz.creatorId === userId) {
+            $("#quizzesCreated").removeClass("hide");
+            let quizzesCreatedHTML =
+              `<hr>
+              <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
+                <div class="cell small-12 medium-12 large-4 tdText">
+                ${quiz.title}
+                </div>
+                <div class="cell small-12 medium-6 large-4 ">
+                  <a href="/leaderboard/${quiz.id}">
+                    <button class="button">Leaderboard</button>
+                  </a>
+                </div>
+              </div>`
+            $("#quizzesCreatedInfo").append(quizzesCreatedHTML);
+            
+            if (quiz.isDeleted !== true) {
+              let quizzesCreatedDeleteHTML =
+                `<div class="cell small-12 medium-6 large-4 quizCreatedDelete">
+                  <button class="button delete" data-id="${quiz.id}">Delete</button>
+                </div>`
 
-
-
-
-        for (let i = 0; i < quizUsers.length; i++) {
-
-            if (quizUsers[i].Quiz.creatorId != userId) {
-                $("#quizzesTaken").removeClass("hide");
-                let quizzesTakenHTML = `<tr>
-        <td class="tdText">`+ quizUsers[i].Quiz.title + `</td>
-        <td>
-          <a href="/leaderboard/`+ quizUsers[i].QuizId + `">
-            <button class="button">Leaderboard</button>
-          </a>
-        </td>
-        <td>
-          <a href="/quiz/`+ quizUsers[i].Quiz.accessCode + `">
-            <button class="button">Retake</button>
-          </a>
-        </td>
-      </tr>`
-                console.log("quizzesTakenHTML: " + quizzesTakenHTML);
-
-                $("#quizzesTakenInfo").append(quizzesTakenHTML);
-            } else {
-                console.log("nope");
-
+              $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedDeleteHTML)
             }
-
+          }
         }
+      }
+    }
+  })
 
-    })
+  $.ajax({
+    method: "GET",
+    url: "/api/quizuser",
+  }).then(userInfo => {
+    let userQuizzes = userInfo.quizUsers;
+    let userId = userInfo.id;
+    
+    for (let y = 0; y < userQuizzes.length; y++) {
+      let quiz = userQuizzes[y];
 
-
-
+      if (quiz.Quiz.creatorId !== userId && quiz.UserId !== userId) {
+        $("#quizzesTaken").removeClass("hide");
+        let quizzesTakenHTML =
+          `<hr>
+            <div class="grid-padding-x grid-x " id="quizTakenLeaderboard${quiz.Quiz.id}">
+              <div class="cell small-12 medium-12 large-4 tdText">
+              ${quiz.Quiz.title}
+              </div>
+              <div class="cell small-12 medium-6 large-4 ">
+                <a href="/leaderboard/${quiz.Quiz.id}">
+                  <button class="button">Leaderboard</button>
+                </a>
+              </div>
+            </div>`
+        $("#quizzesTakenInfo").append(quizzesTakenHTML);
+        
+        if (quiz.Quiz.canRetake === true) {
+          let quizzesTakenRetakeHTML =
+            `<div class="cell small-12 medium-6 large-4 quizCreatedDelete">
+              <a href = "/quiz/${quiz.Quiz.accessCode}">
+                <button class="button" data-id="${quiz.Quiz.id}">Retake</button>
+              </a>
+            </div>`
+          $(`#quizTakenLeaderboard${quiz.Quiz.id}`).append(quizzesTakenRetakeHTML)
+        }
+      }
+    }
+  })
 })
+
+

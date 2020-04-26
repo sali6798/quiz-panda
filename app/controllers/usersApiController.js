@@ -107,4 +107,29 @@ router.route("/api/users/id/:id")
         })
     })
 
+    //gets req.session.id and all users with their associated quizzes
+router.get("/api/userquizzes", function (req, res) {
+    if (req.session.user) {
+
+        db.User
+            .findAll({
+                include: [db.Quiz]
+            })
+            .then(data => {
+                let resObj =
+                {
+                    id: req.session.user.id,
+                    userQuizzes: data
+                }
+                res.status(200).json(resObj)
+            })
+            .catch(error => {
+                console.log(error)
+                res.status(400).json(error)
+            })
+    } else {
+        res.redirect("/login");
+    }
+});
+
 module.exports = router;
