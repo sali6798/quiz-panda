@@ -125,6 +125,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
     margin: 0 auto;
 }
 
+#createLanding .formError {
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 639px) {
     .correctAnswerDiv {
         display: block;
