@@ -1,12 +1,8 @@
-README IN PROCESS
-
 # [quiz-panda](https://quizpanda.herokuapp.com/)
 
 ## Quiz Making Made Easy 
 
->An application built to help you create a set of quiz and have it sent to people.
-
-> 
+###  Quiz Panda is a full stack application that allows user to create, edit and delete quizzes with multiple choice questions.
 
 ## Table of contents
 * [General info](#general-info) 
@@ -18,10 +14,11 @@ README IN PROCESS
 * [Status](#status) 
 * [License](#license) 
 * [Contributers](#contributers)
-* [Contact](#contact)
 
 
 ## General Info
+
+This application will give you the ability to make multiple choice quizzes in a convenient way. You will be able to log in with a username that you create, to have access to your user profile and to view or edit the past quizzes. You will also be able to send the link to a quiz that you created via email. There is a leaderboard that will show the scores of the attempt.
 
 
 ## Screenshots
@@ -31,27 +28,52 @@ README IN PROCESS
 
 ## Installation
 
-To use this application, follow the link on the repository page; otherwise, you can [click here](https://quizpanda.herokuapp.com/).
 
 ## Usage 
 
+To use this application, you can [click here](https://quizpanda.herokuapp.com/).
+
+![gif1]()
+
+![gif2]()
 
 
 ## Credits
 
-Built with [Foundation]().
+Built with [Foundation](https://get.foundation/).
 
 Fonts from [Google Fonts](https://developers.google.com/fonts).
 
- [](). 
+Icons from [flat icon](https://www.flaticon.com/)
+
+deploy with [heroku](https://dashboard.heroku.com/)
+
+#### npm packages used
+
+ * [express-handlebars](https://www.npmjs.com/package/express-handlebars). 
+ * [bcrypt](https://www.npmjs.com/package/bcrypt)
+ * [dotenv](https://www.npmjs.com/package/dotenv)
+ * [express](https://www.npmjs.com/package/express)
+ * [sequelize](https://www.npmjs.com/package/sequelize)
+ * [uniqid](https://www.npmjs.com/package/uniqid)
+ * [Node MySQL 2](https://www.npmjs.com/package/mysql2)
+ * [MySQL](https://www.npmjs.com/package/mysql)
+ * [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize)
+ * [express-session](https://www.npmjs.com/package/express-session)
+ * [foundation-sites](https://www.npmjs.com/package/foundation-sites)
+ * [mysql2](https://www.npmjs.com/package/mysql2)
+ * [nodemailer](https://www.npmjs.com/package/nodemailer)
+ * [session](https://www.npmjs.com/package/node-session)
+
 
 
 ## Features
 List of features ready:
 * Feature 1: Easy to navigate design.
-* Feature 2: Ability to create, update, delete.
-* Feature 3: 
-* Feature 4: 
+* Feature 2: Ability to create, update, delete quizzes.
+* Feature 3: Leaderboard to show the scores.
+* Feature 4: Ability to create a user and password.
+* Feature 5: Ability to send an email with an access code to 
 
 
 To-do list:
@@ -59,39 +81,47 @@ To-do list:
 * Improvement to be done 2: 
 
 ## Status
-Project is:  _in progress_
+Project is:  _Finished_
+
+#### Inspiration
+The social distancing during the Covid 19 pandemic has caused the majority of the population to practice social distancing. This application can help teachers, tutors , parents as well as a fun way to stay connected with friends.
 
 
 ## License
 
 MIT license 
-Copyright © 2020 Zahra Ali Aghazadeh, Shaidee, Brett , and JJ
+Copyright © 2020 Zahra Ali Aghazadeh, Shaidee Alincastre, Brett Belka and JJ Cardenas
 
 
 
 ## Contributers
 
-The links to github accounts of contributers on this project:
-
-[Shaidee Alingcastre](https://github.com/sali6798)
-
-[Brett Belka](https://github.com/bbelka)
-
-[JJ Cardenas](https://github.com/cardeens)
-
-[Zahra Ali Aghazadeh](https://github.com/zahraaliaghazadeh)
-
-
-## Contact 
-
-LinkedIn profiles for contact:
-
-[Yalda Aghazade](www.linkedin.com/in/yalda-aghazade)
-
-[Shaidee Alingcastre](https://www.linkedin.com/in/shaidee-alingcastre/)
-
-[JJ Cardenas](https://www.linkedin.com/in/jordanjcardenas/)
-
-[Brett Belka](https://www.linkedin.com/in/brettbelka/)
-
 Feel free to contact us for any feedbacks, questions or collaborations! 
+
+
+<img src="./app/public/assets/images/Shaidee2.png" width="80px"> <br>
+Shaidee Alingcastre : Back End Developer/ Git Master
+[Github](https://github.com/sali6798) ,
+[LinkedIn](https://www.linkedin.com/in/shaidee-alingcastre/)
+
+
+<img src="./app/public/assets/images/brett2.png" width="80px"><br>
+Brett Belka : Back End Developer/ Project Manager
+[Github](https://github.com/bbelka) ,
+[linkedIn](https://www.linkedin.com/in/brettbelka/)
+
+
+
+<img src="./app/public/assets/images/JJ3.png" width="80px"> <br>
+JJ Cardenas : Front End Developer / Designer
+[Github](https://github.com/cardeens) ,
+[LinkedIn](https://www.linkedin.com/in/jordanjcardenas/)
+
+
+<img src="./app/public/assets/images/yalda3.png" width="80px"> <br>
+Yalda Ali Aghazadeh : Front End Developer / Designer
+[Github](https://github.com/zahraaliaghazadeh) ,
+[LinkedIn](www.linkedin.com/in/yalda-aghazade)
+
+
+
