@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const nodemailer = require("nodemailer");
+require("dotenv");
 
 // GET and POST requests for /api/quiz
 router.route("/api/quiz")
@@ -148,7 +149,7 @@ router.route("/send")
                 service: 'gmail',
                 auth: {
                     user: 'quizpanda2020@gmail.com',
-                    pass: 'Aghazadeh'
+                    pass: process.env.EMAIL_PASSWORD
                 }
             });
 
