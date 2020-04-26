@@ -112,6 +112,11 @@ td .button, .listDisplay button, .answerOption, #emailList {
     word-break: break-word;
 }
 
+#accesscodeForm { 
+    width:50%;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 639px) {
     .correctAnswerDiv {
         display: block;
@@ -127,15 +132,9 @@ td .button, .listDisplay button, .answerOption, #emailList {
     .grid-container {
         width: 95%;
     }
-<<<<<<< HEAD
 
     .logincontainer {
         margin-top: 50px;
     }
-=======
 }
 
-#accesscodeFrom{
-    width:50%;
->>>>>>> development
-}
