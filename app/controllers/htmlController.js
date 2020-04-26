@@ -50,7 +50,7 @@ router.get("/profile", function (req, res) {
                 model: db.Quiz,
             }]
         }).then((dbUserQuizzes) => {
-            const hbsObject = {User: dbUserQuizzes.toJSON()};
+            const hbsObject = { User: dbUserQuizzes.toJSON() };
 
             console.log(hbsObject);
 
@@ -140,7 +140,11 @@ router.get("/leaderboard/:QuizId", function (req, res) {
 
 // defaults to index.handlebars if user tries to visit any other route
 router.get("*", function (req, res) {
-    res.render("index");
+    if (req.session.user) {
+        res.redirect("/profile")
+    } else {
+        res.render("index");
+    }
 });
 
 module.exports = router;
