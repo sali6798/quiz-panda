@@ -11,6 +11,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
     margin-bottom: 30px;
 }
 
+/* .cell-shrink{
+    width: 100%;
+} */
+
 .listDisplay {
     background-color: white;
     display: flex;
@@ -81,6 +85,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
 #emailQuiz {
     margin-top: 20px;
 }
+
+/* #finalQuiz {
+    width: 80%;
+} */
 
 @media only screen and (max-width: 500px) {
     .logo {
