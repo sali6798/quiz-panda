@@ -84,8 +84,8 @@ List of features ready:
 
 
 To-do list:
-* Improvement to be done 1: 
-* Improvement to be done 2: 
+* Improvement to be done 1: Having the ability to take some default quizzes on the application as a trivia game can be a nice feature to add.
+
 
 ## Status
 Project is:  _Finished_
