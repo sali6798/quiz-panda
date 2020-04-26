@@ -101,3 +101,7 @@ td .button, .listDisplay button, .answerOption, #emailList {
         width: 95%;
     }
 }
+
+#accesscodeFrom{
+    width:50%;
+}
