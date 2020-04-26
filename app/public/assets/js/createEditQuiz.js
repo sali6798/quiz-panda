@@ -473,6 +473,7 @@ $(document).ready(function () {
     })
 
     async function init() {
+        // navbar link change for logged in
         $('a[href="/signup"]').children().text("Account");
         $('a[href="/signup"]').attr("href", "/account")
 
@@ -488,7 +489,6 @@ $(document).ready(function () {
             })
 
             if (stagedQuizzes.length > 0) {
-                // console.log(stagedQuizzes)
                 stagedQuizzes.forEach(quiz => {
                     const parsedQuiz = JSON.parse(quiz.storedQuiz)
                     const row = $("<tr>");

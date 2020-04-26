@@ -1,0 +1,50 @@
+{{!-- start content of adduser.handlebars --}}
+<div class="grid-container">
+    <div class="addusercontainer actionCards">
+        <form id="accountForm" class="userInfoForm">
+            <div class="grid-y">
+                <div class="cell">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" value="{{ firstName }}">
+
+                </div>
+                <div class="cell">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" value="{{ lastName }}">
+
+                </div>
+                <div class="cell">
+                    <label>Email</label>
+                    <input type="email" name="email" value="{{ email }}">
+
+                </div>
+                <div class="cell">
+                    <label>Username</label>
+                    <input type="text" name="username" value="{{ username }}" disabled>
+
+                </div>
+                <div class="cell">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password">
+
+                </div>
+                <div class="cell">
+                    <label>Confirm password</label>
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password">
+
+                </div>
+                <div class="grid-x grid-padding-x multButtonsContainer">
+                    <div class="cell shrink">
+                        <a href="/profile"><button class="button primary" type="button">Cancel</button></a>
+                    </div>
+                    <div class="cell shrink">
+                        <button class="button primary" type="submit">Update Account</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/assets/js/editAccount.js"></script>
+
+{{!-- end of content of adduser.handlebars --}}

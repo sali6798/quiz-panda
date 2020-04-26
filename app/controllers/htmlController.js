@@ -33,9 +33,25 @@ router.route("/logout")
             res.redirect("/")
         })
     })
+
 router.get("/readsessions", ((req, res) => {
     res.json(req.session);
 }))
+
+router.get("/account", function (req, res) {
+    if (req.session.user) {
+        db.User.findOne({
+            raw: true,
+            where: {
+                id: req.session.user.id
+            }
+        }).then((dbUser) => {
+           res.render("account", dbUser)
+        })
+    } else {
+        res.redirect("/login")
+    }
+})
 
 //Render route for userprofile.handlebars.
 //Serves entries from Quizzes table which correspond to the session user's userid.

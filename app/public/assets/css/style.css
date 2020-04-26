@@ -85,6 +85,11 @@ td .button, .listDisplay button, .answerOption, #emailList {
     margin: 0 auto;
 }
 
+.multButtonsContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #emailQuiz {
     margin-top: 20px;
 }

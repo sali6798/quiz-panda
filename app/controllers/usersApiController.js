@@ -67,6 +67,33 @@ router.route("/api/users/:username")
             res.status(404).json(err)
         })
     })
+    .put((req, res) => {
+        let updatedPassword;
+
+        if (req.body.password.length === 1) {
+            updatedPassword = req.body.password[0]
+        }
+        else {
+            updatedPassword = bcrypt.hashSync(req.body.password[0], bcrypt.genSaltSync(10), null)
+        }
+
+        db.User.update({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.username,
+            password: updatedPassword,
+            email: req.body.email,
+
+        }, {
+            where: {
+                username: req.params.username
+            }
+        }).then(dbUpdatedUser => {
+            res.status(200).json(dbUpdatedUser);
+        }).catch(err => {
+            res.status(404).json(err)
+        })
+    })
 
 // needed to send emails
 router.route("/api/users/id/:id")
