@@ -10,14 +10,14 @@ $(document).ready(function () {
         const quizName = $("#quizName").val().trim();
 
         if (quizName === "") {
-            if ($("#quizName").parent().siblings()[1]) {
-                $("#quizName").parent().siblings()[1].remove();
+            if ($("#quizName").parent().children()[2]) {
+                $("#quizName").parent().children()[2].remove();
             }
             $("#quizName").addClass("invalidInput");
             // create a new message with font color red
-            const errorMsg = $("<p>").text("Must enter a Quiz Title").addClass("formError");
+            const errorMsg = $("<p class='cardTitles'>").text("Must enter a Quiz Title").addClass("formError");
             // append it to the div that holds the input element
-            $("#quizName").parent().parent().append(errorMsg);
+            $("#quizName").parent().append(errorMsg);
         }
         else {
             quizObj.title = quizName;
@@ -31,8 +31,8 @@ $(document).ready(function () {
 
             quizObj.questions = [];
 
-            $("#createLanding").addClass("hide");
-            $("#unfinishedQuiz").addClass("hide");
+            $(".createQuizContainer").addClass("hide");
+            $(".unfinishedQuizContainer").addClass("hide");
             $("#addQuestions").removeClass("hide");
             $("#questionNumber").text(currentQuestionNum);
             $("#back").addClass("hide");
@@ -110,12 +110,12 @@ $(document).ready(function () {
 
         $.each(quizObj.questions, function (index) {
             const questionContainer = $("<div class='grid-x grid-padding-x'>");
-            const titleDiv = $("<div class='cell shrink'>").css({ "display": "flex", "align-items": "center" });
+            const titleDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center"});
             const title = $("<p>").text(`Question ${index + 1}: ${$(this)[0].title}`).css("font-weight", "bold");
             titleDiv.append(title);
             questionContainer.append(titleDiv);
             $.each($(this)[0].answers, function (index) {
-                const answerDiv = $("<div class='cell shrink'>").css({ "display": "flex", "align-items": "center" });
+                const answerDiv = $("<div class='cell'>").css({ "display": "flex", "align-items": "center"});
                 const answer = $("<p>").text(`Answer ${index + 1}: ${$(this)[0].answer}`);
                 if ($(this)[0].correctAnswer) {
                     const correctAnswer = $("<span>").text(" Correct Answer").css("color", "green");
@@ -130,53 +130,46 @@ $(document).ready(function () {
             buttonDiv.append(editButton)
             questionContainer.append(buttonDiv)
 
-            $("#finalQuiz").append(questionContainer)
+            $("#finalQuiz").prepend(questionContainer)
         });
 
-        $("#finalQuiz").append($(`<button id="finalSubmit" class="button" type='button'>`).text("Create Quiz"))
+        $("#finalQuiz").append($(`<button id="finalSubmit" class="button cardTitles" type='button'>`).text("Create Quiz"))
     }
 
 
-    $(document).on("click", "#finalSubmit", function () {
+    $(document).on("click", "#finalSubmit", async function () {
         $("#finalQuizContainer").addClass("hide");
         $("#emailListContainer").removeClass("hide");
         console.log(quizObj)
-        $.ajax({
-            method: "POST",
-            data: quizObj,
-            url: "/api/quiz"
-        }).then(data => {
-            console.log(data);
-            accessCode = data.accessCode;
+
+        try {
+            const createdQuiz = await $.ajax({
+                method: "POST",
+                data: quizObj,
+                url: "/api/quiz"
+            });
+            console.log(createdQuiz);
+            accessCode = createdQuiz.accessCode
             console.log(accessCode)
-            $.ajax({
+
+            await $.ajax({
                 method: "DELETE",
                 url: "/api/staged/" + stagedId
-            }).then(data => {
-                console.log(data)
-            }).catch(err => {
-                console.log(err);
-            })
-        }).catch(err => {
-            console.log(err);
-        })
+            });
+        } catch (error) {
+            console.log(error)
+        }
     })
 
     $("#emailQuiz").on("click", async function (event) {
         event.preventDefault();
-
-        // const { email } = await $.ajax({
-        //     method: "GET",
-        //     url: "/api/users/id/" + $(":input[name=id]").data("id")
-        // })
-
         const emailsArr = [];
 
         $(".emailItem").each(function (index) {
             emailsArr.push($(this).text())
         })
 
-        const {firstName, lastName} = await $.ajax({
+        const { firstName, lastName } = await $.ajax({
             method: "GET",
             url: "/api/users/id/" + $(":input[name=id]").data("id")
         })
@@ -206,25 +199,25 @@ $(document).ready(function () {
         var valid = /^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,7}$/g;
         if (!valid.test(email.val().trim())) {
             // remove existing message if it exists
-            if ($(this).parent().children()[1]) {
-                $(this).parent().children()[1].remove();
+            if (email.parent().children()[1]) {
+                email.parent().children()[1].remove();
             }
             // create a new message with font color red
             const errorMsg = $("<p>").text("Not a valid email!").addClass("formError");
             // append it to the div that holds the input element
-            $(this).parent().append(errorMsg);
+            email.parent().append(errorMsg);
             // add red border to input element
-            $(this).addClass("invalidInput");
+            email.addClass("invalidInput");
         }
         else {
             // remove message
-            if ($(this).parent().children()[1]) {
-                $(this).parent().children()[1].remove();
+            if (email.parent().children()[1]) {
+                email.parent().children()[1].remove();
             }
 
             // remove red border
-            $(this).removeClass("invalidInput");
-            var item = $("<li>");
+            email.removeClass("invalidInput");
+            var item = $("<li class='listDisplay cardTitles'>");
             // create a span with the text as the city name
             var itemName = $("<span class='emailItem'>").text(email.val());
             // creates a 'x' button for deletion of item
@@ -241,7 +234,7 @@ $(document).ready(function () {
     })
 
     $(document).on("click", ".editQBtn", function () {
-        $("#finalQuiz").addClass("hide");
+        $("#finalQuizContainer").addClass("hide");
         $("#addQuestions").removeClass("hide");
 
         const editQNum = parseInt($(this).val());
@@ -388,28 +381,10 @@ $(document).ready(function () {
         }
     });
 
-    // $("#back").on("click", function () {
-    //     $("#questionNumber").text(--currentQuestionNum);
-    //     if (currentQuestionNum === 1) {
-    //         $("#back").addClass("hide")
-    //     }
-    //     const prevQuestion = quizObj.questions[quizObj.questions.length - 1];
-    //     $("#addQuestions :input[name=question]").val(prevQuestion.title);
-    //     $("#addQuestions :input[placeholder=Answer]").each(function (index) {
-    //         $(this).val(prevQuestion.answers[index].answer);
-    //         // console.log(prevQuestion.answers[index].answer);
-    //         if (prevQuestion.answers[index].correctAnswer) {
-    //             // console.log(index)
-    //             $(`:input[value=${index}]`).prop("checked", true);
-    //         }
-    //     })
-    // })
-
     $("#back").on("click", function (event) {
         event.preventDefault();
 
         if (checkInputs() === 5) {
-            // addQuestion();
             if (currentQuestionNum < quizObj.questions.length ||
                 (currentQuestionNum === quizObj.questions.length && quizObj.questions[currentQuestionNum - 1])) {
                 updateQuestion();
@@ -441,33 +416,92 @@ $(document).ready(function () {
         }
     });
 
-    function init() {
-        // $("#addQuestions").addClass("hide");
-        console.log("hi")
-        // const data = await $.ajax({
-        //     method: "GET",
-        //     url: "/api/staged/user"
-        // })
+    $(document).on("click", ".editStaged", async function() {
+        try {
+            const quizData = await $.ajax({
+                method: "GET",
+                url: "/api/staged/" + $(this).val()
+            })
+            console.log(quizData)
 
-        // if (data !== null) {
-        //     console.log("hello")
-        //     $("#unfinishedQuiz").removeClass("hide")
-        // }
-        // else {
+            const parsedQuizData = JSON.parse(quizData.storedQuiz);
 
-        // }
+            quizObj.title = parsedQuizData.title;
+            quizObj.canRetake = parsedQuizData.canRetake;
+            quizObj.questions = parsedQuizData.questions;
+            console.log(quizObj)
 
-        $.ajax({
-            method: "GET",
-            url: "/api/staged/user/" + $(":input[name=id]").data("id")
-        }).then(data => {
-            console.log(data)
-        }).catch(err => {
-            console.log(err)
-        })
+            const lastQuestion = parsedQuizData.questions[parsedQuizData.questions.length - 1];
+            stagedId = $(this).val();
+            currentQuestionNum = parsedQuizData.questions.length;
 
+            $("#questionNumber").text(currentQuestionNum);
+            if (currentQuestionNum === 1) {
+                $("#back").addClass("hide")
+            }
 
+            $("#addQuestions :input[name=question]").val(lastQuestion.title);
+            $("#addQuestions :input[placeholder=Answer]").each(function (index) {
+                $(this).val(lastQuestion.answers[index].answer);
+                if (lastQuestion.answers[index].correctAnswer) {
+                    $(`:input[value=${index}]`).prop("checked", true);
+                }
+            })
 
+            $(".createQuizContainer").addClass("hide");
+            $(".unfinishedQuizContainer").addClass("hide");
+            $("#addQuestions").removeClass("hide");
+    
+            
+        } catch (error) {
+            console.log(error)
+        }
+        
+    })
+
+    $(document).on("click", ".deleteStaged", async function () {
+        try {
+            await $.ajax({
+                method: "DELETE",
+                url: "/api/staged/" + $(this).val()
+            });
+
+            $(this).parent().parent().remove();
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
+    async function init() {
+        try {
+            const stagedQuizzes = await $.ajax({
+                method: "GET",
+                url: "/api/staged/user/" + $(":input[name=id]").data("id")
+            })
+
+            if (stagedQuizzes.length > 0) {
+                // console.log(stagedQuizzes)
+                stagedQuizzes.forEach(quiz => {
+                    const parsedQuiz = JSON.parse(quiz.storedQuiz)
+                    const row = $("<tr>");
+                    const title = $("<td class='tdText'>").text(parsedQuiz.title);
+                    const editTd = $("<td>");
+                    const editButton = $(`<button class='button editStaged' value="${quiz.id}">`).text("Edit");
+                    const deleteTd = $("<td>");
+                    const deleteButton = $(`<button class='button deleteStaged' value="${quiz.id}">`).text("Delete");
+
+                    editTd.append(editButton);
+                    deleteTd.append(deleteButton);
+                    row.append(title, editTd, deleteTd);
+                    $("#stagedTable").append(row);
+                });
+
+                $(".unfinishedQuizContainer").removeClass("hide");
+
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     init();
