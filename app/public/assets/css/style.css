@@ -104,8 +104,16 @@ td .button, .listDisplay button, .answerOption, #emailList {
     font-size: 50px;
 }
 
-#emailQuiz {
-    margin-top: 20px;
+.createQuizContainer {
+    text-align: right;
+}
+
+.quizHeading {
+    font-weight: bold;
+}
+
+.quizHeading:not(h3) {
+    margin-top: 30px;
 }
 
 #emailList span {
@@ -131,6 +139,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
 @media screen and (max-width: 575px) {
     .grid-container {
         width: 95%;
+    }
+
+    #accesscodeForm {
+        width: 100%;
     }
 
     .logincontainer {
