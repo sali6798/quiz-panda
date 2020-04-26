@@ -1,17 +1,8 @@
 body {
-	/* height: auto; */
 	background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	font-family: Avenir, "Century Gothic", sans-serif;
-}
-
-button {
-    text-align: center;
-    padding-left: 5px;
-    padding-right: 5px;
-    /* border-radius: 20px;
-    border: 2px solid white; */
 }
 
 button:hover {
