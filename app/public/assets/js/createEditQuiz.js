@@ -473,6 +473,14 @@ $(document).ready(function () {
     })
 
     async function init() {
+        $('a[href="/signup"]').children().text("Account");
+        $('a[href="/signup"]').attr("href", "/account")
+
+        $('a[href="/login"]').children().text("Log Out");
+        $('a[href="/login"]').attr("href", "/logout")
+
+        $('a[href="/"]').attr("href", "/profile") 
+
         try {
             const stagedQuizzes = await $.ajax({
                 method: "GET",

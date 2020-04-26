@@ -1,35 +1,47 @@
 $(document).ready(function () {
     let quizObj;
 
-    $("#accesscodeForm").on("submit", function (event) {
+    $("#accessBtn").on("click", function (event) {
         event.preventDefault();
         const accesscode = $("#accesscodeForm :input[name=accesscode]").val().trim();
-        //GET request to retrieve quiz
-        $.ajax({
-            method: "GET",
-            url: "/api/quiz/" + accesscode
-        }).then(response => {
-            //if the access code entered doesn't correspond to an existing quiz, throw an eror.
-            if (response === null) {
-                if ($("#accesscodeForm").siblings()[3]) {
-                    $("#accesscodeForm").siblings()[3].remove();
+        if (accesscode === "") {
+            //GET request to retrieve quiz
+            $.ajax({
+                method: "GET",
+                url: "/api/quiz/" + accesscode
+            }).then(response => {
+                //if the access code entered doesn't correspond to an existing quiz, throw an eror.
+                console.log(response)
+                if (response === null) {
+
+                    // if ($(this).siblings().length === 2) {
+                    //     $(this).siblings().splice(1, 1);
+                    // }
+
+                    if ($("#accesscodeForm :input[name=accesscode]").siblings()[1]) {
+                        $("#accesscodeForm").siblings()[3].remove();
+                    }
+
+                    const errorMsg = $("<p>").text("This access code does not exist!").addClass("formError");
+
+                    // append it to the div after the form element
+                    $("#takeQuiz").append(errorMsg);
+
+                    // add red border to input element
+                    $("#takeQuiz").addClass("invalidInput");
                 }
+                else {
+                    //redirrect to the appropriate quiz
+                    quizObj = response;
+                    console.log(quizObj)
+                    location.href = "/quiz/" + accesscode
+                }
+            })
+        }
+        else {
+            console.log("no access")
+        }
 
-                const errorMsg = $("<p>").text("This access code does not exist!").addClass("formError");
-
-                // append it to the div after the form element
-                $("#takeQuiz").append(errorMsg);
-
-                // add red border to input element
-                $("#takeQuiz").addClass("invalidInput");
-            }
-            else {
-                //redirrect to the appropriate quiz
-                quizObj = response;
-                console.log(quizObj)
-                location.href = "/quiz/" + accesscode
-            }
-        })
     })
 
     //submitAnswers onclick
@@ -86,4 +98,16 @@ $(document).ready(function () {
             }
         })
     })
+
+    function init() {
+        $('a[href="/signup"]').children().text("Account");
+        $('a[href="/signup"]').attr("href", "/account")
+
+        $('a[href="/login"]').children().text("Log Out");
+        $('a[href="/login"]').attr("href", "/logout")
+
+        $('a[href="/"]').attr("href", "/profile")
+    }
+
+    init();
 })
