@@ -29,4 +29,14 @@
     {{/if}}
   </div>
 </div>
+
+<script>
+  $('a[href="/signup"]').children().text("Account");
+  $('a[href="/signup"]').attr("href", "/account")
+
+  $('a[href="/login"]').children().text("Log Out");
+  $('a[href="/login"]').attr("href", "/logout")
+
+  $('a[href="/"]').attr("href", "/profile")  
+</script>
 {{!--  end of leaderboard --}}
