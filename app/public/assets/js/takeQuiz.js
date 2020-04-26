@@ -96,6 +96,20 @@ $(document).ready(function () {
             }
         })
     })
+<<<<<<< HEAD
+    
+    $(".delete").on("click", function(event){
+        event.preventDefault();
+        let id = $(this).data("id");
+        $.ajax({
+            method:"DELETE",
+            url:"/quiz/delete/"+id,
+        }).then(deleted=>{
+            location.reload()
+        })
+
+    })
+=======
 
     function init() {
         $('a[href="/signup"]').children().text("Account");
@@ -108,4 +122,5 @@ $(document).ready(function () {
     }
 
     init();
+>>>>>>> development
 })
