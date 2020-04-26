@@ -116,6 +116,13 @@ td .button, .listDisplay button, .answerOption, #emailList {
     margin-top: 30px;
 }
 
+.quizTitle {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #emailList span {
     word-break: break-word;
 }
