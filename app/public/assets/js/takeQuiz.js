@@ -1,34 +1,26 @@
 $(document).ready(function () {
     let quizObj;
 
-    $("#accessBtn").on("click", function (event) {
+    $("#accesscodeForm").on("submit", function (event) {
         event.preventDefault();
         const accesscode = $("#accesscodeForm :input[name=accesscode]").val().trim();
-        if (accesscode === "") {
+
+        if (accesscode) {
             //GET request to retrieve quiz
             $.ajax({
                 method: "GET",
                 url: "/api/quiz/" + accesscode
             }).then(response => {
                 //if the access code entered doesn't correspond to an existing quiz, throw an eror.
-                console.log(response)
                 if (response === null) {
-
-                    // if ($(this).siblings().length === 2) {
-                    //     $(this).siblings().splice(1, 1);
-                    // }
-
-                    if ($("#accesscodeForm :input[name=accesscode]").siblings()[1]) {
-                        $("#accesscodeForm").siblings()[3].remove();
-                    }
+                    $("#accessCodeError").empty();
 
                     const errorMsg = $("<p>").text("This access code does not exist!").addClass("formError");
 
-                    // append it to the div after the form element
-                    $("#takeQuiz").append(errorMsg);
-
+                    // append it to the div
+                    $("#accessCodeError").append(errorMsg);
                     // add red border to input element
-                    $("#takeQuiz").addClass("invalidInput");
+                    $("#accesscodeForm :input[name=accesscode]").addClass("invalidInput") 
                 }
                 else {
                     //redirrect to the appropriate quiz
@@ -40,6 +32,12 @@ $(document).ready(function () {
         }
         else {
             console.log("no access")
+            $("#accessCodeError").empty();
+            const errorMsg = $("<p>").text("This access code does not exist!").addClass("formError");
+
+            // append it to the div
+            $("#accessCodeError").append(errorMsg);
+            $("#accesscodeForm :input[name=accesscode]").addClass("invalidInput")
         }
 
     })
