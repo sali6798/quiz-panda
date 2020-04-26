@@ -1,3 +1,10 @@
+body {
+	background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family: Avenir, "Century Gothic", sans-serif;
+}
+
 button:hover {
     cursor: pointer;
 }
@@ -10,10 +17,6 @@ td .button, .listDisplay button, .answerOption, #emailList {
     width: 70%;
     margin-bottom: 30px;
 }
-
-/* .cell-shrink{
-    width: 100%;
-} */
 
 .listDisplay {
     background-color: white;
@@ -85,10 +88,6 @@ td .button, .listDisplay button, .answerOption, #emailList {
 #emailQuiz {
     margin-top: 20px;
 }
-
-/* #finalQuiz {
-    width: 80%;
-} */
 
 @media only screen and (max-width: 500px) {
     .logo {
