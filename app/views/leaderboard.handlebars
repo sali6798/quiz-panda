@@ -21,7 +21,12 @@
     <div class="multButtonsContainer">
       <a href="/profile"><button class="button primary" type="submit">Profile</button></a>
       {{#if canRetake}}
+      {{#if hasTaken}}
+      {{#if isDeleted}}
+      {{else}}
       <a href="/quiz/{{accessCode}}"><button class="button primary" type="submit">Retake quiz</button></a>
+      {{/if}}
+      {{/if}}
       {{/if}}
     </div>
   </div>

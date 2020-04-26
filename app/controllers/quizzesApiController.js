@@ -173,8 +173,28 @@ router.route("/send")
 
     })
 
-// // GET and DELETE routes for /api/quiz/:id
-// router.route("/api/quiz/:id")
+// GET and DELETE routes for /api/quiz/:id
+router.route("/quiz/delete/:id")
+    .delete((req, res) => {
+        db.Quiz.update({
+            isDeleted: true
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(quiz => {
+            db.Question.destroy({
+                where: {
+                    QuizId: req.params.id
+                }
+            })
+        }).then(data => {
+            res.status(200).end();
+        }).catch(err => {
+            res.status(500).json(err);
+        })
+    })
+
 //     // returns the quiz with its questions and answers
 //     // that matches the id given in the parameter
 //     .get((req, res) => {
@@ -199,26 +219,9 @@ router.route("/send")
 //         }).catch(err => {
 //             res.status(500).json(err);
 //         })
-//     // sets the isDeleted property to true for the quiz that matches the id  
-//     // parameter and then deletes the questions and answers for that quiz
-//     }).delete((req, res) => {
-//         db.Quiz.update({
-//             isDeleted: true
-//         }, {
-//             where: {
-//                 id: req.params.id
-//             }
-//         }).then(quiz => {
-//             db.Question.destroy({
-//                 where: {
-//                     QuizId: req.params.id
-//                 }
-//             })
-//         }).then(data => {
-//             res.status(200).end();
-//         }).catch(err => {
-//             res.status(500).json(err);
-//         })
-//     })
+// sets the isDeleted property to true for the quiz that matches the id  
+// parameter and then deletes the questions and answers for that quiz
+// })
+
 
 module.exports = router;

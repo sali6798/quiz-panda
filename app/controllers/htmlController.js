@@ -63,10 +63,10 @@ router.get("/profile", function (req, res) {
                 id: req.session.user.id
             },
             include: [{
-                model: db.Quiz
+                model: db.Quiz,
             }]
         }).then((dbUserQuizzes) => {
-            const hbsObject = { User: dbUserQuizzes.toJSON() };
+            const hbsObject = {User: dbUserQuizzes.toJSON()};
 
             console.log(hbsObject);
 
@@ -146,7 +146,7 @@ router.get("/leaderboard/:QuizId", function (req, res) {
         }).then((dbScores) => {
             const hbsObject = dbScores.toJSON();
             console.log(hbsObject);
-            
+
             return res.render("leaderboard", hbsObject)
         })
     } else {
