@@ -1,8 +1,6 @@
 $(document).ready(function () {
-    let validUsername = false;
-    let validPassword = false;
-    let validEmail = false;
-    let validName = false;
+    let validPassword = true;
+    let validEmail = true;
 
     // display error message at the bottom of the input element
     // and outline the input in red, return false if it needs
@@ -41,47 +39,14 @@ $(document).ready(function () {
         return;
     }
 
-    // checks immediately after user clicks out of first name input field or
-    // last name input field if it is valid i.e. not an empty string
-    $(".userInfoForm :input[name=firstName], .userInfoForm :input[name=lastName]").blur(function () {
-        const name = $(this).val().trim();
-
-        if (name === "") {
-            validName = displayErrorMessage($(this), "Must enter a name!", true);
-        }
-        else {
-            validName = removeErrorMessage($(this), true);
-        }
-    })
-
-    // checks immediately after user clicks out of username input field if it 
-    // is valid i.e. username has not been taken already
-    $(".userInfoForm :input[name=username]").blur(function () {
-        const username = $(this).val().trim();
-
-        // make a GET request to see if the response from the server
-        // is null or not. If it null, username is free to take, else
-        // display an error message
-        $.ajax({
-            method: "GET",
-            url: "/api/users/" + username
-        }).then(response => {
-            if (response !== null) {
-                validUsername = displayErrorMessage($(this), "Username is already taken!", true);
-            }
-            else {
-                validUsername = removeErrorMessage($(this), true);
-            }
-        })
-    })
-
     // checks immediately after user clicks out of password input field if it 
     // is valid i.e. password is at least 8 characters
     $(".userInfoForm :input[name=password]").blur(function () {
         const password = $(this);
         const confirmPassword = $(".userInfoForm :input[name=confirmPassword]");
 
-        if (password.val().length < 8) {
+        // if user has entered something check length
+        if (password.val().length > 0 && password.val().length < 8) {
             displayErrorMessage(password, "Password must be at least 8 characters!", null);
             // doesn't allow you to type in the confirm password input field
             // until the password is a valid length
@@ -118,8 +83,9 @@ $(document).ready(function () {
         const email = $(this);
 
         // check email is a valid format [A-Za-z0-9_-.]@[A-Za-z0-9_-.].[a-zA-Z]
+        // only if user has entered something 
         var valid = /^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,7}$/g;
-        if (!valid.test(email.val().trim())) {
+        if (email.val().trim().length > 0 && !valid.test(email.val().trim())) {
             validEmail = displayErrorMessage(email, "Not a valid email!", true);
         }
         else {
@@ -129,69 +95,59 @@ $(document).ready(function () {
 
     // when user submits the form, if all inputs are valid, 
     // makes a POST request to create a new user
-    $(".userInfoForm").on("submit", function (event) {
+    $(".userInfoForm").on("submit", async function (event) {
         event.preventDefault();
 
-        if (validName && validUsername && validPassword && validEmail) {
-            // create a new user object
-            const user = {
-                firstName: $(".userInfoForm :input[name=firstName]").val().trim(),
-                lastName: $(".userInfoForm :input[name=lastName]").val().trim(),
-                username: $(".userInfoForm :input[name=username]").val().trim(),
-                password: $(".userInfoForm :input[name=password]").val(),
-                email: $(".userInfoForm :input[name=email]").val().trim()
-            }
+        if (validPassword && validEmail) {
+            const username = $(".userInfoForm :input[name=username]").val().trim();
 
-            // make a POST request to create the user
+            const userObj = await $.ajax({
+                method: "GET",
+                url: "/api/users/" + username
+            });
+
+            const firstName = $(".userInfoForm :input[name=firstName]").val().trim();
+            const lastName = $(".userInfoForm :input[name=lastName]").val().trim();
+            const password = $(".userInfoForm :input[name=password]").val();
+            const email = $(".userInfoForm :input[name=email]").val().trim();
+
+            // create a user object if the input is empty, set the value to
+            // the current value from the db
+            const user = {
+                firstName:!firstName ? userObj.firstName : firstName,
+                lastName: !lastName ? userObj.lastName : lastName,
+                username: username,
+                password: !password ? [userObj.password] : [password, "encrypt"],
+                email: !email ? userObj.email : email
+            }
+            
+
+            // make a PUT request to update the user
             $.ajax({
-                method: "POST",
+                method: "PUT",
                 data: user,
-                url: "/api/users"
-            }).then(() => {
-                // if user was created successfully, redirects them
-                // to the logged in profile page already
-                location.href = "/profile"
+                url: "/api/users/" + username
+            }).then(updatedUser => {
+                // if user was updated successfully, 
+                // refreshes the page to show new info
+                location.reload();
             }).catch(err => {
                 console.log(err);
             })
         }
     });
 
-    // logs user in if entered username and password match
-    $("#loginForm").on("submit", function (event) {
-        event.preventDefault();
 
-        const username = $("#loginForm :input[name=username]").val().trim();
-        const password = $("#loginForm :input[name=password]").val()
+    function init() {
+        // navbar link change for logged in
+        $('a[href="/signup"]').children().text("Account");
+        $('a[href="/signup"]').attr("href", "/account")
 
-        if (username === "" || password === "") {
-            $("#loginError").text("Must enter a username and password!");
-        }
-        else {
-            console.log(password)
-            const user = {
-                username: username,
-                password: password
-            }
+        $('a[href="/login"]').children().text("Log Out");
+        $('a[href="/login"]').attr("href", "/logout")
 
-            // make post request with login information
-            $.ajax({
-                method: "POST",
-                data: user,
-                url: "/login"
-            }).then(data => {
-                // relocates to profile page if successful
-                if (data === "OK") {
-                    location.href = "/profile"
-                }
-                else {
-                    // if log in does not exist, display error message
-                    $("#loginError").text("Username or password is wrong!");
-                    $("#loginForm :input[name=password]").val("");
-                }
-            }).catch(err => {
-                console.log(err);
-            })
-        }
-    })
-})
+        $('a[href="/"]').attr("href", "/profile")
+    }
+
+    init();
+});

@@ -22,14 +22,14 @@ $(document).ready(function () {
             if (quizUsers[i].Quiz.creatorId != userId) {
                 $("#quizzesTaken").removeClass("hide");
                 let quizzesTakenHTML = `<tr>
-        <td class="tdText">`+ quizUsers[i].Quiz.title + `</td>
+        <td class="tdText">${quizUsers[i].Quiz.title}</td>
         <td>
-          <a href="/leaderboard/`+ quizUsers[i].QuizId + `">
+          <a href="/leaderboard/${quizUsers[i].QuizId}">
             <button class="button">Leaderboard</button>
           </a>
         </td>
         <td>
-          <a href="/quiz/`+ quizUsers[i].Quiz.accessCode + `">
+          <a href="/quiz/${quizUsers[i].Quiz.accessCode}">
             <button class="button">Retake</button>
           </a>
         </td>
