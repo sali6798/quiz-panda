@@ -27,6 +27,13 @@ This application will give you the ability to make multiple choice quizzes in a 
 
 
 ## Installation
+To install:
+* [Visual Code](https://code.visualstudio.com/docs/setup/setup-overview)
+* [NodeJS](https://nodejs.org/en/download/)
+* [MySql](https://dev.mysql.com/downloads/installer/)
+* [MySqlworkbench](https://dev.mysql.com/downloads/workbench/)
+
+In order to install, first download the files. Then you would open the terminal and type ```npm install``` . This will install all the npm packages listed under the dependencies in the package.json.( such as MySQL, express, express-handlebars, Node) Then you will open  MySQLworkbench and copy the data in schema.sql file in a SQL file. Once you click on the execute button database table is created for you locally. Then you will open terminal again and type the command ``` node server.js```. This will connect the server. Finally you will type ```localhost:8080``` in the browserwindow and use the application. If you would like to make changes to the application code files , you will have to restart the server after each change. To avoid that, you can install nodemon and use the command ```nodemon``` in the terminal so that it will automatically restart the server for you after each change.
 
 
 ## Usage 
