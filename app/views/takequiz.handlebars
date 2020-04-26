@@ -1,13 +1,13 @@
 <div class="grid-container">
     <div class="actionCards">
         <div class="grid-x grid-padding-x">
-            <h3 class="cardTitles">{{this.title}}</h3>
+            <h3 class="cardTitles quizHeading">{{this.title}}</h3>
         </div>
         <div class="grid-x grid-padding-x">
 
             <fieldset class="large cell">
                 {{#each Questions}}
-                <legend>{{this.title}}</legend>
+                <legend class="quizHeading">{{this.title}}</legend>
                 {{#each Answers}}
                 <div class="grid-y grid-padding-y">
                     <div class="cell">
