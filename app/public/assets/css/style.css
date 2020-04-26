@@ -15,6 +15,7 @@ td .button, .listDisplay button, .answerOption, #emailList {
 
 .grid-container {
     width: 70%;
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -90,18 +91,42 @@ td .button, .listDisplay button, .answerOption, #emailList {
     justify-content: space-evenly;
 }
 
+.nextBackContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.arrowButton span {
+    color: #1779ba;
+    font-size: 50px;
+}
+
 #emailQuiz {
     margin-top: 20px;
 }
 
-@media only screen and (max-width: 500px) {
-    .logo {
-        display: none;
+#emailList span {
+    word-break: break-word;
+}
+
+@media screen and (max-width: 639px) {
+    .correctAnswerDiv {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    #addQuestions input:not([name=question]) {
+        margin-bottom: 0;
     }
 }
 
 @media screen and (max-width: 575px) {
     .grid-container {
         width: 95%;
+    }
+
+    .logincontainer {
+        margin-top: 50px;
     }
 }

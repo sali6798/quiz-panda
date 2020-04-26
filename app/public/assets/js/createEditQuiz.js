@@ -130,7 +130,7 @@ $(document).ready(function () {
             buttonDiv.append(editButton)
             questionContainer.append(buttonDiv)
 
-            $("#finalQuiz").prepend(questionContainer)
+            $("#finalQuiz").append(questionContainer)
         });
 
         $("#finalQuiz").append($(`<button id="finalSubmit" class="button cardTitles" type='button'>`).text("Create Quiz"))
@@ -228,9 +228,9 @@ $(document).ready(function () {
             item.append(itemName, button);
 
             $("#emailList").append(item)
+            $("#emailListContainer :input[name=email]").val("")
         }
 
-        $("#emailListContainer :input[name=email]").val("")
     })
 
     $(document).on("click", ".editQBtn", function () {

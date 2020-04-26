@@ -18,10 +18,12 @@
         {{/each}}
       </tbody>
     </table>
-    <a href="/profile"><button class="button primary" type="submit">Profile</button></a>
-    {{#if canRetake}}
-    <a href="/quiz/{{accessCode}}"><button class="button primary" type="submit">Retake quiz</button></a>
-    {{/if}}
+    <div class="multButtonsContainer">
+      <a href="/profile"><button class="button primary" type="submit">Profile</button></a>
+      {{#if canRetake}}
+      <a href="/quiz/{{accessCode}}"><button class="button primary" type="submit">Retake quiz</button></a>
+      {{/if}}
+    </div>
   </div>
 </div>
 

@@ -23,7 +23,7 @@
       </form>
     </div>
 
-      <input class="hide" type="hidden" name="id" data-id="{{ id }}">
+    <input class="hide" type="hidden" name="id" data-id="{{ id }}">
     <div class="cell unfinishedQuizContainer hide">
       <div id="unfinishedQuiz">
         <div class="actionCards">
@@ -40,7 +40,15 @@
 
   <form id="addQuestions" class="hide">
     <div class="actionCards">
-      <h3 class="cardTitles">Question <span id="questionNumber"></span></h3>
+      <div class="grid-x grid-padding-x nextBackContainer">
+        <div>
+          <button id="back" class="arrowButton" type="submit" value="back"><span>&#8678;</span></button>
+        </div>
+        <h3 class="cardTitles">Question <span id="questionNumber"></span></h3>
+        <div>
+          <button id="next" class="arrowButton" type="submit" value="next"><span>&#8680;</span></button>
+        </div>
+      </div>
       <div class="grid-y grid-padding-y">
         <div class="grid-x grid-padding-x">
           <div class="cell">
@@ -49,59 +57,53 @@
           </div>
         </div>
         <div class="grid-x grid-padding-x">
-          <div class="cell small-10">
+          <div class="cell medium-10">
             <label id="answer1">Answer Option 1</label>
             <input type="text" name="answer1" placeholder="Answer">
           </div>
-          <div class="cell small-2 correctAnswerDiv">
+          <div class="cell medium-2 correctAnswerDiv">
             <input id="option1" class="answerOption" type="radio" value="0" name="answers" checked>
             <label for="option1">Correct Answer</label>
           </div>
         </div>
         <div class="grid-x grid-padding-x">
-          <div class="cell small-10">
+          <div class="cell medium-10">
             <label id="answer2">Answer Option 2</label>
             <input type="text" name="answer2" placeholder="Answer">
 
           </div>
-          <div class="cell small-2 correctAnswerDiv">
+          <div class="cell medium-2 correctAnswerDiv">
             <input id="option2" class="answerOption" type="radio" value="1" name="answers">
             <label for="option2">Correct Answer</label>
           </div>
         </div>
         <div class="grid-x grid-padding-x">
-          <div class="cell small-10">
+          <div class="cell medium-10">
             <label id="answer3">Answer Option 3</label>
             <input type="text" name="answer3" placeholder="Answer">
           </div>
-          <div class="cell small-2 correctAnswerDiv">
+          <div class="cell medium-2 correctAnswerDiv">
             <input id="option3" class="answerOption" type="radio" value="2" name="answers">
             <label for="option3">Correct Answer</label>
           </div>
         </div>
         <div class="grid-x grid-padding-x">
-          <div class="cell small-10">
+          <div class="cell medium-10">
             <label id="answer4">Answer Option 4</label>
             <input type="text" name="answer4" placeholder="Answer">
           </div>
-          <div class="cell small-2 correctAnswerDiv">
+          <div class="cell medium-2 correctAnswerDiv">
             <input id="option4" class="answerOption" type="radio" value="3" name="answers">
             <label for="option4">Correct Answer</label>
           </div>
         </div>
       </div>
-      <div class="grid-x grid-padding-x">
-        <div class="medium-3 cell">
-          <button id="back" class="button" type="submit" value="back">Go Back</button>
-        </div>
-        <div class="medium-3 cell">
+      <div class="grid-x grid-padding-x multButtonsContainer">
+        <div>
           <button id="save" class="button" type="submit" value="save">Save and Exit</button>
         </div>
-        <div class="medium-3 cell">
-          <button id="finish" class="button" type="submit" value="finish">Finish!</button>
-        </div>
-        <div class="medium-3 cell">
-          <button id="next" class="button" type="submit" value="next">Next Question</button>
+        <div>
+          <button id="finish" class="button" type="submit" value="finish">Finished!</button>
         </div>
       </div>
     </div>
