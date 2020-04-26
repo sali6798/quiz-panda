@@ -39,23 +39,6 @@ $(document).ready(function () {
         }
     });
 
-    // $("#addQuestions :input[type=text]").on("blur", function () {
-    //     const value = $(this)
-
-    //     if (value.val().trim() === "") {
-    //         value.siblings().remove();
-    //         value.addClass("invalidInput");
-    //         // create a new message with font color red
-    //         const errorMsg = $("<p>").text("Must enter a value").addClass("formError");
-    //         // append it to the div that holds the input element
-    //         value.parent().append(errorMsg);
-    //     }
-    //     else {
-    //         value.siblings().remove();
-    //         value.removeClass("invalidInput")
-    //     }
-    // });
-
     function checkInputs() {
         let validCount = 0;
 
@@ -63,7 +46,9 @@ $(document).ready(function () {
             const value = $(this)
 
             if (value.val().trim() === "") {
-                value.siblings().remove();
+                if (value.siblings()[1]) {
+                    value.siblings()[1].remove();
+                }
                 value.addClass("invalidInput");
                 // create a new message with font color red
                 const errorMsg = $("<p>").text("Must enter a value").addClass("formError");
@@ -71,7 +56,9 @@ $(document).ready(function () {
                 value.parent().append(errorMsg);
             }
             else {
-                value.siblings().remove();
+                if (value.siblings()[1]) {
+                    value.siblings()[1].remove();
+                }
                 value.removeClass("invalidInput")
                 validCount++;
             }
