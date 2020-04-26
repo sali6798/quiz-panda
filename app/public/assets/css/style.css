@@ -1,5 +1,7 @@
 body {
-	background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%);
+	/* background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%); */
+	background: linear-gradient(to bottom, #60d4e6 0%, #044d4d 100%);
+	/* background: linear-gradient(to bottom, #17a2b8 0%, #044d4d 100%); */
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	font-family: Avenir, "Century Gothic", sans-serif;

@@ -47,9 +47,9 @@ To use this application, you can [click here](https://quizpanda.herokuapp.com/).
 
 ## Credits
 
-Built with [Foundation](https://get.foundation/).
+Built with [Foundation](https://get.foundation/)
 
-Fonts from [Google Fonts](https://developers.google.com/fonts).
+Fonts from [Google Fonts](https://developers.google.com/fonts)
 
 Icons from [flat icon](https://www.flaticon.com/)
 
