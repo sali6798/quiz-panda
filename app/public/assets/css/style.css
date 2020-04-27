@@ -129,6 +129,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
     padding-bottom: 20px;
 }
 
+.userlbheading {
+    word-break: break-word;
+}
+
 #emailList span {
     word-break: break-word;
 }
@@ -140,6 +144,12 @@ td .button, .listDisplay button, .answerOption, #emailList {
 
 #createLanding .formError {
     margin-left: 10px;
+}
+
+#signupForm {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 639px) {
@@ -167,6 +177,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
     }
 
     #accesscodeForm {
+        width: 100%;
+    }
+
+    #signupForm {
         width: 100%;
     }
 }
