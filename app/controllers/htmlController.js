@@ -46,7 +46,7 @@ router.get("/account", function (req, res) {
                 id: req.session.user.id
             }
         }).then((dbUser) => {
-           res.render("account", dbUser)
+            res.render("account", dbUser)
         })
     } else {
         res.redirect("/login")
@@ -140,9 +140,13 @@ router.get("/leaderboard/:QuizId", function (req, res) {
             },
             include: [
                 {
-                    model: db.User
+                    model: db.User,
+                    order: [
+                        ['score', 'DESC']
+                    ]
                 }
             ]
+
         }).then((dbScores) => {
             const hbsObject = dbScores.toJSON();
             console.log(hbsObject);

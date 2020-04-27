@@ -96,18 +96,6 @@ $(document).ready(function () {
             }
         })
     })
-    
-    $(".delete").on("click", function(event){
-        event.preventDefault();
-        let id = $(this).data("id");
-        $.ajax({
-            method:"DELETE",
-            url:"/quiz/delete/"+id,
-        }).then(deleted=>{
-            location.reload()
-        })
-
-    })
 
     function init() {
         if (window.location.pathname.includes("/quiz/")) {
