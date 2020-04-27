@@ -123,7 +123,20 @@ $(document).ready(function () {
             validEmail = displayErrorMessage(email, "Not a valid email!", true);
         }
         else {
-            validEmail = removeErrorMessage(email, true);
+            $.ajax({
+                method: "GET",
+                url: "/api/users/email/" + email.val().trim()
+            }).then(user => {
+                // checks if the email already exists
+                // user is only allowed to sign up once per email
+                if (user === null) {
+                    validEmail = removeErrorMessage(email, true);
+                }
+                else {
+                    validEmail = displayErrorMessage(email, "A user already exists for this email!", true);
+                }
+            })
+            
         }
     });
 

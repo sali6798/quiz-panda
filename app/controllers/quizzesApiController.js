@@ -49,14 +49,6 @@ router.route("/api/quiz")
 
                 res.status(200).json(newQuizData)
 
-
-
-
-                // .then((data) => {
-                //     res.status(200).end();
-                // })
-
-
             } catch (err) {
                 console.log(err)
                 res.status(500).end();
@@ -64,45 +56,6 @@ router.route("/api/quiz")
         } else {
             res.redirect("/login");
         }
-
-
-
-        // db.Quiz.create({
-        //     title: req.body.title,
-        //     canRetake: req.body.canRetake,
-        //     creatorId: req.session.user.id
-
-        // }).then(newQuizData => {
-        //     // iterates through questions array and creates a
-        //     // new entry in the database for each question linked
-        //     // to the new quiz id created above
-        //     for (let i = 0; i < req.body.questions.length; i++) {
-        //         const newQuestion = req.body.questions[i];
-        //         db.Question.create({
-        //             title: newQuestion.title,
-        //             QuizId: newQuizData.id
-
-        //         }).then(newQuestionData => {
-        //             // iterates through answers array for each question and creates a
-        //             // new entry in the database for each answer linked
-        //             // to the new question id created above
-        //             for (let i = 0; i < newQuestion.answers.length; i++) {
-        //                 const newAnswer = newQuestion.answers[i];
-        //                 db.Answer.create({
-        //                     answer: newAnswer.answer,
-        //                     correctAnswer: newAnswer.correctAnswer,
-        //                     QuestionId: newQuestionData.id
-        //                 }).then((data) => {
-        //                     res.status(200).end();
-        //                 })
-
-        //             }
-        //         })
-        //     }
-        // }).catch(err => {
-        //     console.log(err)
-        //     res.status(500).end();
-        // })
     })
 
 
@@ -136,10 +89,10 @@ router.route("/api/quiz/:accesscode")
         } else {
             res.redirect("/login");
         }
-        // sets the isDeleted property to true for the quiz that matches the id  
-        // parameter and then deletes the questions and answers for that quiz
     })
 
+// sends an email to the emails given, using gmail and the
+// email quizpanda2020@gmail.com
 router.route("/send")
     .post((req, res) => {
         console.log(req.body.emails)
@@ -174,7 +127,8 @@ router.route("/send")
 
     })
 
-// GET and DELETE routes for /api/quiz/:id
+// sets the isDeleted property to true for the quiz that matches the id  
+// parameter and then deletes the questions and answers for that quiz
 router.route("/quiz/delete/:id")
     .delete((req, res) => {
         db.Quiz.update({
@@ -195,34 +149,5 @@ router.route("/quiz/delete/:id")
             res.status(500).json(err);
         })
     })
-
-//     // returns the quiz with its questions and answers
-//     // that matches the id given in the parameter
-//     .get((req, res) => {
-//         db.Quiz.findOne({
-//             where: {
-//                 id: req.params.id
-//             },
-
-//             include: [
-//                 {
-//                     model: db.Question,
-
-//                     include: [
-//                         {
-//                             model: db.Answer
-//                         }
-//                     ]
-//                 }
-//             ]
-//         }).then(quiz => {
-//             res.json(quiz);
-//         }).catch(err => {
-//             res.status(500).json(err);
-//         })
-// sets the isDeleted property to true for the quiz that matches the id  
-// parameter and then deletes the questions and answers for that quiz
-// })
-
 
 module.exports = router;

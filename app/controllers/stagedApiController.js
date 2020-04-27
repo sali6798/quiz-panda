@@ -104,6 +104,7 @@ router.delete("/api/staged/:id", function (req, res) {
     }
 });
 
+// gets all the staged quizzes for a specific user
 router.get("/api/staged/user/:id", function (req, res) {
     if (req.session.user) {
         db.Staged
