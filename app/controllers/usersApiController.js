@@ -55,6 +55,19 @@ router.route("/login")
         })
     })
 
+router.route("/api/users/email/:email")
+    .get((req, res) => {
+        db.User.findOne({
+            where: {
+                email: req.params.email
+            }
+        }).then(dbUser => {
+            res.status(200).json(dbUser);
+        }).catch(err => {
+            res.status(404).json(err)
+        })
+    })
+
 router.route("/api/users/:username")
     .get((req, res) => {
         db.User.findOne({
