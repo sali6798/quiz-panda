@@ -489,12 +489,6 @@ $(document).ready(function () {
             if (stagedQuizzes.length > 0) {
                 stagedQuizzes.forEach(quiz => {
                     const parsedQuiz = JSON.parse(quiz.storedQuiz);
-                    // const row = $("<tr>");
-                    // const title = $("<td class='tdText'>").text(parsedQuiz.title);
-                    // const editTd = $("<td>");
-                    // const editButton = $(`<button class='button editStaged' value="${quiz.id}">`).text("Edit");
-                    // const deleteTd = $("<td>");
-                    // const deleteButton = $(`<button class='button deleteStaged' value="${quiz.id}">`).text("Delete");
                     const stagedQuizHTML =
                         `
                     <hr>
@@ -509,10 +503,6 @@ $(document).ready(function () {
                             <button class='button deleteStaged' value="${quiz.id}">Delete Quiz</button>
                         </div>
                     </div>`
-                    // editTd.append(editButton);
-                    // deleteTd.append(deleteButton);
-                    // row.append(title, editTd, deleteTd);
-                    // $("#stagedTable").append(row);
                     $(".stagedTable").append(stagedQuizHTML);
                 });
 

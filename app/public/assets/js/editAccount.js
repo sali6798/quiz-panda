@@ -79,8 +79,14 @@ $(document).ready(function () {
 
     // checks immediately after user clicks out of email input field 
     // if the email is in a valid form
-    $(".userInfoForm :input[name=email]").blur(function () {
+    $(".userInfoForm :input[name=email]").blur(async function () {
         const email = $(this);
+
+        const username = $(".userInfoForm :input[name=username]").val().trim();
+        const userObj = await $.ajax({
+            method: "GET",
+            url: "/api/users/" + username
+        });
 
         // check email is a valid format [A-Za-z0-9_-.]@[A-Za-z0-9_-.].[a-zA-Z]
         // only if user has entered something 
@@ -89,7 +95,19 @@ $(document).ready(function () {
             validEmail = displayErrorMessage(email, "Not a valid email!", true);
         }
         else {
-            validEmail = removeErrorMessage(email, true);
+            $.ajax({
+                method: "GET",
+                url: "/api/users/email/" + email.val().trim()
+            }).then(user => {
+                // checks if the email already exists
+                // user is only allowed to sign up once per email
+                if (user === null || email.val().trim() === userObj.email) {
+                    validEmail = removeErrorMessage(email, true);
+                }
+                else {
+                    validEmail = displayErrorMessage(email, "A user already exists for this email!", true);
+                }
+            })
         }
     });
 
@@ -100,7 +118,6 @@ $(document).ready(function () {
 
         if (validPassword && validEmail) {
             const username = $(".userInfoForm :input[name=username]").val().trim();
-
             const userObj = await $.ajax({
                 method: "GET",
                 url: "/api/users/" + username
@@ -114,13 +131,13 @@ $(document).ready(function () {
             // create a user object if the input is empty, set the value to
             // the current value from the db
             const user = {
-                firstName:!firstName ? userObj.firstName : firstName,
+                firstName: !firstName ? userObj.firstName : firstName,
                 lastName: !lastName ? userObj.lastName : lastName,
                 username: username,
                 password: !password ? [userObj.password] : [password, "encrypt"],
                 email: !email ? userObj.email : email
             }
-            
+
 
             // make a PUT request to update the user
             $.ajax({
