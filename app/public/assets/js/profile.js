@@ -19,24 +19,43 @@ $(document).ready(function () {
             let quizzesCreatedHTML =
               `<hr>
               <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
-                <div class="cell small-12 medium-12 large-4 tdText quizTitle">
-                ${quiz.title}
-                </div>
-                <div class="cell small-12 medium-6 large-4 ">
-                  <a href="/leaderboard/${quiz.id}">
-                    <button class="button">Leaderboard</button>
-                  </a>
+                <div class="cell small-12 medium-12 large-12 tdText quizTitle">
+                <h3>${quiz.title}</h3>
                 </div>
               </div>`
             $("#quizzesCreatedInfo").append(quizzesCreatedHTML);
             
             if (quiz.isDeleted !== true) {
-              let quizzesCreatedDeleteHTML =
-                `<div class="cell small-12 medium-6 large-4 quizCreatedDelete">
-                  <button class="button delete" data-id="${quiz.id}">Delete</button>
-                </div>`
+              let quizzesCreatedNotDeletedHTML =
+                `
+                <div class="cell small-12 medium-12 large-12 quizCreatedDelete">
+                  <h4>Access code: ${quiz.accessCode}</h4>
+                </div>
+                <div class="grid-container">
+                <div class="grid-padding-x grid-x">
+                <div class="cell small-12 medium-4 large-4 quizCreatedDelete">
+                  <button class="button delete" data-id="${quiz.id}">Delete Quiz</button>
+                </div>
+                <div class="cell small-12 medium-4 large-4 ">
+                  <a href="/leaderboard/${quiz.id}">
+                    <button class="button">Leaderboard</button>
+                  </a>
+                </div>
+                <div class="cell small-12 medium-4 large-4 quizCreatedEmail">
+                  <button class="button delete" data-id="${quiz.id}">Invite User</button>
+                </div>
+                </div>
+                </div>
+                `
 
-              $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedDeleteHTML)
+              $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedNotDeletedHTML)
+            }else{
+              let quizzesCreatedDeletedHTML = `<div class="cell small-12 medium-12 large-12 ">
+              <a href="/leaderboard/${quiz.id}">
+                <button class="button">Leaderboard</button>
+              </a>
+            </div>`
+            $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedDeletedHTML)
             }
           }
         }
