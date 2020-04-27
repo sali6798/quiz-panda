@@ -1,4 +1,4 @@
-# [quiz-panda](https://quizpanda.herokuapp.com/)
+# [Quiz-panda](https://quizpanda.herokuapp.com/)
 
 ## Quiz Making Made Easy 
 
@@ -22,7 +22,13 @@ This application will give you the ability to make multiple choice quizzes in a 
 
 
 ## Screenshots
-![screenshot](assets/images/screenshot1.png)
+
+mobile screen size responsible
+
+<img src="./app/public/assets/images/screenshot1.png" height="250px"> 
+<img src="./app/public/assets/images/screenshot2.png" height="250px"> 
+
+
 
 
 
@@ -40,9 +46,9 @@ In order to install, first download the files. Then you would open the terminal 
 
 To use this application, you can [click here](https://quizpanda.herokuapp.com/).
 
-![gif1]()
+![gif1](./app/public/assets/images/gif1.gif)
 
-![gif2]()
+
 
 
 ## Credits
@@ -84,7 +90,13 @@ List of features ready:
 
 
 To-do list:
-* Improvement to be done 1: Having the ability to take some default quizzes on the application as a trivia game can be a nice feature to add.
+* Adding the access code to the link received
+* Add a database of sample questions 
+* Having the ability to take a random quiz as a trivia game
+* Adding option of creating quizzes with input answers or true false
+* Adding math operations and symbols to choose from
+* Having the ability to take some default quizzes on the application as a trivia game can be a nice feature to add.
+
 
 
 ## Status
@@ -101,9 +113,10 @@ Copyright © 2020 Zahra Ali Aghazadeh, Shaidee Alincastre, Brett Belka and JJ Ca
 
 
 
-## Contributers
+## Contributors
 
-Feel free to contact us for any feedbacks, questions or collaborations! 
+Feel free to contact us via linkedIn for any feedbacks, questions or collaborations! 
+You can also contact us at quizpanda2020@gmail.com
 
 
 <img src="./app/public/assets/images/Shaidee2.png" width="80px"> <br>
