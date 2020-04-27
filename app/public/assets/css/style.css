@@ -123,6 +123,12 @@ td .button, .listDisplay button, .answerOption, #emailList {
     align-items: center;
 }
 
+.createQuizButton {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 #emailList span {
     word-break: break-word;
 }

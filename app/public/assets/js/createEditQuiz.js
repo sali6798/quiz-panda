@@ -500,7 +500,7 @@ $(document).ready(function () {
                     <hr>
                     <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
                         <div class="cell small-12 medium-4 large-4 tdText quizTitle">
-                            <h3>${parsedQuiz.title}</h3>
+                            <h5>${parsedQuiz.title}</h5>
                         </div>
                         <div class="cell small-12 medium-4 large-4 quizCreatedDelete">
                             <button class='button editStaged' value="${quiz.id}">Edit</button>
