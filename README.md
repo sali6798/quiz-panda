@@ -46,6 +46,8 @@ In order to install, first download the files. Then you would open the terminal 
 
 To use this application, you can [click here](https://quizpanda.herokuapp.com/).
 
+Upon clicking on the link above, you will create a user and password in the app, then you will be able to create a quiz with passing in questions and once finished by adding one or more email addresses, it will send an acces code to them to take the quiz. If you want to update your email or password in the acount , it can be done in the acount tab. You can delete a quiz or you can edit an existing quiz as well.
+
 ![gif1](./app/public/assets/images/gif1.gif)
 
 
@@ -61,7 +63,7 @@ Icons from [flat icon](https://www.flaticon.com/)
 
 deploy with [heroku](https://dashboard.heroku.com/)
 
-#### npm packages used
+#### npm packages used:
 
  * [express-handlebars](https://www.npmjs.com/package/express-handlebars). 
  * [bcrypt](https://www.npmjs.com/package/bcrypt)
@@ -90,12 +92,11 @@ List of features ready:
 
 
 To-do list:
-* Adding the access code to the link received
+* Adding the access code in the link received so that it will redirect the user straight to the specific quiz
 * Add a database of sample questions 
 * Having the ability to take a random quiz as a trivia game
 * Adding option of creating quizzes with input answers or true false
 * Adding math operations and symbols to choose from
-* Having the ability to take some default quizzes on the application as a trivia game can be a nice feature to add.
 
 
 
@@ -103,13 +104,13 @@ To-do list:
 Project is:  _Finished_
 
 #### Inspiration
-The social distancing during the Covid 19 pandemic has caused the majority of the population to practice social distancing. This application can help teachers, tutors , parents as well as a fun way to stay connected with friends.
+The  Covid 19 pandemic has caused the majority of the population to practice social distancing. This application can help teachers, tutors , parents as well as a fun way to stay connected with friends.
 
 
 ## License
 
 MIT license 
-Copyright © 2020 Zahra Ali Aghazadeh, Shaidee Alincastre, Brett Belka and JJ Cardenas
+Copyright © 2020 Zahra Ali Aghazadeh, Shaidee Alingcastre, Brett Belka and JJ Cardenas
 
 
 
