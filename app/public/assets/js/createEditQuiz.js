@@ -193,28 +193,31 @@ $(document).ready(function () {
             emailsArr.push($(this).text())
         })
 
-        // get the name of the logged in user
-        const { firstName, lastName } = await $.ajax({
-            method: "GET",
-            url: "/api/users/id/" + $(":input[name=id]").data("id")
-        })
+        if (emailsArr.length > 0) {
+            // get the name of the logged in user
+            const { firstName, lastName } = await $.ajax({
+                method: "GET",
+                url: "/api/users/id/" + $(":input[name=id]").data("id")
+            })
+    
+            // send user's name, quiz access code and list of emails
+            // to the server
+            $.ajax({
+                method: "POST",
+                data: {
+                    emails: emailsArr,
+                    accessCode: accessCode,
+                    firstName: firstName,
+                    lastName: lastName
+                },
+                url: "/send"
+            }).then(data => {
+                // when emails sent bring user back to
+                // the profile page
+                location.href = "/profile"
+            })
+        }
 
-        // send user's name, quiz access code and list of emails
-        // to the server
-        $.ajax({
-            method: "POST",
-            data: {
-                emails: emailsArr,
-                accessCode: accessCode,
-                firstName: firstName,
-                lastName: lastName
-            },
-            url: "/send"
-        }).then(data => {
-            // when emails sent bring user back to
-            // the profile page
-            location.href = "/profile"
-        })
     })
 
     // deletes the email the user wants deleted from the list of emails 

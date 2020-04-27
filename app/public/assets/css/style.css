@@ -145,6 +145,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
     #addQuestions input:not([name=question]) {
         margin-bottom: 0;
     }
+
+    #quizzesCreatedInfo .multButtonsContainer{
+        display: block;
+    }
 }
 
 @media screen and (max-width: 575px) {
@@ -152,12 +156,12 @@ td .button, .listDisplay button, .answerOption, #emailList {
         width: 95%;
     }
 
-    #accesscodeForm {
-        width: 100%;
-    }
-
     .logincontainer {
         margin-top: 50px;
+    }
+
+    #accesscodeForm {
+        width: 100%;
     }
 }
 
