@@ -150,16 +150,6 @@ $(document).ready(function () {
     }
   })
 
-  $(document).on("click", ".delete", function() {
-    $.ajax({
-      method: "DELETE",
-      url: "/quiz/delete/" + $(this).data("id")
-    }).then(() => {
-      $(`#quizCreatedLeaderboard${$(this).data("id")}`).next().remove();
-      $(`#quizCreatedLeaderboard${$(this).data("id")}`).remove();
-    }) 
-  })
-
   $.ajax({
     method: "GET",
     url: "/api/quizuser",
@@ -199,4 +189,16 @@ $(document).ready(function () {
   })
 })
 
+$(document).on("click", ".delete", function(event) {
+  event.preventDefault();
+  let id = $(this).data("id");
+  console.log(id);
+
+  $.ajax({
+    method: "DELETE",
+    url: "/quiz/delete/" + id,
+  }).then(deleted => {
+    location.reload()
+  })
+})
 
