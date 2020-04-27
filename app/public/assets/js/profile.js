@@ -18,7 +18,7 @@ $(document).ready(function () {
         method: "GET",
         url: "/api/users/id/" + $(":input[name=user]").data("user")
       })
-  
+
       // send user's name, quiz access code and list of emails
       // to the server
       $.ajax({
@@ -40,7 +40,7 @@ $(document).ready(function () {
       $("#emailListContainer").foundation("close");
     }
 
-  });   
+  });
 
   // deletes the email the user wants deleted from the list of emails 
   $(document).on("click", ".close", function () {
@@ -85,7 +85,7 @@ $(document).ready(function () {
       $("#emailListContainer :input[name=email]").val("")
     }
 
-  })
+  });
 
   $(document).on("click", ".invite", function () {
     $("#emailListContainer").foundation("open");
@@ -148,19 +148,23 @@ $(document).ready(function () {
         }
       }
     }
-  })
+  });
 
   $.ajax({
     method: "GET",
     url: "/api/quizuser",
   }).then(userInfo => {
     let userQuizzes = userInfo.quizUsers;
+    console.log(userQuizzes);
+
     let userId = userInfo.id;
+    console.log(userId);
 
     for (let y = 0; y < userQuizzes.length; y++) {
       let quiz = userQuizzes[y];
+      console.log(quiz);
 
-      if (quiz.Quiz.creatorId !== userId && quiz.UserId !== userId) {
+      if (quiz.UserId === userId && quiz.Quiz.creatorId !== userId) {
         $("#quizzesTaken").removeClass("hide");
         let quizzesTakenHTML =
           `
@@ -168,37 +172,43 @@ $(document).ready(function () {
           <div class="grid-padding-x grid-x " id="quizTakenLeaderboard${quiz.Quiz.id}">
             <div class="cell small-12 medium-12 large-4 tdText quizTitle">
               ${quiz.Quiz.title}
-              </div>
-              <div class="cell multButtonsContainer ">
-                <a href="/leaderboard/${quiz.Quiz.id}">
-                  <button class="button">Leaderboard</button>
-                </a>
-              </div>
-            </div>`
+            </div>
+            <div class="cell small-12 medium-6 large-4 ">
+              <a href="/leaderboard/${quiz.Quiz.id}">
+                <button class="button">Leaderboard</button>
+              </a>
+            </div>
+          </div>`
         $("#quizzesTakenInfo").append(quizzesTakenHTML);
 
         if (quiz.Quiz.canRetake === true) {
           let quizzesTakenRetakeHTML =
-            `<a href = "/quiz/${quiz.Quiz.accessCode}">
+            `
+            <div class="cell small-12 medium-6 large-4 quizCreatedDelete">
+              <a href = "/quiz/${quiz.Quiz.accessCode}">
                 <button class="button" data-id="${quiz.Quiz.id}">Retake</button>
-              </a>`
+              </a>
+            </div>`
           $(`#quizTakenLeaderboard${quiz.Quiz.id}`).append(quizzesTakenRetakeHTML)
         }
       }
     }
-  })
-})
+  });
 
-$(document).on("click", ".delete", function(event) {
-  event.preventDefault();
-  let id = $(this).data("id");
-  console.log(id);
+  $(document).on("click", ".delete", function (event) {
+    event.preventDefault();
+    let id = $(this).data("id");
+    console.log(id);
 
-  $.ajax({
-    method: "DELETE",
-    url: "/quiz/delete/" + id,
-  }).then(deleted => {
-    location.reload()
-  })
-})
+    $.ajax({
+      method: "DELETE",
+      url: "/quiz/delete/" + id,
+    }).then(deleted => {
+      location.reload()
+    })
+  });
+});
+
+
+
 
