@@ -146,9 +146,12 @@ td .button, .listDisplay button, .answerOption, #emailList {
     margin-left: 10px;
 }
 
-#signupForm {
+#signupForm, #loginForm {
     width: 80%;
     margin: 0 auto;
+}
+
+#signupForm {
     margin-top: 20px;
 }
 
@@ -180,7 +183,7 @@ td .button, .listDisplay button, .answerOption, #emailList {
         width: 100%;
     }
 
-    #signupForm {
+    #signupForm, #loginForm {
         width: 100%;
     }
 }
