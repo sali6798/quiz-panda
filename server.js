@@ -8,6 +8,7 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
+require("dotenv").config();
 
 // Sets up the Express App
 // =============================================================
@@ -23,7 +24,7 @@ app.use(express.json());
 
 app.use(session({
   // secret:process.env.SESSION_SECRET,
-  secret:"tacos",
+  secret:process.env.SESSION_SECRET,
   store: new SequelizeStore({
     db:db.sequelize
   }),
@@ -68,4 +69,6 @@ db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
-});
+}).catch(error => {
+  console.log(error);
+})

@@ -1,124 +1,144 @@
-
-<form id="createLanding">
-  
-  <div class="grid-container actionCards">
-    <h1 class="cardTitles">Begin Building Your Quiz!</h1>
-    <div class="grid-x grid-padding-x">
-      
-      <h3 class="cardTitles">Enter the title of your new quiz:</h3>
-      <label>
-        <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
-      </label>
-    </div>
-    <div class="grid-x grid-padding-x">
-     
-      <fieldset class="medium-6 cell">
-        <legend>Is this quiz retakeable?</legend>
-        <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label for="yesOption">Yes</label>
-        <input id="noOption" type="radio" value="no" name="retakeable"><label for="noOption">No</label>
-      </fieldset>
-    </div>
-    <button class="button" type="submit">Create Quiz</button></a>
-  </div>
-</form>
-
-
-<input class="hide" type="hidden" name="id" data-id="{{ id }}">
-<div id="unfinishedQuiz" class="grid-container hide">
-  <h3>Continue a quiz draft:</h3>
+<div class="grid-container">
   <div class="grid-y grid-padding-y">
-    <ul class="stagedList"></ul>
-  </div>
-</div>
-
-
-<form id="addQuestions" class="hide">
-  <div class="grid-container actionCards">
-    <h3 class="cardTitles">Question <span id="questionNumber"></span></h3>
-    <div class="grid-y grid-padding-y">
-      <div class="grid-x grid-padding-x">
-        <div class="cell">
-          <label id="question">Enter your question</label>
-          <input type="text" name="question" placeholder="Question">
-        </div>
-      </div>
-      <div class="grid-x grid-padding-x">
-        <div class="cell small-10">
-          <label id="answer1">Answer Option 1</label>
-          <input type="text" name="answer1" placeholder="Answer">
-        </div>
-        <div class="cell small-2 correctAnswerDiv">
-          <input id="option1" class="answerOption" type="radio" value="0" name="answers" checked>
-          <label for="option1">Correct Answer</label>
-        </div>
-      </div>
-      <div class="grid-x grid-padding-x">
-        <div class="cell small-10">
-          <label id="answer2">Answer Option 2</label>
-          <input type="text" name="answer2" placeholder="Answer">
-
-        </div>
-        <div class="cell small-2 correctAnswerDiv">
-          <input id="option2" class="answerOption" type="radio" value="1" name="answers">
-          <label for="option2">Correct Answer</label>
-        </div>
-      </div>
-      <div class="grid-x grid-padding-x">
-        <div class="cell small-10">
-          <label id="answer3">Answer Option 3</label>
-          <input type="text" name="answer3" placeholder="Answer">
-        </div>
-        <div class="cell small-2 correctAnswerDiv">
-          <input id="option3" class="answerOption" type="radio" value="2" name="answers">
-          <label for="option3">Correct Answer</label>
-        </div>
-      </div>
-      <div class="grid-x grid-padding-x">
-        <div class="cell small-10">
-          <label id="answer4">Answer Option 4</label>
-          <input type="text" name="answer4" placeholder="Answer">
-        </div>
-        <div class="cell small-2 correctAnswerDiv">
-          <input id="option4" class="answerOption" type="radio" value="3" name="answers">
-          <label for="option4">Correct Answer</label>
-        </div>
-      </div>
-
+    <div class="cell createQuizContainer">
+      <a data-open="createLandingContainer"><button class="button createQuizButton">&#10133; Create A New Quiz</button></a>
     </div>
-    <div class="grid-x grid-padding-x">
-      <div class="medium-3 cell">
-        <button id="back" class="button" type="submit" value="back">Go Back</button>
-      </div>
-      <div class="medium-3 cell">
-        <button id="save" class="button" type="submit" value="save">Save and Exit</button>
-      </div>
-      <div class="medium-3 cell">
-        <button id="finish" class="button" type="submit" value="finish">Finish!</button>
-      </div>
-      <div class="medium-3 cell">
-        <button id="next" class="button" type="submit" value="next">Next Question</button>
+
+    <div class="reveal actionCards" id="createLandingContainer" data-reveal>
+      <form id="createLanding">
+        <div class="">
+          <h1 class="cardTitles">Begin Building Your Quiz!</h1>
+          <div class="grid-x grid-padding-x">
+            <h3 class="cardTitles">Enter the title of your new quiz:</h3>
+            <input class="cardTitles" id="quizName" type="text" name="name" placeholder="Name">
+          </div>
+          <div class="grid-x grid-padding-x">
+            <fieldset class="medium-6 cell">
+              <legend>Is this quiz retakeable?</legend>
+              <input id="yesOption" type="radio" value="yes" name="retakeable" checked><label
+                for="yesOption">Yes</label>
+              <input id="noOption" type="radio" value="no" name="retakeable"><label for="noOption">No</label>
+            </fieldset>
+          </div>
+          <div class="grid-x cardTitles">
+            <button class="button" type="submit">Create Quiz</button></a>
+          </div>
+        </div>
+      </form>
+      <button class="close-button" data-close aria-label="Close reveal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <input class="hide" type="hidden" name="id" data-id="{{ id }}">
+    <div class="cell unfinishedQuizContainer hide">
+      <div id="unfinishedQuiz">
+        <div class="actionCards">
+          <div class="card-section">
+            <h3 class="cardTitles">Continue a drafted quiz</h3>
+            <div class="stagedTable">
+              
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</form>
 
-<div id="finalQuizContainer" class="grid-container actionCards hide">
-  <div id="finalQuiz" class="grid-container"></div>
-</div>
-
-<div id="emailListContainer" class="grid-container hide actionCards">
-  <h3 class="cardTitles">Send your quiz to your friends!</h3>
-  <form action="">
-    <div class="grid-x">
-      <div class="cell auto">
-        <input type="email" name="email" placeholder="Enter your friends' emails!">
+  <form id="addQuestions" class="hide">
+    <div class="actionCards">
+      <div class="grid-x grid-padding-x nextBackContainer">
+        <div>
+          <button id="back" class="arrowButton" type="submit" value="back"><span>&#8678;</span></button>
+        </div>
+        <h3 class="cardTitles">Question <span id="questionNumber"></span></h3>
+        <div>
+          <button id="next" class="arrowButton" type="submit" value="next"><span>&#8680;</span></button>
+        </div>
       </div>
-      <div class="cell shrink">
-        <button class="button" type="button" name="add">Add</button>
+      <div class="grid-y grid-padding-y">
+        <div class="grid-x grid-padding-x">
+          <div class="cell">
+            <label id="question">Enter your question</label>
+            <input type="text" name="question" placeholder="Question">
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-10">
+            <label id="answer1">Answer Option 1</label>
+            <input type="text" name="answer1" placeholder="Answer">
+          </div>
+          <div class="cell medium-2 correctAnswerDiv">
+            <input id="option1" class="answerOption" type="radio" value="0" name="answers" checked>
+            <label for="option1">Correct Answer</label>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-10">
+            <label id="answer2">Answer Option 2</label>
+            <input type="text" name="answer2" placeholder="Answer">
+
+          </div>
+          <div class="cell medium-2 correctAnswerDiv">
+            <input id="option2" class="answerOption" type="radio" value="1" name="answers">
+            <label for="option2">Correct Answer</label>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-10">
+            <label id="answer3">Answer Option 3</label>
+            <input type="text" name="answer3" placeholder="Answer">
+          </div>
+          <div class="cell medium-2 correctAnswerDiv">
+            <input id="option3" class="answerOption" type="radio" value="2" name="answers">
+            <label for="option3">Correct Answer</label>
+          </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-10">
+            <label id="answer4">Answer Option 4</label>
+            <input type="text" name="answer4" placeholder="Answer">
+          </div>
+          <div class="cell medium-2 correctAnswerDiv">
+            <input id="option4" class="answerOption" type="radio" value="3" name="answers">
+            <label for="option4">Correct Answer</label>
+          </div>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x multButtonsContainer">
+        <div>
+          <button id="save" class="button" type="submit" value="save">Save and Exit</button>
+        </div>
+        <div>
+          <button id="finish" class="button" type="submit" value="finish">Finished!</button>
+        </div>
       </div>
     </div>
   </form>
-  <ul id="emailList"></ul>
-  <button id="emailQuiz" class="button" name="emailQuiz" type="submit">Email Quiz</button>
+
+  <div id="finalQuizContainer" class="hide">
+    <div id="finalQuiz" class="actionCards"></div>
+  </div>
+
+  <div id="emailListContainer" class="hide">
+    <div class="actionCards">
+      <h3 class="cardTitles">Send your quiz to your friends!</h3>
+      <form class="cardTitles">
+        <div class="grid-x">
+          <div class="cell auto">
+            <input type="email" name="email" placeholder="Enter an email then click Add!">
+          </div>
+          <div class="cell shrink">
+            <button class="button" type="button" name="add">Add</button>
+          </div>
+        </div>
+      </form>
+      <ul id="emailList"></ul>
+      <div class="multButtonsContainer">
+        <button id="emailQuiz" class="button cardTitles" name="emailQuiz" type="submit">Email Quiz</button>
+        <a href="/profile"><button class="button cardTitles" type="button">Maybe Later</button></a>
+      </div>
+    </div>
+  </div>
 </div>
-{{!--  --}}
+<script src="/assets/js/createEditQuiz.js"></script>

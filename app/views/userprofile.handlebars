@@ -1,76 +1,82 @@
 <div class="grid-container">
-
-  <div class="grid-container profilecardcontainer">
-    <div class="grid-padding-y grid-y">
-      {{!-- Take a quiz card --}}
-      <div class="cell small-12 large-6">
-        <div class="card actionCards" style="">
-          <div id="takeQuiz" class="card-section">
-            <h3 class="cardTitles">Take a Quiz!</h3>
-            <br>
-            <p>Enter your access code below to get started:</p>
-            <form id="accesscodeForm">
-              <label>
-                <input name="accesscode" type="text" placeholder="Access Code">
-              </label>
-              <button class="button primary" type="submit">Go!</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      {{!-- Create a quiz card --}}
-      <div class="cell small-12 large-6">
-        <div class="card actionCards" style="">
-          <div class="card-section">
-            <h3 class="cardTitles">Create a Quiz!</h3>
-            <br>
-            <p>Click to begin creating a shareable quiz:</p>
-            <a href="/createquiz"><button class="button primary">Go!</button></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-
-
-    {{!-- Past quiz table --}}
-    {{#if User.Quizzes}}
+  <div class="grid-padding-y grid-y">
+    {{!-- Take a quiz card --}}
     <div class="cell small-12 large-6">
-      <div class="card actionCards">
-        <div class="card-section">
-          <h3 class="cardTitles">Past Quizzes</h3>
-          <table>
-            <h3></h3>
-            <tbody>
-              {{#each User.Quizzes}}
-              <tr>
-                <td>{{this.title}}</td>
-                <td>
-                  <a href="/leaderboard/{{this.id}}">
-                    <button class="button">Leaderboard</button>
-                  </a>
-                </td>
-                <td>
-                  {{#if this.canRetake}}
-                  <a href="/quiz/{{this.accessCode}}">
-                    <button class="button">Retake Quiz</button>
-                  </a>
-                  {{/if}}
-                </td>
-
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
+      <div class="actionCards">
+        <div id="takeQuiz" class="card-section">
+          <h3 class="cardTitles">Take a Quiz!</h3>
+          <br>
+          <p>Enter your access code below to get started:</p>
+          <form id="accesscodeForm">
+            <input name="accesscode" type="text" placeholder="Access Code">
+            <div id="accessCodeError"></div>
+            <button class="button primary" type="submit">Go!</button>
+          </form>
         </div>
       </div>
     </div>
-    {{/if}}
+
+    {{!-- Create a quiz card --}}
+    <div class="cell small-12 large-6">
+      <div class="actionCards">
+        <div class="card-section">
+          <h3 class="cardTitles">Create a Quiz!</h3>
+          <br>
+          <p>Click to begin creating a shareable quiz:</p>
+          <a href="/createquiz"><button class="button primary">Go!</button></a>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Created quizzes table --}}
+
+    <div class="cell small-12 large-6 hide" id="quizzesCreated">
+      <div class="actionCards">
+        <div class="card-section">
+          <h3 class="cardTitles">Your Creations</h3>
+          <div id="quizzesCreatedInfo">
+            {{!-- info injected here --}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="emailListContainer" class="reveal actionCards" data-reveal>
+      <input type="hidden" name="user" data-user="{{ User.id }}">
+      <h3 class="cardTitles">Send your quiz to your friends!</h3>
+      <form class="cardTitles">
+        <div class="grid-x">
+          <div class="cell auto">
+            <input type="email" name="email" placeholder="Enter an email then click Add!">
+          </div>
+          <div class="cell shrink">
+            <button class="button" type="button" name="add">Add</button>
+          </div>
+        </div>
+      </form>
+      <ul id="emailList"></ul>
+      <div class="multButtonsContainer">
+        <button id="emailQuiz" class="button cardTitles" name="emailQuiz" type="submit">Email Quiz</button>
+      </div>
+      <button class="close-button" data-close aria-label="Close reveal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+
+    <div class="cell small-12 large-6 hide" id="quizzesTaken">
+      <div class="actionCards">
+        <div class="card-section">
+          <h3 class="cardTitles">Quizzes you've taken</h3>
+          <div id="quizzesTakenInfo">
+            {{!-- info injected here --}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </div>
-{{!-- </div> --}}
-
-{{!--  --}}
-
+<script src="/assets/js/takeQuiz.js"></script>
+<script src="assets/js/profile.js"></script>

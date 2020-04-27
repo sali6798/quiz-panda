@@ -1,0 +1,114 @@
+header {
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
+	background-color: #56c5d5;
+}
+
+header nav ul {
+	list-style: none;
+	margin: 0;
+}
+
+header nav li {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: bold;
+    color: #086775;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+header nav li a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header nav li a span:hover { 
+	padding-bottom: 5px;
+	border-bottom: 2px solid;
+	color: #FFFF;
+}
+
+.navContainer {
+	padding: 10px 30px;
+	padding-bottom: 0;
+}
+
+main .container, .brandname a {
+	color: #FFFF;
+}
+
+.container {
+	text-align: center;
+	width: 70%;
+	margin: 50px auto;
+}
+
+.mainButton {
+	border-radius: 5px;
+	background-color: #FFFF;
+	color: #17a2b8;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 20px 30px;
+}
+
+.brandname{
+    font-family: 'Dancing Script', cursive;
+	font-weight: bold;
+	font-size: 36px;
+}
+
+.brandname a:hover {
+	color: rgb(209, 208, 208);
+}
+
+.menuContainer {
+	display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.mainlogo{
+    width: 300px;
+}
+
+.mainintro{
+    font-size: 28px;
+}
+
+#main_header {
+	font-size: 48px;
+}
+
+@media screen and (max-width: 639px) {
+	header nav li {
+		margin: 0;
+	}
+
+	.navContainer {
+		padding: 0;
+		padding-top: 10px;
+	}
+	
+	nav .links {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	.brandContainer {
+		text-align: center;
+	}
+
+	.menuContainer {
+		display: block;
+		background-color: rgb(19, 165, 187);
+		padding: 10px 0;
+	}
+
+	.mainintro{
+		font-size: 20px;
+	}
+}
+

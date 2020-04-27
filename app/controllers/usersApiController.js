@@ -34,16 +34,21 @@ router.route("/login")
             }
         }).then(dbUser => {
             console.log(dbUser);
-
-            if (bcrypt.compareSync(req.body.password, dbUser.password)) {
-                req.session.user = {
-                    username: dbUser.username,
-                    id: dbUser.id
-                };
-                res.send("OK");
-            } else {
-                res.send("not logged in");
+            if (dbUser !== null) {
+                if (bcrypt.compareSync(req.body.password, dbUser.password)) {
+                    req.session.user = {
+                        username: dbUser.username,
+                        id: dbUser.id
+                    };
+                    res.status(200).send("OK");
+                } else {
+                    res.status(200).send("not logged in");
+                }
             }
+            else {
+                res.status(200).send("user not found");
+            }
+
         }).catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -62,16 +67,69 @@ router.route("/api/users/:username")
             res.status(404).json(err)
         })
     })
+    .put((req, res) => {
+        let updatedPassword;
 
-// router.route("/api/users/id/:id")
-//     .get((req, res) => {
-//         db.User.findOne({
-//             where: {
-//                 id: req.params.id
-//             }
-//         }).then(dbUser => {
-//             res.status(200).json(dbUser);
-//         })
-//     })
+        if (req.body.password.length === 1) {
+            updatedPassword = req.body.password[0]
+        }
+        else {
+            updatedPassword = bcrypt.hashSync(req.body.password[0], bcrypt.genSaltSync(10), null)
+        }
+
+        db.User.update({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.username,
+            password: updatedPassword,
+            email: req.body.email,
+
+        }, {
+            where: {
+                username: req.params.username
+            }
+        }).then(dbUpdatedUser => {
+            res.status(200).json(dbUpdatedUser);
+        }).catch(err => {
+            res.status(404).json(err)
+        })
+    })
+
+// needed to send emails
+router.route("/api/users/id/:id")
+    .get((req, res) => {
+        db.User.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(dbUser => {
+            res.status(200).json(dbUser);
+        })
+    })
+
+    //gets req.session.id and all users with their associated quizzes
+router.get("/api/userquizzes", function (req, res) {
+    if (req.session.user) {
+
+        db.User
+            .findAll({
+                include: [db.Quiz]
+            })
+            .then(data => {
+                let resObj =
+                {
+                    id: req.session.user.id,
+                    userQuizzes: data
+                }
+                res.status(200).json(resObj)
+            })
+            .catch(error => {
+                console.log(error)
+                res.status(400).json(error)
+            })
+    } else {
+        res.redirect("/login");
+    }
+});
 
 module.exports = router;

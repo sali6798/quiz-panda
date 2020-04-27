@@ -33,9 +33,25 @@ router.route("/logout")
             res.redirect("/")
         })
     })
+
 router.get("/readsessions", ((req, res) => {
     res.json(req.session);
 }))
+
+router.get("/account", function (req, res) {
+    if (req.session.user) {
+        db.User.findOne({
+            raw: true,
+            where: {
+                id: req.session.user.id
+            }
+        }).then((dbUser) => {
+            res.render("account", dbUser)
+        })
+    } else {
+        res.redirect("/login")
+    }
+})
 
 //Render route for userprofile.handlebars.
 //Serves entries from Quizzes table which correspond to the session user's userid.
@@ -47,10 +63,12 @@ router.get("/profile", function (req, res) {
                 id: req.session.user.id
             },
             include: [{
-                model: db.Quiz
+                model: db.Quiz,
             }]
         }).then((dbUserQuizzes) => {
             const hbsObject = { User: dbUserQuizzes.toJSON() };
+            console.log("====================")
+            console.log(hbsObject)
 
             console.log(hbsObject);
 
@@ -124,13 +142,17 @@ router.get("/leaderboard/:QuizId", function (req, res) {
             },
             include: [
                 {
-                    model: db.User
+                    model: db.User,
+                    order: [
+                        ['score', 'DESC']
+                    ]
                 }
             ]
+
         }).then((dbScores) => {
             const hbsObject = dbScores.toJSON();
             console.log(hbsObject);
-            
+
             return res.render("leaderboard", hbsObject)
         })
     } else {
@@ -140,7 +162,11 @@ router.get("/leaderboard/:QuizId", function (req, res) {
 
 // defaults to index.handlebars if user tries to visit any other route
 router.get("*", function (req, res) {
-    res.render("index");
+    if (req.session.user) {
+        res.redirect("/profile")
+    } else {
+        res.render("index");
+    }
 });
 
 module.exports = router;
