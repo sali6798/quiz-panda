@@ -101,7 +101,7 @@ Copyright © 2020 Zahra Ali Aghazadeh, Shaidee Alincastre, Brett Belka and JJ Ca
 
 
 
-## Contributers
+## Contributors
 
 Feel free to contact us for any feedbacks, questions or collaborations! 
 
