@@ -5,8 +5,10 @@ const db = require("../models");
 
 
 // for all of these url routes, render the
-// handlebar files
+// handlebar files, most routes needs authentication
+// before accessing
 
+// displays sign up page
 router.get("/signup", function (req, res) {
     if (req.session.user) {
         res.redirect("/profile")
@@ -15,6 +17,7 @@ router.get("/signup", function (req, res) {
     }
 });
 
+// display login page
 router.get("/login", function (req, res) {
     if (req.session.user) {
         res.redirect("/profile")
@@ -23,10 +26,12 @@ router.get("/login", function (req, res) {
     }
 });
 
+// display about page
 router.get("/about", function (req, res) {
     res.render("aboutus");
 });
 
+// destroys session and redirects to splash page
 router.route("/logout")
     .get((req, res) => {
         req.session.destroy(err => {
@@ -34,10 +39,13 @@ router.route("/logout")
         })
     })
 
+// return session information
 router.get("/readsessions", ((req, res) => {
     res.json(req.session);
 }))
 
+// returns info for the user and brings them to 
+// the account page
 router.get("/account", function (req, res) {
     if (req.session.user) {
         db.User.findOne({
@@ -67,10 +75,6 @@ router.get("/profile", function (req, res) {
             }]
         }).then((dbUserQuizzes) => {
             const hbsObject = { User: dbUserQuizzes.toJSON() };
-            console.log("====================")
-            console.log(hbsObject)
-
-            console.log(hbsObject);
 
             return res.render("userprofile", hbsObject)
         })
@@ -79,26 +83,19 @@ router.get("/profile", function (req, res) {
     }
 });
 
+// passes the handlebars the id of the logged in user
+// and displays the create quiz page
 router.get("/createquiz", function (req, res) {
-    // if (req.session.user) {
-    // db.Staged.findAll({
-    //     where: {
-    //         UserId: req.session.user.id
-    //     }
-    // }).then((dbStagedQuizzes) => {
-    //     const hbsStagedObj = { quiz: dbStagedQuizzes };
-    //     console.log("________________");
-    //     console.log(hbsStagedObj);
-
-    //     return res.render("quizbuild", hbsStagedObj);
-    // })
-    const hbsObj = { id: req.session.user.id };
-    res.render("quizbuild", hbsObj)
-    // } else {
-    //     res.redirect("/login");
-    // }
+    if (req.session.user) {
+        const hbsObj = { id: req.session.user.id };
+        res.render("quizbuild", hbsObj)
+    } else {
+        res.redirect("/login");
+    }
 });
 
+// get the quiz information with its questions and
+// answers for the given access code
 router.get("/quiz/:accesscode", function (req, res) {
     if (req.session.user) {
         db.Quiz.findOne({
@@ -119,8 +116,6 @@ router.get("/quiz/:accesscode", function (req, res) {
             ]
         }).then(quiz => {
             const QuizJson = quiz.toJSON();
-            console.log(QuizJson);
-            console.log("---------------");
 
             res.render("takequiz", QuizJson);
         }).catch(err => {
@@ -151,7 +146,6 @@ router.get("/leaderboard/:QuizId", function (req, res) {
 
         }).then((dbScores) => {
             const hbsObject = dbScores.toJSON();
-            console.log(hbsObject);
 
             return res.render("leaderboard", hbsObject)
         })
