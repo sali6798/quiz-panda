@@ -87,118 +87,133 @@ $(document).ready(function () {
 
   });
 
+  // opens modal with email input when invite button clicked
   $(document).on("click", ".invite", function () {
     $("#emailListContainer").foundation("open");
     accessCode = $(this).data("code");
   });
 
-  $.ajax({
-    method: "GET",
-    url: "/api/userquizzes",
-  }).then(userInfo => {
-    let userQuizzes = userInfo.userQuizzes;
-    let userId = userInfo.id;
-
-    for (let i = 0; i < userQuizzes.length; i++) {
-      if (userQuizzes[i].id === userId) {
-        let user = userQuizzes[i];
-
-        for (let x = 0; x < user.Quizzes.length; x++) {
-          let quiz = user.Quizzes[x];
-
-          if (quiz.creatorId === userId) {
-            $("#quizzesCreated").removeClass("hide");
-            let quizzesCreatedHTML =
-              `
-              <hr>
-              <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
-                <div class="cell small-12 medium-12 large-12 tdText quizTitle">
-                  <h3>${quiz.title}</h3>
-                </div>
-               </div>`
-            $("#quizzesCreatedInfo").append(quizzesCreatedHTML);
-
-            if (quiz.isDeleted !== true) {
-              let quizzesCreatedNotDeletedHTML =
+  // display all the quizzes create by the
+  // logged in user on page load
+  function loadCreatedQuizzes() {
+    $.ajax({
+      method: "GET",
+      url: "/api/userquizzes",
+    }).then(userInfo => {
+      let userQuizzes = userInfo.userQuizzes;
+      let userId = userInfo.id;
+  
+      for (let i = 0; i < userQuizzes.length; i++) {
+        if (userQuizzes[i].id === userId) {
+          let user = userQuizzes[i];
+  
+          for (let x = 0; x < user.Quizzes.length; x++) {
+            let quiz = user.Quizzes[x];
+  
+            // if the user has created the quiz, generate HTML
+            // to display the quiz name, access code, delete button,
+            // leaderboard button and invite user button if the user has not
+            // deleted the quiz, if they have only display the leaderboard button
+            if (quiz.creatorId === userId) {
+              $("#quizzesCreated").removeClass("hide");
+              let quizzesCreatedHTML =
                 `
-                <div class="cell small-12 medium-12 large-12 quizCreatedDelete">
-                  <h4>Access code: ${quiz.accessCode}</h4>
-                </div>
-                <div class="cell">
-                <div class="multButtonsContainer">
-                  <button class="button delete" data-id="${quiz.id}">Delete Quiz</button>
-                  <a href="/leaderboard/${quiz.id}">
-                    <button class="button">Leaderboard</button>
-                  </a>
-                  <button class="button invite" data-code="${quiz.accessCode}">Invite User</button>
-                </div>
-                </div>
-                `
-
-              $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedNotDeletedHTML)
-            } else {
-              let quizzesCreatedDeletedHTML = `<div class="cell small-12 medium-12 large-12 ">
-              <a href="/leaderboard/${quiz.id}">
-                <button class="button">Leaderboard</button>
-              </a>
-            </div>`
-              $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedDeletedHTML)
+                <hr>
+                <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
+                  <div class="cell small-12 medium-12 large-12 tdText quizTitle">
+                    <h3>${quiz.title}</h3>
+                  </div>
+                 </div>`
+              $("#quizzesCreatedInfo").append(quizzesCreatedHTML);
+  
+              if (quiz.isDeleted !== true) {
+                let quizzesCreatedNotDeletedHTML =
+                  `
+                  <div class="cell small-12 medium-12 large-12 quizCreatedDelete">
+                    <h4>Access code: ${quiz.accessCode}</h4>
+                  </div>
+                  <div class="cell">
+                  <div class="multButtonsContainer">
+                    <button class="button delete" data-id="${quiz.id}">Delete Quiz</button>
+                    <a href="/leaderboard/${quiz.id}">
+                      <button class="button">Leaderboard</button>
+                    </a>
+                    <button class="button invite" data-code="${quiz.accessCode}">Invite User</button>
+                  </div>
+                  </div>
+                  `
+  
+                $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedNotDeletedHTML)
+              } else {
+                let quizzesCreatedDeletedHTML = `<div class="cell small-12 medium-12 large-12 ">
+                <a href="/leaderboard/${quiz.id}">
+                  <button class="button">Leaderboard</button>
+                </a>
+              </div>`
+                $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedDeletedHTML)
+              }
             }
           }
         }
       }
-    }
-  });
+    });
+  }
 
-  $.ajax({
-    method: "GET",
-    url: "/api/quizuser",
-  }).then(userInfo => {
-    let userQuizzes = userInfo.quizUsers;
-    console.log(userQuizzes);
-
-    let userId = userInfo.id;
-    console.log(userId);
-
-    for (let y = 0; y < userQuizzes.length; y++) {
-      let quiz = userQuizzes[y];
-      console.log(quiz);
-
-      if (quiz.UserId === userId && quiz.Quiz.creatorId !== userId) {
-        $("#quizzesTaken").removeClass("hide");
-        let quizzesTakenHTML =
-          `
-          <hr>
-          <div class="grid-padding-x grid-x " id="quizTakenLeaderboard${quiz.Quiz.id}">
-            <div class="cell small-12 medium-12 large-4 tdText quizTitle">
-              ${quiz.Quiz.title}
-            </div>
-            <div class="cell small-12 medium-6 large-4 ">
-              <a href="/leaderboard/${quiz.Quiz.id}">
-                <button class="button">Leaderboard</button>
-              </a>
-            </div>
-          </div>`
-        $("#quizzesTakenInfo").append(quizzesTakenHTML);
-
-        if (quiz.Quiz.canRetake === true) {
-          let quizzesTakenRetakeHTML =
+  // displays all the questions the user
+  // has taken on page load
+  function loadTakenQuizzes() {
+    $.ajax({
+      method: "GET",
+      url: "/api/quizuser",
+    }).then(userInfo => {
+      let userQuizzes = userInfo.quizUsers;
+      let userId = userInfo.id;
+  
+      for (let y = 0; y < userQuizzes.length; y++) {
+        let quiz = userQuizzes[y];
+  
+        // checks if the user has taken the quiz but is not the creator of it and
+        // if the quiz has not been deleted by the creator. Then creates a html
+        // template for each quiz, displaying the quiz title, leaderboard button
+        // and a retake button if the quiz is retakeable
+        if (quiz.UserId === userId && quiz.Quiz.creatorId !== userId && !quiz.Quiz.isDeleted) {
+          $("#quizzesTaken").removeClass("hide");
+          let quizzesTakenHTML =
             `
-            <div class="cell small-12 medium-6 large-4 quizCreatedDelete">
-              <a href = "/quiz/${quiz.Quiz.accessCode}">
-                <button class="button" data-id="${quiz.Quiz.id}">Retake</button>
-              </a>
+            <hr>
+            <div class="grid-padding-x grid-x " id="quizTakenLeaderboard${quiz.Quiz.id}">
+              <div class="cell small-12 medium-12 large-4 tdText quizTitle">
+                ${quiz.Quiz.title}
+              </div>
+              <div class="cell small-12 medium-6 large-4 ">
+                <a href="/leaderboard/${quiz.Quiz.id}">
+                  <button class="button">Leaderboard</button>
+                </a>
+              </div>
             </div>`
-          $(`#quizTakenLeaderboard${quiz.Quiz.id}`).append(quizzesTakenRetakeHTML)
+          $("#quizzesTakenInfo").append(quizzesTakenHTML);
+  
+          if (quiz.Quiz.canRetake === true) {
+            let quizzesTakenRetakeHTML =
+              `
+              <div class="cell small-12 medium-6 large-4 quizCreatedDelete">
+                <a href = "/quiz/${quiz.Quiz.accessCode}">
+                  <button class="button" data-id="${quiz.Quiz.id}">Retake</button>
+                </a>
+              </div>`
+            $(`#quizTakenLeaderboard${quiz.Quiz.id}`).append(quizzesTakenRetakeHTML)
+          }
         }
       }
-    }
-  });
-
+    });
+  }
+ 
+  // makes a DELETE request when delete is clicked,
+  // reloads the page and now only displays the
+  // leaderboard button for the quiz deleted
   $(document).on("click", ".delete", function (event) {
     event.preventDefault();
     let id = $(this).data("id");
-    console.log(id);
 
     $.ajax({
       method: "DELETE",
@@ -207,7 +222,13 @@ $(document).ready(function () {
       location.reload()
     })
   });
+
+
+  loadCreatedQuizzes();
+  loadTakenQuizzes();
 });
+
+
 
 
 
