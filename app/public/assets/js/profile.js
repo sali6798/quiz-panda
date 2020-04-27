@@ -109,12 +109,13 @@ $(document).ready(function () {
           if (quiz.creatorId === userId) {
             $("#quizzesCreated").removeClass("hide");
             let quizzesCreatedHTML =
-              `<hr>
+              `
+              <hr>
               <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
                 <div class="cell small-12 medium-12 large-12 tdText quizTitle">
-                <h3>${quiz.title}</h3>
+                  <h3>${quiz.title}</h3>
                 </div>
-              </div>`
+               </div>`
             $("#quizzesCreatedInfo").append(quizzesCreatedHTML);
 
             if (quiz.isDeleted !== true) {
@@ -162,9 +163,10 @@ $(document).ready(function () {
       if (quiz.Quiz.creatorId !== userId && quiz.UserId !== userId) {
         $("#quizzesTaken").removeClass("hide");
         let quizzesTakenHTML =
-          `<hr>
-            <div class="grid-padding-x grid-x " id="quizTakenLeaderboard${quiz.Quiz.id}">
-              <div class="cell small-12 medium-12 large-4 tdText quizTitle">
+          `
+          <hr>
+          <div class="grid-padding-x grid-x " id="quizTakenLeaderboard${quiz.Quiz.id}">
+            <div class="cell small-12 medium-12 large-4 tdText quizTitle">
               ${quiz.Quiz.title}
               </div>
               <div class="cell multButtonsContainer ">
