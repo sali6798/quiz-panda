@@ -123,6 +123,16 @@ td .button, .listDisplay button, .answerOption, #emailList {
     align-items: center;
 }
 
+.createQuizButton {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.userlbheading {
+    word-break: break-word;
+}
+
 #emailList span {
     word-break: break-word;
 }
@@ -136,6 +146,12 @@ td .button, .listDisplay button, .answerOption, #emailList {
     margin-left: 10px;
 }
 
+#signupForm {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 639px) {
     .correctAnswerDiv {
         display: block;
@@ -145,6 +161,10 @@ td .button, .listDisplay button, .answerOption, #emailList {
     #addQuestions input:not([name=question]) {
         margin-bottom: 0;
     }
+
+    #quizzesCreatedInfo .multButtonsContainer{
+        display: block;
+    }
 }
 
 @media screen and (max-width: 575px) {
@@ -152,12 +172,16 @@ td .button, .listDisplay button, .answerOption, #emailList {
         width: 95%;
     }
 
+    .logincontainer {
+        margin-top: 50px;
+    }
+
     #accesscodeForm {
         width: 100%;
     }
 
-    .logincontainer {
-        margin-top: 50px;
+    #signupForm {
+        width: 100%;
     }
 }
 

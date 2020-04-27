@@ -67,6 +67,8 @@ router.get("/profile", function (req, res) {
             }]
         }).then((dbUserQuizzes) => {
             const hbsObject = { User: dbUserQuizzes.toJSON() };
+            console.log("====================")
+            console.log(hbsObject)
 
             console.log(hbsObject);
 
