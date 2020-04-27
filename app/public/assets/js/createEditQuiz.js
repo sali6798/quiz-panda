@@ -280,13 +280,13 @@ $(document).ready(function () {
                         $("#back").removeClass("hide");
                     }
                     else {
-                       newQuestion();
+                        newQuestion();
                     }
                 }
                 else {
                     newQuestion();
                 }
-                
+
                 break;
             case "save":
                 location.href = "/profile"
@@ -334,7 +334,7 @@ $(document).ready(function () {
             else {
                 addQuestion();
             }
-            
+
             --currentQuestionNum;
             const prevQuestion = quizObj.questions[currentQuestionNum - 1];
             loadQuestion(prevQuestion);
@@ -393,18 +393,32 @@ $(document).ready(function () {
 
             if (stagedQuizzes.length > 0) {
                 stagedQuizzes.forEach(quiz => {
-                    const parsedQuiz = JSON.parse(quiz.storedQuiz)
-                    const row = $("<tr>");
-                    const title = $("<td class='tdText'>").text(parsedQuiz.title);
-                    const editTd = $("<td>");
-                    const editButton = $(`<button class='button editStaged' value="${quiz.id}">`).text("Edit");
-                    const deleteTd = $("<td>");
-                    const deleteButton = $(`<button class='button deleteStaged' value="${quiz.id}">`).text("Delete");
-
-                    editTd.append(editButton);
-                    deleteTd.append(deleteButton);
-                    row.append(title, editTd, deleteTd);
-                    $("#stagedTable").append(row);
+                    const parsedQuiz = JSON.parse(quiz.storedQuiz);
+                    // const row = $("<tr>");
+                    // const title = $("<td class='tdText'>").text(parsedQuiz.title);
+                    // const editTd = $("<td>");
+                    // const editButton = $(`<button class='button editStaged' value="${quiz.id}">`).text("Edit");
+                    // const deleteTd = $("<td>");
+                    // const deleteButton = $(`<button class='button deleteStaged' value="${quiz.id}">`).text("Delete");
+                    const stagedQuizHTML =
+                        `
+                    <hr>
+                    <div class="grid-padding-x grid-x " id="quizCreatedLeaderboard${quiz.id}">
+                        <div class="cell small-12 medium-4 large-4 tdText quizTitle">
+                            <h3>${parsedQuiz.title}</h3>
+                        </div>
+                        <div class="cell small-12 medium-4 large-4 quizCreatedDelete">
+                            <button class='button editStaged' value="${quiz.id}">Edit</button>
+                        </div>
+                        <div class="cell small-12 medium-4 large-4 quizCreatedDelete">
+                            <button class='button deleteStaged' value="${quiz.id}">Delete Quiz</button>
+                        </div>
+                    </div>`
+                    // editTd.append(editButton);
+                    // deleteTd.append(deleteButton);
+                    // row.append(title, editTd, deleteTd);
+                    // $("#stagedTable").append(row);
+                    $(".stagedTable").append(stagedQuizHTML);
                 });
 
                 $(".unfinishedQuizContainer").removeClass("hide");
