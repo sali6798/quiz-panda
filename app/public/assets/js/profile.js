@@ -25,7 +25,7 @@ $(document).ready(function () {
                 </div>
                </div>`
             $("#quizzesCreatedInfo").append(quizzesCreatedHTML);
-            
+
             if (quiz.isDeleted !== true) {
               let quizzesCreatedNotDeletedHTML =
                 `
@@ -50,13 +50,13 @@ $(document).ready(function () {
                 `
 
               $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedNotDeletedHTML)
-            }else{
+            } else {
               let quizzesCreatedDeletedHTML = `<div class="cell small-12 medium-12 large-12 ">
               <a href="/leaderboard/${quiz.id}">
                 <button class="button">Leaderboard</button>
               </a>
             </div>`
-            $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedDeletedHTML)
+              $(`#quizCreatedLeaderboard${quiz.id}`).append(quizzesCreatedDeletedHTML)
             }
           }
         }
@@ -69,12 +69,16 @@ $(document).ready(function () {
     url: "/api/quizuser",
   }).then(userInfo => {
     let userQuizzes = userInfo.quizUsers;
+    console.log(userQuizzes);
+
     let userId = userInfo.id;
-    
+    console.log(userId);
+
     for (let y = 0; y < userQuizzes.length; y++) {
       let quiz = userQuizzes[y];
+      console.log(quiz);
 
-      if (quiz.Quiz.creatorId !== userId && quiz.UserId !== userId) {
+      if (quiz.UserId === userId && quiz.Quiz.creatorId !== userId) {
         $("#quizzesTaken").removeClass("hide");
         let quizzesTakenHTML =
           `
@@ -90,7 +94,7 @@ $(document).ready(function () {
             </div>
           </div>`
         $("#quizzesTakenInfo").append(quizzesTakenHTML);
-        
+
         if (quiz.Quiz.canRetake === true) {
           let quizzesTakenRetakeHTML =
             `
@@ -106,4 +110,15 @@ $(document).ready(function () {
   })
 })
 
+$(document).on("click", ".delete", function(event) {
+  event.preventDefault();
+  let id = $(this).data("id");
+  console.log(id);
 
+  $.ajax({
+    method: "DELETE",
+    url: "/quiz/delete/" + id,
+  }).then(deleted => {
+    location.reload()
+  })
+})
