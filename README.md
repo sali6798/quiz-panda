@@ -23,7 +23,7 @@ This application will give you the ability to make multiple choice quizzes in a 
 
 ## Screenshots
 
-mobile screen size responsible
+mobile screen size responsive
 
 <img src="./app/public/assets/images/screenshot3.png" width="250px">  <img src="./app/public/assets/images/screenshot5.png" width="250px"> 
 
