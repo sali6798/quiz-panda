@@ -87,7 +87,7 @@ List of features ready:
 * Feature 2: Ability to create, update, delete quizzes.
 * Feature 3: Leaderboard to show the scores.
 * Feature 4: Ability to create a user and password.
-* Feature 5: Ability to send an email with an access code to 
+* Feature 5: Ability to send an email with an access code to your friends
 
 
 To-do list:
